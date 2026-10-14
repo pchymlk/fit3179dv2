@@ -1,0 +1,115 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>From School to Higher Education</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Vega-Lite libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+</head>
+
+<body>
+  <header class="hero">
+    <p class="eyebrow">AUSTRALIAN EDUCATION</p>
+    <h1>From School to Higher Education</h1>
+    <p class="intro">
+      Exploring participation, differences between states,
+      pathways into university, and who gets access to higher education.
+    </p>
+    <p class="source-note">
+      Data sources: Australian Department of Education and
+      Australian Bureau of Statistics.
+    </p>
+  </header>
+
+  <main>
+    <section>
+      <h2>01 — The Big Picture</h2>
+      <p>How is education participation changing over time?</p>
+      <div class="chart-grid">
+        <article class="chart-card">
+          <h3>Higher Education Enrolment Trends</h3>
+          <div id="chart1"></div>
+        </article>
+        <article class="chart-card">
+          <h3>Education Across Australia</h3>
+          <div id="chart2"></div>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2>02 — Where Students Are</h2>
+      <p>How does participation differ across states and territories?</p>
+      <div class="chart-grid">
+        <article class="chart-card">
+          <h3>Student Distribution</h3>
+          <div id="chart3"></div>
+        </article>
+        <article class="chart-card">
+          <h3>State Comparison</h3>
+          <div id="chart4"></div>
+        </article>
+        <article class="chart-card">
+          <h3>Student Pathways</h3>
+          <div id="chart5"></div>
+        </article>
+        <article class="chart-card">
+          <h3>Changing State Rankings</h3>
+          <div id="chart6"></div>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2>03 — How Students Study</h2>
+      <p>Exploring fields of study, student profiles and outcomes.</p>
+      <div class="chart-grid">
+        <article class="chart-card">
+          <h3>Fields of Study</h3>
+          <div id="chart7"></div>
+        </article>
+        <article class="chart-card">
+          <h3>Student Outcomes</h3>
+          <div id="chart8"></div>
+        </article>
+        <article class="chart-card">
+          <h3>Student Profiles</h3>
+          <div id="chart9"></div>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2>04 — Who Gets Access?</h2>
+      <p>Examining differences between student groups.</p>
+      <div class="chart-grid">
+        <article class="chart-card">
+          <h3>Participation Gaps</h3>
+          <div id="chart10"></div>
+        </article>
+        <article class="chart-card">
+          <h3>State Education Profiles</h3>
+          <div id="chart11"></div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>
+      Data visualisation project — FIT3179.
+      Sources and data definitions will be documented here.
+    </p>
+  </footer>
+
+  <script src="vega_lite_vis.js"></script>
+</body>
+</html>
