@@ -8,7 +8,7 @@
   "width": "container",
   "height": 340,
   "data": {
-    "url": ".../data/05_engagement_by_remoteness.csv"
+    "url": "./data/05_engagement_by_remoteness.csv"
   },
   "mark": {
     "type": "bar",
