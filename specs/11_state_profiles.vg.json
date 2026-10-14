@@ -6,7 +6,7 @@
     "subtitle": "Comparing education and work/study indicators, 2025"
   },
   "data": {
-    "url": "../data/11_state_profiles_long.csv"
+    "url": "data/11_state_profiles_long.csv"
   },
   "facet": {
     "row": {

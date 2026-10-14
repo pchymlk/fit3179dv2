@@ -8,7 +8,7 @@
   "width": "container",
   "height": 380,
   "data": {
-    "url": "../data/07_domestic_commencements_by_field.csv"
+    "url": "data/07_domestic_commencements_by_field.csv"
   },
   "mark": {
     "type": "area",

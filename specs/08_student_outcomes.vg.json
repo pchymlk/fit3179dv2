@@ -8,7 +8,7 @@
   "width": "container",
   "height": 350,
   "data": {
-    "url": "../data/08_labour_force_outcomes.csv"
+    "url": "data/08_labour_force_outcomes.csv"
   },
   "mark": {
     "type": "bar",
