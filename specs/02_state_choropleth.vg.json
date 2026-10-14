@@ -1,0 +1,70 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Young Australians Fully Engaged in Work and/or Study",
+    "subtitle": "People aged 15–24, by state and territory | 2025"
+  },
+  "width": "container",
+  "height": 430,
+  "projection": {
+    "type": "mercator"
+  },
+  "data": {
+    "url": "australia_states.topojson.json",
+    "format": {
+      "type": "topojson",
+      "feature": "States and Territories"
+    }
+  },
+  "transform": [
+    {
+      "lookup": "properties.STE_NAME21",
+      "from": {
+        "data": {
+          "url": "data/cleaned_work_study_engagement_by_state.csv"
+        },
+        "key": "State",
+        "fields": ["Engaged_pct"]
+      }
+    }
+  ],
+  "mark": {
+    "type": "geoshape",
+    "stroke": "#FFFFFF",
+    "strokeWidth": 1.2
+  },
+  "encoding": {
+    "color": {
+      "field": "Engaged_pct",
+      "type": "quantitative",
+      "title": "Fully engaged (%)",
+      "scale": {
+        "domain": [75, 85],
+        "scheme": "tealblues"
+      },
+      "legend": {
+        "format": ".1f"
+      }
+    },
+    "tooltip": [
+      {
+        "field": "properties.STE_NAME21",
+        "type": "nominal",
+        "title": "State or territory"
+      },
+      {
+        "field": "Engaged_pct",
+        "type": "quantitative",
+        "title": "Fully engaged",
+        "format": ".1f"
+      }
+    ]
+  },
+  "config": {
+    "background": "#FFFFFF",
+    "view": {
+      "stroke": null
+    }
+  }
+}

@@ -1,0 +1,73 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Higher Education Student Enrolments",
+    "subtitle": "Australia, 2015–2024 | All enrolled students"
+  },
+  "width": "container",
+  "height": 300,
+  "data": {
+    "url": "data/cleaned_higher_education_enrolments.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+  "mark": {
+    "type": "line",
+    "point": {
+      "filled": true,
+      "size": 75
+    },
+    "strokeWidth": 3,
+    "color": "#397B70"
+  },
+  "encoding": {
+    "x": {
+      "field": "year",
+      "type": "quantitative",
+      "title": "Year",
+      "axis": {
+        "format": "d",
+        "tickMinStep": 1
+      }
+    },
+    
+    "y": {
+    "field": "students",
+    "type": "quantitative",
+    "title": "Enrolled students",
+    "axis": {
+        "labelExpr": "datum.value >= 1000000 ? format(datum.value / 1000000, '.1f') + 'M' : format(datum.value / 1000, '.0f') + 'K'"
+    },
+    "scale": {
+        "zero": true
+    }
+    },
+    "tooltip": [
+      {
+        "field": "year",
+        "type": "quantitative",
+        "title": "Year",
+        "format": "d"
+      },
+      {
+        "field": "students",
+        "type": "quantitative",
+        "title": "Enrolments",
+        "format": ","
+      }
+    ]
+  },
+  "config": {
+    "background": "#FFFFFF",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "gridColor": "#E8ECEB",
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    }
+  }
+}

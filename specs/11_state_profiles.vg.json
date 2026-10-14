@@ -1,0 +1,91 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "State Education Profiles",
+    "subtitle": "Comparing education and work/study indicators, 2025"
+  },
+  "data": {
+    "url": "../data/11_state_profiles_long.csv"
+  },
+  "facet": {
+    "row": {
+      "field": "Metric",
+      "type": "nominal",
+      "title": null,
+      "header": {
+        "labelFontSize": 13,
+        "labelFontWeight": "bold",
+        "labelLimit": 300,
+        "labelOrient": "top"
+      }
+    }
+  },
+  "spec": {
+    "width": 420,
+    "height": 145,
+    "mark": {
+      "type": "bar",
+      "cornerRadiusEnd": 3
+    },
+    "encoding": {
+      "y": {
+        "field": "Abbreviation",
+        "type": "nominal",
+        "title": null,
+        "sort": "-x",
+        "axis": {
+          "labelFontSize": 11
+        }
+      },
+      "x": {
+        "field": "Value_pct",
+        "type": "quantitative",
+        "title": "Percentage",
+        "scale": {
+          "domain": [0, 100]
+        },
+        "axis": {
+          "tickCount": 6
+        }
+      },
+      "color": {
+        "field": "Value_pct",
+        "type": "quantitative",
+        "scale": {
+          "scheme": "tealblues"
+        },
+        "legend": null
+      },
+      "tooltip": [
+        {
+          "field": "State",
+          "type": "nominal"
+        },
+        {
+          "field": "Metric",
+          "type": "nominal"
+        },
+        {
+          "field": "Value_pct",
+          "type": "quantitative",
+          "title": "Percentage",
+          "format": ".1f"
+        }
+      ]
+    }
+  },
+  "resolve": {
+    "scale": {
+      "x": "shared"
+    }
+  },
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "facet": {
+      "spacing": 24
+    }
+  }
+}

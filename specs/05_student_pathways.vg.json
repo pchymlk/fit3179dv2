@@ -1,0 +1,80 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Work and Study Engagement by Remoteness",
+    "subtitle": "People aged 15–24; group percentages, not individual transitions"
+  },
+  "width": "container",
+  "height": 340,
+  "data": {
+    "url": "../data/05_engagement_by_remoteness.csv"
+  },
+  "mark": {
+    "type": "bar",
+    "stroke": "white",
+    "strokeWidth": 1
+  },
+  "encoding": {
+    "x": {
+      "field": "Remoteness",
+      "type": "nominal",
+      "title": "Remoteness area",
+      "sort": [
+        "Major Cities",
+        "Inner Regional",
+        "Outer Regional and Remote"
+      ],
+      "axis": {
+        "labelAngle": -15
+      }
+    },
+    "y": {
+      "field": "Percent",
+      "type": "quantitative",
+      "stack": "normalize",
+      "title": "Share of each area",
+      "axis": {
+        "format": "%"
+      }
+    },
+    "color": {
+      "field": "Engagement_status",
+      "type": "nominal",
+      "title": "Engagement status",
+      "scale": {
+        "domain": [
+          "Fully engaged",
+          "Partially engaged",
+          "Not engaged"
+        ],
+        "range": [
+          "#287D8E",
+          "#E6B566",
+          "#C96B5C"
+        ]
+      }
+    },
+    "tooltip": [
+      {
+        "field": "Remoteness",
+        "type": "nominal"
+      },
+      {
+        "field": "Engagement_status",
+        "type": "nominal"
+      },
+      {
+        "field": "Percent",
+        "type": "quantitative",
+        "title": "Percentage",
+        "format": ".1f"
+      }
+    ]
+  },
+  "config": {
+    "view": {
+      "stroke": null
+    }
+  }
+}

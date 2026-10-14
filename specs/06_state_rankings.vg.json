@@ -1,0 +1,97 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Which Fields Are Growing in Importance?",
+    "subtitle": "Ranking of domestic commencing enrolments by field, 2015–2024"
+  },
+  "width": "container",
+  "height": 380,
+  "data": {
+    "url": "../data/07_domestic_commencements_by_field.csv"
+  },
+  "transform": [
+    {
+      "window": [
+        {
+          "op": "rank",
+          "field": "Commencing_domestic_students",
+          "order": "descending",
+          "as": "Rank"
+        }
+      ],
+      "groupby": ["Year"],
+      "sort": [
+        {
+          "field": "Commencing_domestic_students",
+          "order": "descending"
+        }
+      ]
+    }
+  ],
+  "mark": {
+    "type": "line",
+    "point": {
+      "filled": true,
+      "size": 45
+    },
+    "strokeWidth": 2
+  },
+  "encoding": {
+    "x": {
+      "field": "Year",
+      "type": "ordinal",
+      "title": "Year",
+      "axis": {
+        "labelAngle": 0
+      }
+    },
+    "y": {
+      "field": "Rank",
+      "type": "quantitative",
+      "title": "Rank (1 = most commencements)",
+      "scale": {
+        "reverse": true
+      },
+      "axis": {
+        "tickMinStep": 1
+      }
+    },
+    "color": {
+      "field": "Field",
+      "type": "nominal",
+      "title": "Field of education",
+      "scale": {
+        "scheme": "tableau10"
+      }
+    },
+    "detail": {
+      "field": "Field"
+    },
+    "tooltip": [
+      {
+        "field": "Year",
+        "type": "ordinal"
+      },
+      {
+        "field": "Field",
+        "type": "nominal"
+      },
+      {
+        "field": "Commencing_domestic_students",
+        "type": "quantitative",
+        "title": "Commencements",
+        "format": ",.0f"
+      },
+      {
+        "field": "Rank",
+        "type": "quantitative"
+      }
+    ]
+  },
+  "config": {
+    "view": {
+      "stroke": null
+    }
+  }
+}

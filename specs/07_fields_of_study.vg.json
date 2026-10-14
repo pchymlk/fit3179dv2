@@ -1,0 +1,74 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "How Student Choices Have Shifted",
+    "subtitle": "Domestic commencing enrolments by broad field, 2015–2024"
+  },
+  "width": "container",
+  "height": 380,
+  "data": {
+    "url": "../data/07_domestic_commencements_by_field.csv"
+  },
+  "mark": {
+    "type": "area",
+    "interpolate": "monotone",
+    "opacity": 0.85
+  },
+  "encoding": {
+    "x": {
+      "field": "Year",
+      "type": "quantitative",
+      "title": "Year",
+      "axis": {
+        "format": "d",
+        "tickMinStep": 1
+      }
+    },
+    "y": {
+      "field": "Commencing_domestic_students",
+      "type": "quantitative",
+      "stack": "center",
+      "title": "Commencements",
+      "axis": {
+        "format": "~s"
+      }
+    },
+    "color": {
+      "field": "Field",
+      "type": "nominal",
+      "title": "Field of education",
+      "scale": {
+        "scheme": "tableau10"
+      }
+    },
+    "detail": {
+      "field": "Field"
+    },
+    "order": {
+      "field": "Field",
+      "type": "nominal"
+    },
+    "tooltip": [
+      {
+        "field": "Year",
+        "type": "quantitative"
+      },
+      {
+        "field": "Field",
+        "type": "nominal"
+      },
+      {
+        "field": "Commencing_domestic_students",
+        "type": "quantitative",
+        "title": "Commencements",
+        "format": ",.0f"
+      }
+    ]
+  },
+  "config": {
+    "view": {
+      "stroke": null
+    }
+  }
+}

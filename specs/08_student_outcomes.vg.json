@@ -1,0 +1,74 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Employment Outcomes by Qualification and Sex",
+    "subtitle": "Labour-force status among people aged 15–74, 2025"
+  },
+  "width": "container",
+  "height": 350,
+  "data": {
+    "url": "../data/08_labour_force_outcomes.csv"
+  },
+  "mark": {
+    "type": "bar",
+    "cornerRadiusEnd": 2
+  },
+  "encoding": {
+    "y": {
+      "field": "Group",
+      "type": "nominal",
+      "title": "Qualification and sex group",
+      "sort": null
+    },
+    "x": {
+      "field": "Percent",
+      "type": "quantitative",
+      "stack": "zero",
+      "title": "Share of group (%)",
+      "scale": {
+        "domain": [0, 100]
+      }
+    },
+    "color": {
+      "field": "Labour_force_status",
+      "type": "nominal",
+      "title": "Labour-force status",
+      "scale": {
+        "domain": [
+          "Employed full-time",
+          "Employed part-time",
+          "Unemployed",
+          "Not in labour force"
+        ],
+        "range": [
+          "#287D8E",
+          "#E6B566",
+          "#C96B5C",
+          "#9B8AC4"
+        ]
+      }
+    },
+    "tooltip": [
+      {
+        "field": "Group",
+        "type": "nominal"
+      },
+      {
+        "field": "Labour_force_status",
+        "type": "nominal"
+      },
+      {
+        "field": "Percent",
+        "type": "quantitative",
+        "title": "Percentage",
+        "format": ".1f"
+      }
+    ]
+  },
+  "config": {
+    "view": {
+      "stroke": null
+    }
+  }
+}

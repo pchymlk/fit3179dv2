@@ -1,0 +1,95 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "How Student Profiles Differ by Age",
+    "subtitle": "Study participation, qualifications and work/study engagement"
+  },
+  "width": "container",
+  "height": 370,
+  "data": {
+    "url": "../data/09_age_group_indicators.csv"
+  },
+  "transform": [
+    {
+      "fold": [
+        "Currently_studying_pct",
+        "Has_non_school_qualification_pct",
+        "Bachelor_or_above_pct",
+        "Fully_engaged_work_study_pct"
+      ],
+      "as": ["Indicator", "Value_pct"]
+    },
+    {
+      "calculate": "datum.Indicator === 'Currently_studying_pct' ? 'Currently studying' : datum.Indicator === 'Has_non_school_qualification_pct' ? 'Any qualification' : datum.Indicator === 'Bachelor_or_above_pct' ? 'Bachelor or above' : 'Work/study engaged'",
+      "as": "Indicator_label"
+    }
+  ],
+  "mark": {
+    "type": "line",
+    "strokeWidth": 1.5,
+    "opacity": 0.7,
+    "point": {
+      "filled": true,
+      "size": 35
+    }
+  },
+  "encoding": {
+    "x": {
+      "field": "Indicator_label",
+      "type": "ordinal",
+      "title": "Indicator",
+      "sort": [
+        "Currently studying",
+        "Any qualification",
+        "Bachelor or above",
+        "Work/study engaged"
+      ],
+      "axis": {
+        "labelAngle": -20,
+        "labelLimit": 140
+      }
+    },
+    "y": {
+      "field": "Value_pct",
+      "type": "quantitative",
+      "title": "Percentage",
+      "scale": {
+        "domain": [0, 100]
+      }
+    },
+    "color": {
+      "field": "Age_group",
+      "type": "nominal",
+      "title": "Age group",
+      "scale": {
+        "scheme": "tableau10"
+      }
+    },
+    "detail": {
+      "field": "Age_group"
+    },
+    "tooltip": [
+      {
+        "field": "Age_group",
+        "type": "nominal"
+      },
+      {
+        "field": "Indicator_label",
+        "type": "nominal",
+        "title": "Indicator"
+      },
+      {
+        "field": "Value_pct",
+        "type": "quantitative",
+        "title": "Percentage",
+        "format": ".1f"
+      }
+    ]
+  },
+  "config": {
+    "view": {
+      "stroke": null
+    }
+  }
+}

@@ -1,0 +1,73 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Gender Gap in Study Participation",
+    "subtitle": "Currently enrolled in study, by age group, 2025"
+  },
+  "width": "container",
+  "height": 370,
+  "data": {
+    "url": "../data/10_study_participation_gender_gap.csv"
+  },
+  "mark": {
+    "type": "line",
+    "point": {
+      "filled": true,
+      "size": 65
+    },
+    "strokeWidth": 2.5
+  },
+  "encoding": {
+    "x": {
+      "field": "Sex",
+      "type": "nominal",
+      "title": null,
+      "sort": ["Men", "Women"],
+      "axis": {
+        "labelFontSize": 13
+      }
+    },
+    "y": {
+      "field": "Currently_studying_pct",
+      "type": "quantitative",
+      "title": "Currently studying (%)",
+      "scale": {
+        "zero": false
+      }
+    },
+    "color": {
+      "field": "Age_group",
+      "type": "nominal",
+      "title": "Age group",
+      "scale": {
+        "scheme": "tableau10"
+      }
+    },
+    "detail": {
+      "field": "Age_group"
+    },
+    "tooltip": [
+      {
+        "field": "Age_group",
+        "type": "nominal",
+        "title": "Age group"
+      },
+      {
+        "field": "Sex",
+        "type": "nominal"
+      },
+      {
+        "field": "Currently_studying_pct",
+        "type": "quantitative",
+        "title": "Currently studying (%)",
+        "format": ".1f"
+      }
+    ]
+  },
+  "config": {
+    "view": {
+      "stroke": null
+    }
+  }
+}
