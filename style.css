@@ -8,9 +8,11 @@ body {
   background: #f7f6f2;
   color: #252b35;
   font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
   line-height: 1.6;
 }
 
+/* Hero — keep the original title sizing */
 .hero {
   background: #183b4e;
   color: white;
@@ -33,61 +35,114 @@ h1 {
 .intro {
   max-width: 700px;
   font-size: 1.15rem;
+  line-height: 1.7;
 }
 
 .source-note {
   margin-top: 28px;
-  font-size: 0.85rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
   color: #d8e4e9;
 }
 
+/* Main content */
 main {
   max-width: 1300px;
   margin: auto;
   padding: 20px 5%;
 }
 
+/* Section spacing */
 section {
   margin: 56px 0;
 }
 
+/* Section headings — stronger visual hierarchy */
 section h2 {
+  position: relative;
+  font-size: clamp(1.8rem, 3vw, 2.25rem);
+  line-height: 1.25;
+  font-weight: 800;
+  letter-spacing: -0.7px;
+  color: #252b35;
+
+  margin: 0 0 20px;
+  padding: 0 0 18px;
+
   border-bottom: 2px solid #d7dedf;
-  padding-bottom: 12px;
 }
 
+/* Teal accent beneath section headings */
+section h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+
+  width: 76px;
+  height: 4px;
+  background: #287d8e;
+  border-radius: 2px;
+}
+
+/* Section descriptions */
+section > p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #535c65;
+  margin: 20px 0 28px;
+}
+
+/* Chart layout */
 .chart-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 24px;
   margin-top: 24px;
+  align-items: stretch;
 }
 
+/* Individual chart cards */
 .chart-card {
   min-width: 0;
-  padding: 20px;
+  padding: 24px;
   background: white;
   border: 1px solid #e4e4df;
   border-radius: 12px;
 }
 
+/* Chart-card headings */
 .chart-card h3 {
-  font-size: 1.05rem;
-  margin-top: 0;
+  font-size: 1.2rem;
+  line-height: 1.4;
+  font-weight: 700;
+  letter-spacing: -0.25px;
+  color: #252b35;
+  margin: 0 0 18px;
 }
 
+/* Chart containers */
 .chart-card > div {
   width: 100%;
   min-height: 180px;
 }
 
+/* Consistent text inside chart cards */
+.chart-card p {
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+/* Footer */
 footer {
   background: #183b4e;
   color: white;
   padding: 28px 8%;
   font-size: 0.9rem;
+  line-height: 1.6;
 }
 
+/* Responsive layout */
 @media (max-width: 760px) {
   .hero {
     padding: 42px 6%;
@@ -95,9 +150,72 @@ footer {
 
   .chart-grid {
     grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .chart-card {
+    padding: 18px;
   }
 
   section {
     margin: 38px 0;
+  }
+
+  section h2 {
+    font-size: 1.6rem;
+    padding-bottom: 14px;
+  }
+
+  section > p {
+    font-size: 1rem;
+    margin: 16px 0 22px;
+  }
+
+  .chart-card h3 {
+    font-size: 1.1rem;
+  }
+}
+
+/* Section 3 — featured chart layout */
+.section-three-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+}
+
+/* Main chart spans both columns */
+.section-three-grid .chart-featured {
+  grid-column: 1 / -1;
+}
+
+/* Give the main chart more space */
+.section-three-grid .chart-featured > div {
+  min-height: 360px;
+}
+
+/* Supporting charts */
+.section-three-grid .chart-card:not(.chart-featured) > div {
+  min-height: 300px;
+}
+
+/* Ensure Vega-Lite charts fit their cards */
+.section-three-grid .vega-embed,
+.section-three-grid .vega-embed canvas,
+.section-three-grid .vega-embed svg {
+  max-width: 100%;
+}
+
+/* Mobile layout */
+@media (max-width: 760px) {
+  .section-three-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .section-three-grid .chart-featured {
+    grid-column: auto;
+  }
+
+  .section-three-grid .chart-featured > div,
+  .section-three-grid .chart-card:not(.chart-featured) > div {
+    min-height: 220px;
   }
 }
