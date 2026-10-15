@@ -49,14 +49,9 @@
           "tickCount": 6
         }
       },
-      "color": {
-        "field": "Value_pct",
-        "type": "quantitative",
-        "scale": {
-          "scheme": "tealblues"
-        },
-        "legend": null
-      },
+    "color": {
+    "value": "#287D8E"
+},
       "tooltip": [
         {
           "field": "State",

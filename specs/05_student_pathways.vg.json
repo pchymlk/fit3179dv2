@@ -44,16 +44,16 @@
       "title": "Engagement status",
       "scale": {
         "domain": [
-          "Fully engaged",
-          "Partially engaged",
-          "Not engaged"
+            "Fully engaged",
+            "Partially engaged",
+            "Not engaged"
         ],
         "range": [
-          "#287D8E",
-          "#E6B566",
-          "#C96B5C"
+            "#287D8E",
+            "#E5B45E",
+            "#9B83B8"
         ]
-      }
+        }
     },
     "tooltip": [
       {

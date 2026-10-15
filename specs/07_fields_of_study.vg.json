@@ -13,7 +13,7 @@
   "mark": {
     "type": "area",
     "interpolate": "monotone",
-    "opacity": 0.85
+    "opacity": 0.82
   },
   "encoding": {
     "x": {
@@ -39,7 +39,36 @@
       "type": "nominal",
       "title": "Field of education",
       "scale": {
-        "scheme": "tableau10"
+        "domain": [
+          "Agriculture, Environmental and Related Sciences",
+          "Architecture and Building",
+          "Creative Arts",
+          "Education",
+          "Engineering and Related Technologies",
+          "Food, Hospitality and Personal Services",
+          "Health",
+          "Information Technology",
+          "Management and Commerce",
+          "Mixed Field Programmes",
+          "Natural and Physical Sciences",
+          "Non-award courses(3.04)",
+          "Society and Culture"
+        ],
+        "range": [
+          "#24476B",
+          "#477DA8",
+          "#9B83B8",
+          "#58A6A6",
+          "#347C78",
+          "#E5B45E",
+          "#7664A8",
+          "#D49A64",
+          "#8C7666",
+          "#A7A7A7",
+          "#355F8A",
+          "#D4B9D8",
+          "#287D8E"
+        ]
       }
     },
     "detail": {
@@ -52,11 +81,14 @@
     "tooltip": [
       {
         "field": "Year",
-        "type": "quantitative"
+        "type": "quantitative",
+        "title": "Year",
+        "format": "d"
       },
       {
         "field": "Field",
-        "type": "nominal"
+        "type": "nominal",
+        "title": "Field of education"
       },
       {
         "field": "Commencing_domestic_students",
