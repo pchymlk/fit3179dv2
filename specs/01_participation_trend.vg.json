@@ -8,7 +8,7 @@
   "width": "container",
   "height": 300,
   "data": {
-    "url": "../data/cleaned_higher_education_enrolments.csv",
+    "url": "./data/cleaned_higher_education_enrolments.csv",
     "format": {
       "type": "csv"
     }
