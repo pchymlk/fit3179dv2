@@ -6,7 +6,7 @@
     "subtitle": "Ranking of domestic commencing enrolments by field, 2015–2024"
   },
   "width": "container",
-  "height": 380,
+  "height": 340,
   "data": {
     "url": "data/07_domestic_commencements_by_field.csv"
   },
@@ -57,42 +57,57 @@
         "tickMinStep": 1
       }
     },
-    "color": {
-    "field": "Field",
-    "type": "nominal",
+    
+"color": {
+  "field": "Field",
+  "type": "nominal",
+  "title": "Field of education",
+  "scale": {
+    "domain": [
+      "Agriculture, Environmental and Related Sciences",
+      "Architecture and Building",
+      "Creative Arts",
+      "Education",
+      "Engineering and Related Technologies",
+      "Food, Hospitality and Personal Services",
+      "Health",
+      "Information Technology",
+      "Management and Commerce",
+      "Mixed Field Programmes",
+      "Natural and Physical Sciences",
+      "Non-award courses(3.04)",
+      "Society and Culture"
+    ],
+    "range": [
+      "#24476B",
+      "#E5B45E",
+      "#9B83B8",
+      "#58A6A6",
+      "#477DA8",
+      "#D49A64",
+      "#7664A8",
+      "#C96F63",
+      "#8C7666",
+      "#A7A7A7",
+      "#355F8A",
+      "#D4B9D8",
+      "#347C78"
+    ]
+  },
+  "legend": {
+    "orient": "bottom",
+    "direction": "horizontal",
+    "columns": 2,
     "title": "Field of education",
-    "scale": {
-        "domain": [
-            "Agriculture, Environmental and Related Sciences",
-            "Architecture and Building",
-            "Creative Arts",
-            "Education",
-            "Engineering and Related Technologies",
-            "Food, Hospitality and Personal Services",
-            "Health",
-            "Information Technology",
-            "Management and Commerce",
-            "Mixed Field Programmes",
-            "Natural and Physical Sciences",
-            "Non-award courses(3.04)",
-            "Society and Culture"
-        ],
-        "range": [
-            "#24476B",
-            "#E5B45E",
-            "#9B83B8",
-            "#58A6A6",
-            "#477DA8",
-            "#D49A64",
-            "#7664A8",
-            "#C96F63",
-            "#8C7666",
-            "#A7A7A7",
-            "#355F8A",
-            "#D4B9D8",
-            "#347C78"
-        ]
-    }
+    "labelLimit": 240,
+    "labelFontSize": 11,
+    "titleFontSize": 12,
+    "symbolSize": 90,
+    "rowPadding": 5,
+    "columnPadding": 18,
+    "offset": 16,
+    "labelOverlap": false
+  }
 },
     "detail": {
       "field": "Field"

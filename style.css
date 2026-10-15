@@ -112,6 +112,19 @@ section > p {
 }
 
 /* Chart-card headings */
+
+/* Individual chart cards */
+.chart-card {
+  min-width: 0;
+  max-width: 100%;
+  padding: 24px;
+  background: white;
+  border: 1px solid #e4e4df;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Chart-card headings */
 .chart-card h3 {
   font-size: 1.2rem;
   line-height: 1.4;
@@ -124,7 +137,22 @@ section > p {
 /* Chart containers */
 .chart-card > div {
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
   min-height: 180px;
+}
+
+/* Prevent Vega-Lite charts from exceeding card width */
+.chart-card .vega-embed,
+.chart-card .vega-embed > div {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.chart-card .vega-embed svg,
+.chart-card .vega-embed canvas {
+  max-width: 100%;
 }
 
 /* Consistent text inside chart cards */
@@ -132,6 +160,7 @@ section > p {
   font-size: 0.95rem;
   line-height: 1.65;
 }
+
 
 /* Footer */
 footer {

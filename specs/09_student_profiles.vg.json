@@ -92,6 +92,17 @@
     ]
   }
 },
+    "legend": {
+      "orient": "bottom",
+      "direction": "horizontal",
+      "columns": 6,
+      "title": "Age group",
+      "labelLimit": 180,
+      "symbolSize": 100,
+      "offset": 12
+    },
+
+
     "detail": {
       "field": "Age_group"
     },

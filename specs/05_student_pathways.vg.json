@@ -53,6 +53,15 @@
             "#E5B45E",
             "#9B83B8"
         ]
+        },
+        "legend": {
+            "orient": "bottom",
+            "direction": "horizontal",
+            "columns": 3,
+            "title": "Engagement status",
+            "labelLimit": 180,
+            "symbolSize": 100,
+            "offset": 12
         }
     },
     "tooltip": [
