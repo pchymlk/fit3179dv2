@@ -1,15 +1,15 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>From School to Higher Education</title>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 
-  <!-- Vega-Lite libraries -->
   <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
@@ -17,7 +17,7 @@
 
 <body>
   <header class="hero">
-    <p class="eyebrow">AUSTRALIAN EDUCATION</p>
+    <p class="eyebrow">Australian education</p>
     <h1>From School to Higher Education</h1>
     <p class="intro">
       Exploring participation, differences between states,
@@ -29,94 +29,140 @@
     </p>
   </header>
 
+  <nav class="jump" aria-label="Sections">
+    <a href="#big-picture">1 The big picture</a>
+    <a href="#where">2 Where students are</a>
+    <a href="#how">3 How students study</a>
+    <a href="#access">4 Who gets access</a>
+  </nav>
+
   <main>
-    <section>
-      <h2>01 — The Big Picture</h2>
-      <p>How is education participation changing over time?</p>
-      <div class="chart-grid">
-        <article class="chart-card">
-          <h3>Higher Education Enrolment Trends</h3>
-          <div id="chart1"></div>
-          <p class="chart-insight">
-            <strong>Key finding:</strong> Higher education enrolments
-            increased overall between 2015 and 2024, despite a decline
-            in 2021 and 2022, before reaching their highest level in 2024.
-          </p>
-        </article>
-        <article class="chart-card">
-          <h3>Education Across Australia</h3>
-          <div id="chart2"></div>
-        </article>
+    <!-- 1 -->
+    <section class="band" id="big-picture">
+      <div class="band-inner">
+        <header class="section-head">
+          <span class="section-num" aria-hidden="true">1</span>
+          <div>
+            <h2>The Big Picture</h2>
+            <p>How is education participation changing over time?</p>
+          </div>
+        </header>
+        <div class="chart-grid">
+          <article class="chart-card">
+            <h3>Higher Education Student Enrolments</h3>
+            <p class="chart-sub">Australia, 2015–2024, all enrolled students</p>
+            <div id="chart1"></div>
+            <p class="chart-insight">
+              <strong>Key finding:</strong> Higher education enrolments
+              increased overall between 2015 and 2024, despite a decline
+              in 2021 and 2022, before reaching their highest level in 2024.
+            </p>
+          </article>
+          <article class="chart-card">
+            <h3>Young Australians Fully Engaged in Work and/or Study</h3>
+            <p class="chart-sub">People aged 15–24, by state and territory, 2025. Darker means more engaged.</p>
+            <div id="chart2"></div>
+          </article>
+        </div>
       </div>
     </section>
 
-    <section>
-      <h2>02 — Where Students Are</h2>
-      <p>How does participation differ across states and territories?</p>
-      <div class="chart-grid">
-        <article class="chart-card">
-          <h3>Student Distribution</h3>
-          <div id="chart3"></div>
-        </article>
-        <article class="chart-card">
-          <h3>State Comparison</h3>
-          <div id="chart4"></div>
-        </article>
-        <article class="chart-card">
-          <h3>Student Pathways</h3>
-          <div id="chart5"></div>
-        </article>
-        <article class="chart-card">
-          <h3>Changes in Education Enrolments</h3>
-          <div id="chart6"></div>
-        </article>
+    <!-- 2 -->
+    <section class="band band-alt" id="where">
+      <div class="band-inner">
+        <header class="section-head">
+          <span class="section-num" aria-hidden="true">2</span>
+          <div>
+            <h2>Where Students Are</h2>
+            <p>How does participation differ across states and territories?</p>
+          </div>
+        </header>
+        <div class="chart-grid">
+          <article class="chart-card">
+            <h3>Student Distribution</h3>
+            <div id="chart3"></div>
+          </article>
+          <article class="chart-card">
+            <h3>State Comparison</h3>
+            <div id="chart4"></div>
+          </article>
+          <article class="chart-card">
+            <h3>Work and Study Engagement by Remoteness</h3>
+            <p class="chart-sub">People aged 15–24. Group percentages, not individual transitions.</p>
+            <div id="chart5"></div>
+          </article>
+          <article class="chart-card">
+            <h3>Which Fields Saw the Biggest Enrolment Changes?</h3>
+            <p class="chart-sub">
+              Domestic commencing students, compared across two years:
+              <span class="dot dot-sky"></span>2015
+              <span class="dot dot-rust"></span>2024
+            </p>
+            <div id="chart6"></div>
+          </article>
+        </div>
       </div>
     </section>
 
-    <section>
-      <h2>03 — How Students Study</h2>
-      <p>Exploring fields of study, student profiles and outcomes.</p>
-      <div class="chart-grid section-three-grid">
-        <!-- Main chart: full width -->
-        <article class="chart-card chart-featured">
-          <h3>Fields of Study</h3>
-          <div id="chart7"></div>
-        </article>
-
-        <!-- Supporting chart: bottom left -->
-        <article class="chart-card">
-          <h3>Student Outcomes</h3>
-          <div id="chart8"></div>
-        </article>
-
-        <!-- Supporting chart: bottom right -->
-        <article class="chart-card">
-          <h3>Student Profiles</h3>
-          <div id="chart9"></div>
-        </article>
-
+    <!-- 3 -->
+    <section class="band" id="how">
+      <div class="band-inner">
+        <header class="section-head">
+          <span class="section-num" aria-hidden="true">3</span>
+          <div>
+            <h2>How Students Study</h2>
+            <p>Exploring fields of study, student profiles and outcomes.</p>
+          </div>
+        </header>
+        <div class="chart-grid section-three-grid">
+          <article class="chart-card chart-featured">
+            <h3>How Student Choices Have Shifted</h3>
+            <p class="chart-sub">Domestic commencing enrolments by broad field, 2015–2024</p>
+            <div id="chart7"></div>
+          </article>
+          <article class="chart-card">
+            <h3>Employment Outcomes by Qualification and Sex</h3>
+            <p class="chart-sub">Labour-force status among people aged 15–74, 2025</p>
+            <div id="chart8"></div>
+          </article>
+          <article class="chart-card">
+            <h3>Student Profiles by Age Group</h3>
+            <p class="chart-sub">Each line is one indicator, as a percentage of the age group</p>
+            <div id="chart9"></div>
+          </article>
+        </div>
       </div>
     </section>
 
-    <section>
-      <h2>04 — Who Gets Access?</h2>
-      <p>Examining differences between student groups.</p>
-      <div class="chart-grid">
-        <article class="chart-card">
-          <h3>Participation Gaps</h3>
-          <div id="chart10"></div>
-        </article>
-        <article class="chart-card">
-          <h3>State Education Profiles</h3>
-          <div id="chart11"></div>
-        </article>
+    <!-- 4 -->
+    <section class="band band-alt" id="access">
+      <div class="band-inner">
+        <header class="section-head">
+          <span class="section-num" aria-hidden="true">4</span>
+          <div>
+            <h2>Who Gets Access?</h2>
+            <p>Examining differences between student groups.</p>
+          </div>
+        </header>
+        <div class="chart-grid">
+          <article class="chart-card">
+            <h3>Gender Gap in Study Participation</h3>
+            <p class="chart-sub">Currently enrolled in study, by age group, 2025</p>
+            <div id="chart10"></div>
+          </article>
+          <article class="chart-card">
+            <h3>State Education Profiles</h3>
+            <p class="chart-sub">Education and work/study indicators by state, 2025</p>
+            <div id="chart11" class="chart-scroll"></div>
+          </article>
+        </div>
       </div>
     </section>
   </main>
 
   <footer>
     <p>
-      Data visualisation project — FIT3179.
+      Data visualisation project, FIT3179.
       Sources and data definitions will be documented here.
     </p>
   </footer>

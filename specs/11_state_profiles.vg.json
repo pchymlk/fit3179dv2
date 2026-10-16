@@ -1,10 +1,5 @@
-
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": {
-    "text": "State Education Profiles",
-    "subtitle": "Comparing education and work/study indicators, 2025"
-  },
   "data": {
     "url": "data/11_state_profiles_long.csv"
   },
@@ -22,12 +17,14 @@
     }
   },
   "spec": {
-    "width": 420,
+    "width": 380,
     "height": 145,
-    "mark": {
-      "type": "bar",
-      "cornerRadiusEnd": 3
-    },
+    "transform": [
+      {
+        "calculate": "format(datum.Value_pct,'.0f') + '%'",
+        "as": "label"
+      }
+    ],
     "encoding": {
       "y": {
         "field": "Abbreviation",
@@ -43,15 +40,16 @@
         "type": "quantitative",
         "title": "Percentage",
         "scale": {
-          "domain": [0, 100]
+          "domain": [
+            0,
+            100
+          ]
         },
         "axis": {
-          "tickCount": 6
+          "tickCount": 5,
+          "grid": false
         }
       },
-    "color": {
-    "value": "#287D8E"
-},
       "tooltip": [
         {
           "field": "State",
@@ -68,7 +66,31 @@
           "format": ".1f"
         }
       ]
-    }
+    },
+    "layer": [
+      {
+        "mark": {
+          "type": "bar",
+          "cornerRadiusEnd": 3,
+          "color": "#003F50"
+        }
+      },
+      {
+        "mark": {
+          "type": "text",
+          "align": "left",
+          "dx": 5,
+          "fontSize": 11,
+          "color": "#3F1816"
+        },
+        "encoding": {
+          "text": {
+            "field": "label",
+            "type": "nominal"
+          }
+        }
+      }
+    ]
   },
   "resolve": {
     "scale": {
@@ -81,6 +103,13 @@
     },
     "facet": {
       "spacing": 24
-    }
+    },
+    "background": "#FBF5EA"
+  },
+  "padding": {
+    "right": 36,
+    "left": 5,
+    "top": 5,
+    "bottom": 5
   }
 }

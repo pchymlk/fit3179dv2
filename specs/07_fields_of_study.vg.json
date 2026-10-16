@@ -1,4 +1,3 @@
-
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
@@ -55,20 +54,20 @@
           "Society and Culture"
         ],
         "range": [
-            "#1B4965",
-            "#CA6702",
-            "#6A4C93",
-            "#0081A7",
-            "#9B2226",
-            "#2A9D8F",
-            "#BB3E03",
-            "#5F0F40",
-            "#669BBC",
-            "#E9C46A",
-            "#386641",
-            "#BC6C25",
-            "#7F5539"
-          ]
+          "#5D6737",
+          "#E5AA7B",
+          "#003F50",
+          "#A9835C",
+          "#90A3AF",
+          "#7E3717",
+          "#2B6577",
+          "#3F1816",
+          "#F0C9A0",
+          "#C5D0D7",
+          "#D9B98A",
+          "#A3AB7D",
+          "#B5683F"
+        ]
       }
     },
     "detail": {
@@ -101,6 +100,7 @@
   "config": {
     "view": {
       "stroke": null
-    }
+    },
+    "background": "#FBF5EA"
   }
 }

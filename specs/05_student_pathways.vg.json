@@ -1,10 +1,5 @@
-
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": {
-    "text": "Work and Study Engagement by Remoteness",
-    "subtitle": "People aged 15–24; group percentages, not individual transitions"
-  },
   "width": "container",
   "height": 340,
   "data": {
@@ -12,7 +7,7 @@
   },
   "mark": {
     "type": "bar",
-    "stroke": "white",
+    "stroke": "#FBF5EA",
     "strokeWidth": 1
   },
   "encoding": {
@@ -26,7 +21,9 @@
         "Outer Regional and Remote"
       ],
       "axis": {
-        "labelAngle": -15
+        "labelAngle": 0,
+        "labelLimit": 160,
+        "labelExpr": "datum.label === 'Outer Regional and Remote' ? ['Outer Regional','and Remote'] : datum.label"
       }
     },
     "y": {
@@ -35,7 +32,8 @@
       "stack": "normalize",
       "title": "Share of each area",
       "axis": {
-        "format": "%"
+        "format": "%",
+        "tickCount": 5
       }
     },
     "color": {
@@ -44,25 +42,25 @@
       "title": "Engagement status",
       "scale": {
         "domain": [
-            "Fully engaged",
-            "Partially engaged",
-            "Not engaged"
+          "Fully engaged",
+          "Partially engaged",
+          "Not engaged"
         ],
         "range": [
-            "#287D8E",
-            "#E5B45E",
-            "#9B83B8"
+          "#003F50",
+          "#90A3AF",
+          "#E5AA7B"
         ]
-        },
-        "legend": {
-            "orient": "bottom",
-            "direction": "horizontal",
-            "columns": 3,
-            "title": "Engagement status",
-            "labelLimit": 180,
-            "symbolSize": 100,
-            "offset": 12
-        }
+      },
+      "legend": {
+        "orient": "bottom",
+        "direction": "horizontal",
+        "columns": 3,
+        "title": "Engagement status",
+        "labelLimit": 180,
+        "symbolSize": 100,
+        "offset": 12
+      }
     },
     "tooltip": [
       {
@@ -84,6 +82,7 @@
   "config": {
     "view": {
       "stroke": null
-    }
+    },
+    "background": "#FBF5EA"
   }
 }

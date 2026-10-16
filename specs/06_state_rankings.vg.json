@@ -1,12 +1,9 @@
-
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": {
-    "text": "Which Fields Saw the Biggest Enrolment Changes?",
-    "subtitle": "Domestic commencing students | 2015 compared with 2024"
-  },
   "width": "container",
-  "height": {"step": 34},
+  "height": {
+    "step": 34
+  },
   "data": {
     "url": "data/07_domestic_commencements_by_field.csv"
   },
@@ -22,12 +19,17 @@
           "as": "Students"
         }
       ],
-      "groupby": ["Year", "Field"]
+      "groupby": [
+        "Year",
+        "Field"
+      ]
     },
     {
       "pivot": "Year",
       "value": "Students",
-      "groupby": ["Field"]
+      "groupby": [
+        "Field"
+      ]
     },
     {
       "calculate": "isValid(datum['2015']) ? datum['2015'] : 0",
@@ -53,12 +55,13 @@
       "axis": {
         "title": null,
         "labelFontSize": 11,
-        "labelLimit": 260,
+        "labelLimit": 190,
         "labelPadding": 8,
         "labelColor": "#454B55",
         "ticks": false,
         "domain": false,
-        "grid": false
+        "grid": false,
+        "labelExpr": "datum.label === 'Non-award courses(3.04)' ? 'Non-award courses' : datum.label"
       }
     }
   },
@@ -66,7 +69,7 @@
     {
       "mark": {
         "type": "rule",
-        "color": "#C7CDD4",
+        "color": "#D9C6A8",
         "strokeWidth": 3
       },
       "encoding": {
@@ -120,8 +123,8 @@
         "type": "point",
         "filled": true,
         "size": 115,
-        "color": "#83A9C2",
-        "stroke": "#FFFFFF",
+        "color": "#90A3AF",
+        "stroke": "#FBF5EA",
         "strokeWidth": 1.5
       },
       "encoding": {
@@ -170,8 +173,8 @@
         "type": "point",
         "filled": true,
         "size": 115,
-        "color": "#28745B",
-        "stroke": "#FFFFFF",
+        "color": "#7E3717",
+        "stroke": "#FBF5EA",
         "strokeWidth": 1.5
       },
       "encoding": {
@@ -227,24 +230,13 @@
     }
   },
   "config": {
-    "background": "#FFFFFF",
+    "background": "#FBF5EA",
     "view": {
       "stroke": null
     },
-    "title": {
-      "anchor": "start",
-      "font": "Arial",
-      "fontSize": 19,
-      "fontWeight": 700,
-      "color": "#252B36",
-      "subtitleFont": "Arial",
-      "subtitleFontSize": 12,
-      "subtitleColor": "#687180",
-      "offset": 12
-    },
     "axis": {
-      "labelFont": "Arial",
-      "titleFont": "Arial",
+      "labelFont": "Nunito",
+      "titleFont": "Nunito",
       "labelColor": "#454B55",
       "titleColor": "#252B36",
       "titleFontWeight": 600

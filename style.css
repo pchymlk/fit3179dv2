@@ -1,99 +1,220 @@
+/* ==========================================================
+   Palette (from the supplied swatches)
+   Linen   #EBDCC5  page background
+   Blush   #E5AA7B  warm accent / highlights
+   Tan     #A9835C  borders, quiet details
+   Rust    #7E3717  strong accent (links, key numbers)
+   Leather #3F1816  headings and body text
+   Gum     #5D6737  decorative only (never next to Rust in charts)
+   Forest  #222918  footer
+   Sky     #90A3AF  cool neutral
+   Ocean   #003F50  hero, primary data colour
+   Hierarchy: Ocean (primary) > Rust/Blush (accent) > Sky/Tan (support)
+   Text pairs used: Leather on Linen/Cream, Linen on Ocean/Forest.
+   ========================================================== */
+
+:root {
+  --linen: #ebdcc5;
+  --cream: #fbf5ea;       /* lightened linen, used for cards */
+  --blush: #e5aa7b;
+  --blush-soft: #f6e0cb;  /* blush tint for callouts */
+  --tan: #a9835c;
+  --tan-soft: #d9c6a8;
+  --linen-deep: #e2cfb1;  /* alternate section band */    /* hairlines on cream */
+  --rust: #7e3717;
+  --leather: #3f1816;
+  --gum: #5d6737;
+  --forest: #222918;
+  --sky: #90a3af;
+  --ocean: #003f50;
+
+  --text: var(--leather);
+  --text-soft: #6b4a3f;   /* leather lightened, 6:1 on linen */
+  --radius-card: 28px;
+  --radius-pill: 999px;
+
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body: "Nunito", "Trebuchet MS", Arial, sans-serif;
+}
 
 * {
   box-sizing: border-box;
 }
 
-body {
-  margin: 0;
-  background: #f7f6f2;
-  color: #252b35;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 16px;
-  line-height: 1.6;
+html {
+  scroll-behavior: smooth;
 }
 
-/* Hero — keep the original title sizing */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+body {
+  margin: 0;
+  background: var(--linen);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+:focus-visible {
+  outline: 3px solid var(--rust);
+  outline-offset: 3px;
+}
+
+/* ---------- Hero ---------- */
 .hero {
-  background: #183b4e;
-  color: white;
-  padding: 64px 8%;
+  position: relative;
+  background: var(--ocean);
+  color: var(--linen);
+  padding: 72px 8% 88px;
+  overflow: hidden;
+}
+
+/* The memorable bit: a stack of palette "pills" along the hero's edge */
+.hero::after {
+  content: "";
+  position: absolute;
+  left: 8%;
+  bottom: 32px;
+  width: min(360px, 60%);
+  height: 12px;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(
+    90deg,
+    var(--blush) 0 25%,
+    var(--tan) 25% 50%,
+    var(--sky) 50% 75%,
+    var(--linen) 75% 100%
+  );
 }
 
 .eyebrow {
-  letter-spacing: 3px;
-  font-size: 0.8rem;
-  font-weight: bold;
+  display: inline-block;
+  margin: 0;
+  padding: 6px 16px;
+  background: var(--blush);
+  color: var(--leather);
+  border-radius: var(--radius-pill);
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.4px;
 }
 
 h1 {
   max-width: 850px;
+  font-family: var(--font-display);
+  font-weight: 600;
   font-size: clamp(2.2rem, 5vw, 4.2rem);
   line-height: 1.1;
-  margin: 16px 0;
+  letter-spacing: -0.5px;
+  margin: 20px 0 16px;
+  color: #fbf5ea;
 }
 
 .intro {
-  max-width: 700px;
+  max-width: 62ch;
   font-size: 1.15rem;
   line-height: 1.7;
+  color: var(--linen);
+  margin: 0;
 }
 
 .source-note {
   margin-top: 28px;
   font-size: 0.875rem;
   line-height: 1.5;
-  color: #d8e4e9;
+  color: var(--sky);
 }
 
-/* Main content */
-main {
+/* ---------- Jump navigation ---------- */
+.jump {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 12px 5%;
+  background: rgba(235, 220, 197, 0.94);
+  backdrop-filter: blur(8px);
+  border-bottom: 1.5px solid var(--tan-soft);
+}
+
+.jump a {
+  padding: 6px 16px;
+  border: 1.5px solid var(--tan);
+  border-radius: var(--radius-pill);
+  color: var(--leather);
+  font-weight: 800;
+  font-size: 0.9rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.jump a:hover {
+  background: var(--blush);
+  border-color: var(--blush);
+}
+
+/* ---------- Sections as alternating bands ---------- */
+.band {
+  padding: 72px 0;
+  scroll-margin-top: 56px;
+}
+
+.band-alt {
+  background: var(--linen-deep);
+}
+
+.band-inner {
   max-width: 1300px;
   margin: auto;
-  padding: 20px 5%;
+  padding: 0 5%;
 }
 
-/* Section spacing */
-section {
-  margin: 56px 0;
+.section-head {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 32px;
 }
 
-/* Section headings — stronger visual hierarchy */
-section h2 {
-  position: relative;
-  font-size: clamp(1.8rem, 3vw, 2.25rem);
-  line-height: 1.25;
-  font-weight: 800;
-  letter-spacing: -0.7px;
-  color: #252b35;
-
-  margin: 0 0 20px;
-  padding: 0 0 18px;
-
-  border-bottom: 2px solid #d7dedf;
+.section-num {
+  flex: none;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--rust);
+  color: var(--cream);
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  font-weight: 600;
+  display: grid;
+  place-items: center;
 }
 
-/* Teal accent beneath section headings */
-section h2::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -2px;
-
-  width: 76px;
-  height: 4px;
-  background: #287d8e;
-  border-radius: 2px;
+.section-head h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 3vw, 2.3rem);
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  color: var(--leather);
+  margin: 0;
 }
 
-/* Section descriptions */
-section > p {
+.section-head p {
+  max-width: 70ch;
   font-size: 1.05rem;
-  line-height: 1.7;
-  color: #535c65;
-  margin: 20px 0 28px;
+  line-height: 1.5;
+  color: var(--text-soft);
+  margin: 4px 0 0;
 }
 
-/* Chart layout */
+/* ---------- Chart cards ---------- */
 .chart-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -102,39 +223,25 @@ section > p {
   align-items: stretch;
 }
 
-/* Individual chart cards */
-.chart-card {
-  min-width: 0;
-  padding: 24px;
-  background: white;
-  border: 1px solid #e4e4df;
-  border-radius: 12px;
-}
-
-/* Chart-card headings */
-
-/* Individual chart cards */
 .chart-card {
   min-width: 0;
   max-width: 100%;
-  padding: 24px;
-  background: white;
-  border: 1px solid #e4e4df;
-  border-radius: 12px;
+  padding: 28px;
+  background: var(--cream);
+  border: 1.5px solid var(--tan-soft);
+  border-radius: var(--radius-card);
   overflow: hidden;
 }
 
-/* Chart-card headings */
 .chart-card h3 {
+  font-family: var(--font-display);
   font-size: 1.2rem;
   line-height: 1.4;
-  font-weight: 700;
-  letter-spacing: -0.25px;
-  color: #252b35;
+  font-weight: 600;
+  color: var(--ocean);
   margin: 0 0 18px;
 }
 
-/* Chart containers */
 .chart-card > div {
   width: 100%;
   max-width: 100%;
@@ -142,7 +249,6 @@ section > p {
   min-height: 180px;
 }
 
-/* Prevent Vega-Lite charts from exceeding card width */
 .chart-card .vega-embed,
 .chart-card .vega-embed > div {
   width: 100%;
@@ -155,88 +261,108 @@ section > p {
   max-width: 100%;
 }
 
-/* Consistent text inside chart cards */
 .chart-card p {
   font-size: 0.95rem;
   line-height: 1.65;
 }
 
-
-/* Footer */
-footer {
-  background: #183b4e;
-  color: white;
-  padding: 28px 8%;
+/* Small caption under a chart title */
+.chart-card .chart-sub {
+  margin: -10px 0 16px;
   font-size: 0.9rem;
-  line-height: 1.6;
+  line-height: 1.5;
+  color: var(--text-soft);
 }
 
-/* Responsive layout */
-@media (max-width: 760px) {
-  .hero {
-    padding: 42px 6%;
-  }
+.dot {
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  margin: 0 4px 0 10px;
+  border-radius: 50%;
+  vertical-align: -1px;
+}
+.dot-sky { background: var(--sky); }
+.dot-rust { background: var(--rust); }
 
-  .chart-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-
-  .chart-card {
-    padding: 18px;
-  }
-
-  section {
-    margin: 38px 0;
-  }
-
-  section h2 {
-    font-size: 1.6rem;
-    padding-bottom: 14px;
-  }
-
-  section > p {
-    font-size: 1rem;
-    margin: 16px 0 22px;
-  }
-
-  .chart-card h3 {
-    font-size: 1.1rem;
-  }
+/* Charts that fail to load */
+.chart-missing {
+  display: grid;
+  place-items: center;
+  min-height: 160px !important;
+  border: 2px dashed var(--tan-soft);
+  border-radius: 20px;
+  color: var(--text-soft);
+  font-size: 0.95rem;
 }
 
-/* Section 3 — featured chart layout */
+.chart-scroll { overflow-x: auto; }
+
+/* Key-finding callout: soft blush pill-ish box */
+.chart-insight {
+  margin: 20px 0 0;
+  padding: 14px 20px;
+  background: var(--blush-soft);
+  border-radius: 20px;
+  color: var(--leather);
+}
+
+.chart-insight strong {
+  color: var(--rust);
+}
+
+/* ---------- Section 3 featured layout ---------- */
 .section-three-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   align-items: start;
 }
 
-/* Main chart spans both columns */
 .section-three-grid .chart-featured {
   grid-column: 1 / -1;
 }
 
-/* Give the main chart more space */
 .section-three-grid .chart-featured > div {
   min-height: 360px;
 }
 
-/* Supporting charts */
 .section-three-grid .chart-card:not(.chart-featured) > div {
   min-height: 300px;
 }
 
-/* Ensure Vega-Lite charts fit their cards */
 .section-three-grid .vega-embed,
 .section-three-grid .vega-embed canvas,
 .section-three-grid .vega-embed svg {
   max-width: 100%;
 }
 
-/* Mobile layout */
+/* ---------- Footer ---------- */
+footer {
+  background: var(--forest);
+  color: var(--linen);
+  padding: 32px 8%;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+footer p {
+  margin: 0;
+}
+
+/* ---------- Mobile ---------- */
 @media (max-width: 760px) {
+  .hero {
+    padding: 48px 6% 72px;
+  }
+
+  .hero::after {
+    left: 6%;
+    bottom: 28px;
+  }
+
+  .chart-grid,
   .section-three-grid {
     grid-template-columns: 1fr;
+    gap: 20px;
   }
 
   .section-three-grid .chart-featured {
@@ -246,5 +372,30 @@ footer {
   .section-three-grid .chart-featured > div,
   .section-three-grid .chart-card:not(.chart-featured) > div {
     min-height: 220px;
+  }
+
+  .chart-card {
+    padding: 18px;
+    border-radius: 22px;
+  }
+
+  .band {
+    padding: 48px 0;
+  }
+
+  .section-num {
+    width: 44px;
+    height: 44px;
+    font-size: 1.3rem;
+  }
+
+  .jump {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+  }
+
+  .chart-card h3 {
+    font-size: 1.1rem;
   }
 }

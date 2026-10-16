@@ -1,14 +1,5 @@
-
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": {
-    "text": "Employment Outcomes by Qualification and Sex",
-    "subtitle": "Labour-force status among people aged 15–74, 2025",
-    "anchor": "middle",
-    "fontSize": 16,
-    "subtitleFontSize": 12,
-    "offset": 12
-  },
   "width": "container",
   "height": 480,
   "autosize": {
@@ -55,7 +46,10 @@
       "type": "quantitative",
       "title": "Share of group (%)",
       "scale": {
-        "domain": [0, 100]
+        "domain": [
+          0,
+          100
+        ]
       },
       "axis": {
         "tickCount": 6,
@@ -77,10 +71,10 @@
           "Not in labour force"
         ],
         "range": [
-          "#477DA8",
-          "#8ABDB8",
-          "#E5B45E",
-          "#B1A3CC"
+          "#003F50",
+          "#90A3AF",
+          "#E5AA7B",
+          "#7E3717"
         ]
       },
       "legend": {
@@ -121,14 +115,15 @@
       "stroke": null
     },
     "axis": {
-      "labelFont": "Arial",
-      "titleFont": "Arial",
+      "labelFont": "Nunito",
+      "titleFont": "Nunito",
       "gridColor": "#E2E5E5",
       "gridOpacity": 0.8
     },
     "title": {
-      "font": "Arial",
-      "subtitleFont": "Arial"
-    }
+      "font": "Nunito",
+      "subtitleFont": "Nunito"
+    },
+    "background": "#FBF5EA"
   }
 }

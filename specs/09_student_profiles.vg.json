@@ -1,11 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": {
-    "text": "Student Profiles by Age Group",
-    "subtitle": "Compare percentages across separate indicators"
-  },
   "width": "container",
-  "height": 420,
+  "height": 380,
   "data": {
     "url": "data/09_age_group_indicators.csv"
   },
@@ -17,7 +13,10 @@
         "Bachelor_or_above_pct",
         "Fully_engaged_work_study_pct"
       ],
-      "as": ["Indicator", "Value_pct"]
+      "as": [
+        "Indicator",
+        "Value_pct"
+      ]
     },
     {
       "calculate": "datum.Indicator === 'Currently_studying_pct' ? 'Currently studying' : datum.Indicator === 'Has_non_school_qualification_pct' ? 'Any qualification' : datum.Indicator === 'Bachelor_or_above_pct' ? 'Bachelor or above' : 'Work/study engaged'",
@@ -25,80 +24,110 @@
     }
   ],
   "mark": {
-    "type": "bar",
-    "cornerRadiusEnd": 2
+    "type": "line",
+    "point": {
+      "filled": true,
+      "size": 70
+    },
+    "strokeWidth": 3
   },
   "encoding": {
     "x": {
-      "field": "Indicator_label",
-      "type": "nominal",
-      "title": "Indicator",
-      "sort": [
-        "Currently studying",
-        "Any qualification",
-        "Bachelor or above",
-        "Work/study engaged"
-      ],
-      "axis": {
-        "labelAngle": -20,
-        "labelLimit": 150
-      }
-    },
-    "xOffset": {
       "field": "Age_group",
-      "type": "nominal"
+      "type": "ordinal",
+      "sort": [
+        "15–19",
+        "20–24",
+        "25–29",
+        "30–34",
+        "35–39",
+        "40–44",
+        "45–49",
+        "45–54",
+        "50–54",
+        "54-74",
+        "55–59",
+        "55–74",
+        "54–74",
+        "60–64",
+        "65–74"
+      ],
+      "title": "Age group",
+      "axis": {
+        "labelAngle": 0,
+        "labelFontSize": 11
+      }
     },
     "y": {
       "field": "Value_pct",
       "type": "quantitative",
       "title": "Percentage (%)",
       "scale": {
-        "domain": [0, 100]
+        "domain": [
+          0,
+          100
+        ]
       },
       "axis": {
-        "tickCount": 6,
+        "tickCount": 5,
         "grid": true
       }
     },
     "color": {
-      "field": "Age_group",
+      "field": "Indicator_label",
       "type": "nominal",
-      "title": "Age group",
+      "title": null,
       "scale": {
         "domain": [
-          "15–19",
-          "20–24",
-          "25–29",
-          "30–34",
-          "35–39",
-          "40–44",
-          "45–49",
-          "50–54",
-          "55–59",
-          "60–64",
-          "65–74"
+          "Currently studying",
+          "Any qualification",
+          "Bachelor or above",
+          "Work/study engaged"
         ],
         "range": [
-          "#264653",
-          "#E76F51",
-          "#457B9D",
-          "#8A5A44",
-          "#6D597A",
-          "#2A9D8F",
-          "#B56576",
-          "#E9C46A",
-          "#355070",
-          "#A44A3F",
-          "#588157"
+          "#003F50",
+          "#7E3717",
+          "#A9835C",
+          "#90A3AF"
         ]
       },
       "legend": {
         "orient": "bottom",
         "direction": "horizontal",
-        "columns": 4,
-        "title": "Age group",
-        "labelLimit": 180,
-        "symbolSize": 100
+        "columns": 2,
+        "labelLimit": 200,
+        "symbolSize": 120
+      }
+    },
+    "strokeDash": {
+      "field": "Indicator_label",
+      "type": "nominal",
+      "legend": null,
+      "scale": {
+        "domain": [
+          "Currently studying",
+          "Any qualification",
+          "Bachelor or above",
+          "Work/study engaged"
+        ],
+        "range": [
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            2,
+            3
+          ]
+        ]
       }
     },
     "tooltip": [
@@ -123,6 +152,7 @@
   "config": {
     "view": {
       "stroke": null
-    }
+    },
+    "background": "#FBF5EA"
   }
 }

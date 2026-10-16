@@ -1,3 +1,19 @@
+// Shared look for every chart (palette: Ocean, Sky, Blush, Rust, Leather, Linen)
+const theme = {
+  background: "#FBF5EA",
+  font: "Nunito",
+  view: { stroke: null },
+  axis: {
+    labelFont: "Nunito", titleFont: "Nunito",
+    labelColor: "#3F1816", titleColor: "#3F1816",
+    gridColor: "#E6D8C0", domainColor: "#A9835C", tickColor: "#A9835C"
+  },
+  legend: {
+    labelFont: "Nunito", titleFont: "Nunito",
+    labelColor: "#3F1816", titleColor: "#3F1816"
+  },
+  header: { labelFont: "Nunito", labelColor: "#003F50" }
+};
 
 const charts = [
   ["#chart1", "specs/01_participation_trend.vg.json"],
@@ -13,15 +29,20 @@ const charts = [
   ["#chart11", "specs/11_state_profiles.vg.json"]
 ];
 
-charts.forEach(([container, specUrl]) => {
-  vegaEmbed(container, specUrl, {
-    actions: false,
-    renderer: "canvas"
-  }).catch(error => {
-    console.error("Error loading " + specUrl, error);
+// Wait for the web fonts so canvas text uses Nunito, not a fallback
+const fontsReady = document.fonts ? document.fonts.ready : Promise.resolve();
 
-    const element = document.querySelector(container);
-    element.textContent =
-      "Chart not available yet. Check the JSON file and data paths.";
+fontsReady.then(() => {
+  charts.forEach(([container, specUrl]) => {
+    vegaEmbed(container, specUrl, {
+      actions: false,
+      renderer: "canvas",
+      config: theme
+    }).catch(error => {
+      console.error("Error loading " + specUrl, error);
+      const element = document.querySelector(container);
+      element.classList.add("chart-missing");
+      element.textContent = "This chart isn't available yet.";
+    });
   });
 });

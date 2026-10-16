@@ -1,9 +1,5 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": {
-    "text": "Gender Gap in Study Participation",
-    "subtitle": "Currently enrolled in study, by age group, 2025"
-  },
   "width": "container",
   "height": 400,
   "data": {
@@ -15,63 +11,77 @@
   },
   "encoding": {
     "x": {
-      "field": "Sex",
+      "field": "Age_group",
       "type": "nominal",
-      "title": "Sex",
-      "sort": ["Men", "Women"],
+      "title": "Age group",
+      "sort": [
+        "15–19",
+        "20–24",
+        "25–29",
+        "30–34",
+        "35–39",
+        "40–44",
+        "45–49",
+        "45–54",
+        "50–54",
+        "54-74",
+        "55–59",
+        "55–74",
+        "54–74",
+        "60–64",
+        "65–74"
+      ],
       "axis": {
-        "labelFontSize": 13
+        "labelAngle": 0,
+        "labelFontSize": 11
       }
     },
     "xOffset": {
-      "field": "Age_group",
-      "type": "nominal"
+      "field": "Sex",
+      "type": "nominal",
+      "sort": [
+        "Men",
+        "Women"
+      ]
     },
     "y": {
       "field": "Currently_studying_pct",
       "type": "quantitative",
       "title": "Currently studying (%)",
       "scale": {
-        "domain": [0, 100]
+        "domain": [
+          0,
+          100
+        ]
       },
       "axis": {
-        "tickCount": 6,
+        "tickCount": 5,
         "grid": true
       }
     },
     "color": {
-      "field": "Age_group",
+      "field": "Sex",
       "type": "nominal",
-      "title": "Age group",
+      "title": null,
+      "sort": [
+        "Men",
+        "Women"
+      ],
       "scale": {
         "domain": [
-          "15–19",
-          "20–24",
-          "25–29",
-          "30–34",
-          "35–39",
-          "40–44",
-          "45–54",
-          "54-74"
+          "Men",
+          "Women"
         ],
         "range": [
-          "#264653",
-          "#E76F51",
-          "#457B9D",
-          "#8A5A44",
-          "#6D597A",
-          "#2A9D8F",
-          "#B56576",
-          "#E9C46A"
+          "#003F50",
+          "#7E3717"
         ]
       },
       "legend": {
         "orient": "bottom",
         "direction": "horizontal",
-        "columns": 4,
-        "title": "Age group",
-        "labelFontSize": 11,
-        "symbolSize": 90
+        "symbolSize": 120,
+        "labelFontSize": 12
       }
     },
     "tooltip": [
@@ -96,6 +106,7 @@
   "config": {
     "view": {
       "stroke": null
-    }
+    },
+    "background": "#FBF5EA"
   }
 }
