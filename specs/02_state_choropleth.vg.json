@@ -23,7 +23,7 @@
         "url": "data/australian_states.topojson",
         "format": {
           "type": "topojson",
-          "feature": "States and Territories"
+          "feature": "STE_2021_AUST_GDA2020"
         }
       }
     }
@@ -32,7 +32,7 @@
     "url": "data/australian_states.topojson",
     "format": {
       "type": "topojson",
-      "feature": "States and Territories"
+      "feature": "STE_2021_AUST_GDA2020"
     }
   },
   "transform": [
@@ -77,18 +77,33 @@
       }
     },
     "tooltip": [
-      {
-        "field": "properties.STE_NAME21",
-        "type": "nominal",
-        "title": "State or territory"
-      },
-      {
-        "field": "Engaged_pct",
-        "type": "quantitative",
-        "title": "Fully engaged",
-        "format": ".1f"
-      }
-    ]
+    {
+      "field": "properties.STE_NAME21",
+      "type": "nominal",
+      "title": "State or territory"
+    },
+    {
+      "field": "properties.AUS_NAME21",
+      "type": "nominal",
+      "title": "Country"
+    },
+    {
+      "value": "2025",
+      "type": "nominal",
+      "title": "Year"
+    },
+    {
+      "value": "15–24 years",
+      "type": "nominal",
+      "title": "Age group"
+    },
+    {
+      "field": "Engaged_pct",
+      "type": "quantitative",
+      "title": "Fully engaged (%)",
+      "format": ".1f"
+    }
+]
   },
   "config": {
     "view": {
