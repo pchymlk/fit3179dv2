@@ -20,7 +20,7 @@
     "type": "mercator",
     "fit": {
       "data": {
-        "url": "data/australia_states.topojson",
+        "url": "data/australian_states.topojson",
         "format": {
           "type": "topojson",
           "feature": "States and Territories"
@@ -29,7 +29,7 @@
     }
   },
   "data": {
-    "url": "data/australia_states.topojson",
+    "url": "data/australian_states.topojson",
     "format": {
       "type": "topojson",
       "feature": "States and Territories"
