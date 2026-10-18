@@ -40,7 +40,7 @@
       "lookup": "properties.STE_NAME21",
       "from": {
         "data": {
-          "url": "data/cleaned_work_study_engagement_by_state.csv",
+          "url": "./data/cleaned_work_study_engagement_by_state.csv",
           "format": {
             "type": "csv"
           }
