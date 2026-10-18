@@ -1,0 +1,503 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "anchor": "middle",
+    "fontSize": 17,
+    "subtitleFontSize": 12,
+    "offset": 12,
+    "text": "Share of People Enrolled in Study, by State and Territory",
+    "subtitle": "Circle area = % of people currently enrolled in study | 2025"
+  },
+  "width": "container",
+  "height": 430,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
+  "padding": {
+    "left": 8,
+    "right": 8,
+    "top": 4,
+    "bottom": 8
+  },
+  "projection": {
+    "type": "mercator"
+  },
+  "params": [
+    {
+      "name": "Group",
+      "value": "Persons_pct",
+      "bind": {
+        "input": "select",
+        "options": [
+          "Persons_pct",
+          "Men_pct",
+          "Women_pct"
+        ],
+        "labels": [
+          "Persons",
+          "Men",
+          "Women"
+        ],
+        "name": "Show: "
+      }
+    }
+  ],
+  "layer": [
+    {
+      "data": {
+        "url": "data/australian_states.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "australian_states"
+        }
+      },
+      "transform": [
+        {
+          "filter": "datum.properties.STE_CODE21 != '9' && datum.properties.STE_CODE21 != 'Z'"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "fill": "#E2CFB1",
+        "stroke": "#FFFFFF",
+        "strokeWidth": 1.5
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "lon": 149.1,
+            "lat": -35.5,
+            "lon2": 153.3,
+            "lat2": -35.5
+          }
+        ]
+      },
+      "mark": {
+        "type": "rule",
+        "stroke": "#7E3717",
+        "strokeWidth": 1.2
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "longitude2": {
+          "field": "lon2"
+        },
+        "latitude2": {
+          "field": "lat2"
+        }
+      }
+    },
+    {
+      "data": {
+        "url": "data/03_state_study_enrolment.csv",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "Men_pct": "number",
+            "Women_pct": "number",
+            "Persons_pct": "number"
+          }
+        }
+      },
+      "transform": [
+        {
+          "lookup": "State",
+          "from": {
+            "data": {
+              "values": [
+                {
+                  "State": "New South Wales",
+                  "lon": 147.0,
+                  "lat": -32.2
+                },
+                {
+                  "State": "Victoria",
+                  "lon": 144.3,
+                  "lat": -36.9
+                },
+                {
+                  "State": "Queensland",
+                  "lon": 144.5,
+                  "lat": -22.6
+                },
+                {
+                  "State": "South Australia",
+                  "lon": 135.8,
+                  "lat": -30.1
+                },
+                {
+                  "State": "Western Australia",
+                  "lon": 122.2,
+                  "lat": -25.5
+                },
+                {
+                  "State": "Tasmania",
+                  "lon": 146.6,
+                  "lat": -42.0
+                },
+                {
+                  "State": "Northern Territory",
+                  "lon": 133.4,
+                  "lat": -19.5
+                },
+                {
+                  "State": "Australian Capital Territory",
+                  "lon": 153.3,
+                  "lat": -35.5
+                }
+              ]
+            },
+            "key": "State",
+            "fields": [
+              "lon",
+              "lat"
+            ]
+          }
+        },
+        {
+          "calculate": "toNumber(datum[Group])",
+          "as": "value"
+        },
+        {
+          "calculate": "format(datum.value, '.1f') + '%'",
+          "as": "valueLabel"
+        },
+        {
+          "calculate": "Group == 'Persons_pct' ? 'Persons' : (Group == 'Men_pct' ? 'Men' : 'Women')",
+          "as": "groupLabel"
+        }
+      ],
+      "params": [
+        {
+          "name": "hover",
+          "select": {
+            "type": "point",
+            "fields": [
+              "State"
+            ],
+            "on": "mouseover",
+            "clear": "mouseout"
+          }
+        }
+      ],
+      "mark": {
+        "type": "circle",
+        "stroke": "#FBF5EA",
+        "strokeWidth": 1.5
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "size": {
+          "field": "value",
+          "type": "quantitative",
+          "title": "Enrolled in study (%)",
+          "scale": {
+            "type": "linear",
+            "domain": [
+              0,
+              20
+            ],
+            "range": [
+              0,
+              2200
+            ],
+            "zero": true
+          },
+          "legend": {
+            "orient": "bottom",
+            "direction": "horizontal",
+            "values": [
+              10,
+              15,
+              20
+            ],
+            "format": ".0f",
+            "symbolFillColor": "#003F50",
+            "offset": 20
+          }
+        },
+        "fill": {
+          "value": "#003F50"
+        },
+        "fillOpacity": {
+          "condition": {
+            "param": "hover",
+            "empty": false,
+            "value": 1
+          },
+          "value": 0.82
+        },
+        "order": {
+          "field": "value",
+          "sort": "descending"
+        },
+        "tooltip": [
+          {
+            "field": "State",
+            "type": "nominal",
+            "title": "State or territory"
+          },
+          {
+            "field": "groupLabel",
+            "type": "nominal",
+            "title": "Group"
+          },
+          {
+            "field": "value",
+            "type": "quantitative",
+            "title": "Enrolled in study (%)",
+            "format": ".1f"
+          },
+          {
+            "field": "Men_pct",
+            "type": "quantitative",
+            "title": "Men (%)",
+            "format": ".1f"
+          },
+          {
+            "field": "Women_pct",
+            "type": "quantitative",
+            "title": "Women (%)",
+            "format": ".1f"
+          },
+          {
+            "value": "2025",
+            "type": "nominal",
+            "title": "Year"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "data/03_state_study_enrolment.csv",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "Men_pct": "number",
+            "Women_pct": "number",
+            "Persons_pct": "number"
+          }
+        }
+      },
+      "transform": [
+        {
+          "lookup": "State",
+          "from": {
+            "data": {
+              "values": [
+                {
+                  "State": "New South Wales",
+                  "lon": 147.0,
+                  "lat": -32.2
+                },
+                {
+                  "State": "Victoria",
+                  "lon": 144.3,
+                  "lat": -36.9
+                },
+                {
+                  "State": "Queensland",
+                  "lon": 144.5,
+                  "lat": -22.6
+                },
+                {
+                  "State": "South Australia",
+                  "lon": 135.8,
+                  "lat": -30.1
+                },
+                {
+                  "State": "Western Australia",
+                  "lon": 122.2,
+                  "lat": -25.5
+                },
+                {
+                  "State": "Tasmania",
+                  "lon": 146.6,
+                  "lat": -42.0
+                },
+                {
+                  "State": "Northern Territory",
+                  "lon": 133.4,
+                  "lat": -19.5
+                },
+                {
+                  "State": "Australian Capital Territory",
+                  "lon": 153.3,
+                  "lat": -35.5
+                }
+              ]
+            },
+            "key": "State",
+            "fields": [
+              "lon",
+              "lat"
+            ]
+          }
+        },
+        {
+          "calculate": "toNumber(datum[Group])",
+          "as": "value"
+        },
+        {
+          "calculate": "format(datum.value, '.1f') + '%'",
+          "as": "valueLabel"
+        },
+        {
+          "calculate": "Group == 'Persons_pct' ? 'Persons' : (Group == 'Men_pct' ? 'Men' : 'Women')",
+          "as": "groupLabel"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "dy": -6,
+        "fontSize": 11,
+        "fontWeight": "bold",
+        "font": "Nunito",
+        "color": "#FBF5EA"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "Abbreviation",
+          "type": "nominal"
+        }
+      }
+    },
+    {
+      "data": {
+        "url": "data/03_state_study_enrolment.csv",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "Men_pct": "number",
+            "Women_pct": "number",
+            "Persons_pct": "number"
+          }
+        }
+      },
+      "transform": [
+        {
+          "lookup": "State",
+          "from": {
+            "data": {
+              "values": [
+                {
+                  "State": "New South Wales",
+                  "lon": 147.0,
+                  "lat": -32.2
+                },
+                {
+                  "State": "Victoria",
+                  "lon": 144.3,
+                  "lat": -36.9
+                },
+                {
+                  "State": "Queensland",
+                  "lon": 144.5,
+                  "lat": -22.6
+                },
+                {
+                  "State": "South Australia",
+                  "lon": 135.8,
+                  "lat": -30.1
+                },
+                {
+                  "State": "Western Australia",
+                  "lon": 122.2,
+                  "lat": -25.5
+                },
+                {
+                  "State": "Tasmania",
+                  "lon": 146.6,
+                  "lat": -42.0
+                },
+                {
+                  "State": "Northern Territory",
+                  "lon": 133.4,
+                  "lat": -19.5
+                },
+                {
+                  "State": "Australian Capital Territory",
+                  "lon": 153.3,
+                  "lat": -35.5
+                }
+              ]
+            },
+            "key": "State",
+            "fields": [
+              "lon",
+              "lat"
+            ]
+          }
+        },
+        {
+          "calculate": "toNumber(datum[Group])",
+          "as": "value"
+        },
+        {
+          "calculate": "format(datum.value, '.1f') + '%'",
+          "as": "valueLabel"
+        },
+        {
+          "calculate": "Group == 'Persons_pct' ? 'Persons' : (Group == 'Men_pct' ? 'Men' : 'Women')",
+          "as": "groupLabel"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "dy": 7,
+        "fontSize": 10,
+        "font": "Nunito",
+        "color": "#FBF5EA"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "valueLabel",
+          "type": "nominal"
+        }
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "title": {
+      "font": "Nunito",
+      "subtitleFont": "Nunito"
+    }
+  }
+}

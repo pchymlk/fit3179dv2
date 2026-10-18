@@ -12,8 +12,7 @@
   "height": 430,
   "autosize": {
     "type": "fit",
-    "contains": "padding",
-    "resize": true
+    "contains": "padding"
   },
   "projection": {
     "type": "mercator"
@@ -22,7 +21,7 @@
     "url": "data/australian_states.topojson",
     "format": {
       "type": "topojson",
-      "feature": "STE_2021_AUST_GDA2020"
+      "feature": "australian_states"
     }
   },
   "transform": [
@@ -36,7 +35,9 @@
           }
         },
         "key": "State",
-        "fields": ["Engaged_pct"]
+        "fields": [
+          "Engaged_pct"
+        ]
       }
     },
     {
@@ -54,7 +55,10 @@
       "type": "quantitative",
       "title": "Fully engaged (%)",
       "scale": {
-        "domain": [75, 85],
+        "domain": [
+          75,
+          85
+        ],
         "scheme": "tealblues",
         "clamp": true
       },

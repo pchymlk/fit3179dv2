@@ -1,0 +1,412 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "anchor": "middle",
+    "fontSize": 17,
+    "subtitleFontSize": 12,
+    "offset": 12,
+    "text": [
+      "Comparing Study Participation",
+      "by State and Territory"
+    ],
+    "subtitle": "One hexagon per state or territory, laid out to resemble Australia | 2025"
+  },
+  "width": 420,
+  "height": 360,
+  "autosize": {
+    "type": "pad"
+  },
+  "params": [
+    {
+      "name": "Group",
+      "value": "Persons_pct",
+      "bind": {
+        "input": "select",
+        "options": [
+          "Persons_pct",
+          "Men_pct",
+          "Women_pct"
+        ],
+        "labels": [
+          "Persons",
+          "Men",
+          "Women"
+        ],
+        "name": "Show: "
+      }
+    }
+  ],
+  "layer": [
+    {
+      "data": {
+        "url": "data/04_state_hex_positions.csv",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "Hex_x": "number",
+            "Hex_y": "number"
+          }
+        }
+      },
+      "transform": [
+        {
+          "lookup": "Abbreviation",
+          "from": {
+            "data": {
+              "url": "data/03_state_study_enrolment.csv",
+              "format": {
+                "type": "csv",
+                "parse": {
+                  "Men_pct": "number",
+                  "Women_pct": "number",
+                  "Persons_pct": "number"
+                }
+              }
+            },
+            "key": "Abbreviation",
+            "fields": [
+              "State",
+              "Men_pct",
+              "Women_pct",
+              "Persons_pct"
+            ]
+          }
+        },
+        {
+          "calculate": "toNumber(datum[Group])",
+          "as": "value"
+        },
+        {
+          "calculate": "format(datum.value, '.1f') + '%'",
+          "as": "valueLabel"
+        },
+        {
+          "calculate": "Group == 'Persons_pct' ? 'Persons' : (Group == 'Men_pct' ? 'Men' : 'Women')",
+          "as": "groupLabel"
+        },
+        {
+          "calculate": "84.2 + 84.0 * toNumber(datum.Hex_x)",
+          "as": "cx"
+        },
+        {
+          "calculate": "58.6 + 96.9948448 * (toNumber(datum.Hex_y) + 0.5 * (toNumber(datum.Hex_x) % 2))",
+          "as": "cy"
+        },
+        {
+          "calculate": "[0, 1, 2, 3, 4, 5]",
+          "as": "k"
+        },
+        {
+          "flatten": [
+            "k"
+          ]
+        },
+        {
+          "calculate": "datum.cx + 53.199999999999996 * cos(datum.k * PI / 3)",
+          "as": "vx"
+        },
+        {
+          "calculate": "datum.cy + 53.199999999999996 * sin(datum.k * PI / 3)",
+          "as": "vy"
+        }
+      ],
+      "params": [
+        {
+          "name": "hover",
+          "select": {
+            "type": "point",
+            "fields": [
+              "State"
+            ],
+            "on": "mouseover",
+            "clear": "mouseout"
+          }
+        }
+      ],
+      "mark": {
+        "type": "line",
+        "interpolate": "linear-closed",
+        "filled": true
+      },
+      "encoding": {
+        "x": {
+          "field": "vx",
+          "type": "quantitative",
+          "scale": null,
+          "axis": null
+        },
+        "y": {
+          "field": "vy",
+          "type": "quantitative",
+          "scale": null,
+          "axis": null
+        },
+        "order": {
+          "field": "k",
+          "type": "quantitative"
+        },
+        "detail": {
+          "field": "State",
+          "type": "nominal"
+        },
+        "color": {
+          "field": "value",
+          "type": "quantitative",
+          "title": "Enrolled in study (%)",
+          "scale": {
+            "domain": [
+              12,
+              20
+            ],
+            "scheme": "tealblues",
+            "clamp": true
+          },
+          "legend": {
+            "orient": "bottom",
+            "direction": "horizontal",
+            "format": ".0f",
+            "gradientLength": 220,
+            "offset": 12
+          }
+        },
+        "stroke": {
+          "condition": {
+            "param": "hover",
+            "empty": false,
+            "value": "#7E3717"
+          },
+          "value": "#FFFFFF"
+        },
+        "strokeWidth": {
+          "condition": {
+            "param": "hover",
+            "empty": false,
+            "value": 3.5
+          },
+          "value": 1.5
+        },
+        "tooltip": [
+          {
+            "field": "State",
+            "type": "nominal",
+            "title": "State or territory"
+          },
+          {
+            "field": "groupLabel",
+            "type": "nominal",
+            "title": "Group"
+          },
+          {
+            "field": "value",
+            "type": "quantitative",
+            "title": "Enrolled in study (%)",
+            "format": ".1f"
+          },
+          {
+            "field": "Men_pct",
+            "type": "quantitative",
+            "title": "Men (%)",
+            "format": ".1f"
+          },
+          {
+            "field": "Women_pct",
+            "type": "quantitative",
+            "title": "Women (%)",
+            "format": ".1f"
+          },
+          {
+            "value": "2025",
+            "type": "nominal",
+            "title": "Year"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "data/04_state_hex_positions.csv",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "Hex_x": "number",
+            "Hex_y": "number"
+          }
+        }
+      },
+      "transform": [
+        {
+          "lookup": "Abbreviation",
+          "from": {
+            "data": {
+              "url": "data/03_state_study_enrolment.csv",
+              "format": {
+                "type": "csv",
+                "parse": {
+                  "Men_pct": "number",
+                  "Women_pct": "number",
+                  "Persons_pct": "number"
+                }
+              }
+            },
+            "key": "Abbreviation",
+            "fields": [
+              "State",
+              "Men_pct",
+              "Women_pct",
+              "Persons_pct"
+            ]
+          }
+        },
+        {
+          "calculate": "toNumber(datum[Group])",
+          "as": "value"
+        },
+        {
+          "calculate": "format(datum.value, '.1f') + '%'",
+          "as": "valueLabel"
+        },
+        {
+          "calculate": "Group == 'Persons_pct' ? 'Persons' : (Group == 'Men_pct' ? 'Men' : 'Women')",
+          "as": "groupLabel"
+        },
+        {
+          "calculate": "84.2 + 84.0 * toNumber(datum.Hex_x)",
+          "as": "cx"
+        },
+        {
+          "calculate": "58.6 + 96.9948448 * (toNumber(datum.Hex_y) + 0.5 * (toNumber(datum.Hex_x) % 2))",
+          "as": "cy"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "dy": -9,
+        "fontSize": 15,
+        "fontWeight": "bold",
+        "font": "Nunito"
+      },
+      "encoding": {
+        "x": {
+          "field": "cx",
+          "type": "quantitative",
+          "scale": null,
+          "axis": null
+        },
+        "y": {
+          "field": "cy",
+          "type": "quantitative",
+          "scale": null,
+          "axis": null
+        },
+        "text": {
+          "field": "Abbreviation",
+          "type": "nominal"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.value >= 16.3",
+            "value": "#FBF5EA"
+          },
+          "value": "#003F50"
+        }
+      }
+    },
+    {
+      "data": {
+        "url": "data/04_state_hex_positions.csv",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "Hex_x": "number",
+            "Hex_y": "number"
+          }
+        }
+      },
+      "transform": [
+        {
+          "lookup": "Abbreviation",
+          "from": {
+            "data": {
+              "url": "data/03_state_study_enrolment.csv",
+              "format": {
+                "type": "csv",
+                "parse": {
+                  "Men_pct": "number",
+                  "Women_pct": "number",
+                  "Persons_pct": "number"
+                }
+              }
+            },
+            "key": "Abbreviation",
+            "fields": [
+              "State",
+              "Men_pct",
+              "Women_pct",
+              "Persons_pct"
+            ]
+          }
+        },
+        {
+          "calculate": "toNumber(datum[Group])",
+          "as": "value"
+        },
+        {
+          "calculate": "format(datum.value, '.1f') + '%'",
+          "as": "valueLabel"
+        },
+        {
+          "calculate": "Group == 'Persons_pct' ? 'Persons' : (Group == 'Men_pct' ? 'Men' : 'Women')",
+          "as": "groupLabel"
+        },
+        {
+          "calculate": "84.2 + 84.0 * toNumber(datum.Hex_x)",
+          "as": "cx"
+        },
+        {
+          "calculate": "58.6 + 96.9948448 * (toNumber(datum.Hex_y) + 0.5 * (toNumber(datum.Hex_x) % 2))",
+          "as": "cy"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "dy": 10,
+        "fontSize": 13,
+        "font": "Nunito"
+      },
+      "encoding": {
+        "x": {
+          "field": "cx",
+          "type": "quantitative",
+          "scale": null,
+          "axis": null
+        },
+        "y": {
+          "field": "cy",
+          "type": "quantitative",
+          "scale": null,
+          "axis": null
+        },
+        "text": {
+          "field": "valueLabel",
+          "type": "nominal"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.value >= 16.3",
+            "value": "#FBF5EA"
+          },
+          "value": "#003F50"
+        }
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "title": {
+      "font": "Nunito",
+      "subtitleFont": "Nunito"
+    }
+  }
+}
