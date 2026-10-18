@@ -3,15 +3,33 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
     "text": "Young Australians Fully Engaged in Work and/or Study",
-    "subtitle": "People aged 15–24, by state and territory | 2025"
+    "subtitle": "People aged 15–24, by state and territory | 2025",
+    "anchor": "middle",
+    "fontSize": 17,
+    "subtitleFontSize": 12,
+    "offset": 12
   },
   "width": "container",
   "height": 430,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding",
+    "resize": true
+  },
   "projection": {
-    "type": "mercator"
+    "type": "mercator",
+    "fit": {
+      "data": {
+        "url": "../data/australia_states.json",
+        "format": {
+          "type": "topojson",
+          "feature": "States and Territories"
+        }
+      }
+    }
   },
   "data": {
-    "url": "australia_states.topojson.json",
+    "url": "../data/australia_states.topojson.json",
     "format": {
       "type": "topojson",
       "feature": "States and Territories"
@@ -22,17 +40,22 @@
       "lookup": "properties.STE_NAME21",
       "from": {
         "data": {
-          "url": "data/cleaned_work_study_engagement_by_state.csv"
+          "url": "../data/cleaned_work_study_engagement_by_state.csv",
+          "format": {
+            "type": "csv"
+          }
         },
         "key": "State",
-        "fields": ["Engaged_pct"]
+        "fields": [
+          "Engaged_pct"
+        ]
       }
     }
   ],
   "mark": {
     "type": "geoshape",
     "stroke": "#FFFFFF",
-    "strokeWidth": 1.2
+    "strokeWidth": 1.5
   },
   "encoding": {
     "color": {
@@ -41,10 +64,16 @@
       "title": "Fully engaged (%)",
       "scale": {
         "domain": [75, 85],
-        "scheme": "tealblues"
+        "scheme": "tealblues",
+        "clamp": true
       },
       "legend": {
-        "format": ".1f"
+        "orient": "bottom",
+        "direction": "horizontal",
+        "title": "Fully engaged (%)",
+        "format": ".1f",
+        "gradientLength": 220,
+        "offset": 12
       }
     },
     "tooltip": [
@@ -56,7 +85,7 @@
       {
         "field": "Engaged_pct",
         "type": "quantitative",
-        "title": "Fully engaged",
+        "title": "Fully engaged (%)",
         "format": ".1f"
       }
     ]
@@ -65,6 +94,10 @@
     "background": "#FFFFFF",
     "view": {
       "stroke": null
+    },
+    "title": {
+      "font": "Nunito",
+      "subtitleFont": "Nunito"
     }
   }
 }
