@@ -1,4 +1,3 @@
-
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
@@ -17,16 +16,7 @@
     "resize": true
   },
   "projection": {
-    "type": "mercator",
-    "fit": {
-      "data": {
-        "url": "data/australian_states.topojson",
-        "format": {
-          "type": "topojson",
-          "feature": "STE_2021_AUST_GDA2020"
-        }
-      }
-    }
+    "type": "mercator"
   },
   "data": {
     "url": "data/australian_states.topojson",
@@ -46,10 +36,11 @@
           }
         },
         "key": "State",
-        "fields": [
-          "Engaged_pct"
-        ]
+        "fields": ["Engaged_pct"]
       }
+    },
+    {
+      "filter": "isValid(datum.Engaged_pct)"
     }
   ],
   "mark": {
@@ -77,33 +68,33 @@
       }
     },
     "tooltip": [
-    {
-      "field": "properties.STE_NAME21",
-      "type": "nominal",
-      "title": "State or territory"
-    },
-    {
-      "field": "properties.AUS_NAME21",
-      "type": "nominal",
-      "title": "Country"
-    },
-    {
-      "value": "2025",
-      "type": "nominal",
-      "title": "Year"
-    },
-    {
-      "value": "15–24 years",
-      "type": "nominal",
-      "title": "Age group"
-    },
-    {
-      "field": "Engaged_pct",
-      "type": "quantitative",
-      "title": "Fully engaged (%)",
-      "format": ".1f"
-    }
-]
+      {
+        "field": "properties.STE_NAME21",
+        "type": "nominal",
+        "title": "State or territory"
+      },
+      {
+        "field": "properties.AUS_NAME21",
+        "type": "nominal",
+        "title": "Country"
+      },
+      {
+        "value": "2025",
+        "type": "nominal",
+        "title": "Year"
+      },
+      {
+        "value": "15–24 years",
+        "type": "nominal",
+        "title": "Age group"
+      },
+      {
+        "field": "Engaged_pct",
+        "type": "quantitative",
+        "title": "Fully engaged (%)",
+        "format": ".1f"
+      }
+    ]
   },
   "config": {
     "view": {
