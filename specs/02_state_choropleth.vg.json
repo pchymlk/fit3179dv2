@@ -1,13 +1,5 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": {
-    "text": "Young Australians Fully Engaged in Work and/or Study",
-    "subtitle": "People aged 15–24, by state and territory | 2025",
-    "anchor": "middle",
-    "fontSize": 17,
-    "subtitleFontSize": 12,
-    "offset": 12
-  },
   "width": "container",
   "height": 430,
   "autosize": {
@@ -17,89 +9,6 @@
   "projection": {
     "type": "mercator"
   },
-  "data": {
-    "url": "data/australian_states.topojson",
-    "format": {
-      "type": "topojson",
-      "feature": "australian_states"
-    }
-  },
-  "transform": [
-    {
-      "lookup": "properties.STE_NAME21",
-      "from": {
-        "data": {
-          "url": "data/cleaned_work_study_engagement_by_state.csv",
-          "format": {
-            "type": "csv"
-          }
-        },
-        "key": "State",
-        "fields": [
-          "Engaged_pct"
-        ]
-      }
-    },
-    {
-      "filter": "isValid(datum.Engaged_pct)"
-    }
-  ],
-  "mark": {
-    "type": "geoshape",
-    "stroke": "#FFFFFF",
-    "strokeWidth": 1.5
-  },
-  "encoding": {
-    "color": {
-      "field": "Engaged_pct",
-      "type": "quantitative",
-      "title": "Fully engaged (%)",
-      "scale": {
-        "domain": [
-          75,
-          85
-        ],
-        "scheme": "tealblues",
-        "clamp": true
-      },
-      "legend": {
-        "orient": "bottom",
-        "direction": "horizontal",
-        "title": "Fully engaged (%)",
-        "format": ".1f",
-        "gradientLength": 220,
-        "offset": 12
-      }
-    },
-    "tooltip": [
-      {
-        "field": "properties.STE_NAME21",
-        "type": "nominal",
-        "title": "State or territory"
-      },
-      {
-        "field": "properties.AUS_NAME21",
-        "type": "nominal",
-        "title": "Country"
-      },
-      {
-        "value": "2025",
-        "type": "nominal",
-        "title": "Year"
-      },
-      {
-        "value": "15–24 years",
-        "type": "nominal",
-        "title": "Age group"
-      },
-      {
-        "field": "Engaged_pct",
-        "type": "quantitative",
-        "title": "Fully engaged (%)",
-        "format": ".1f"
-      }
-    ]
-  },
   "config": {
     "view": {
       "stroke": null
@@ -107,6 +16,184 @@
     "title": {
       "font": "Nunito",
       "subtitleFont": "Nunito"
+    },
+    "background": "#FBF5EA",
+    "font": "Nunito",
+    "axis": {
+      "labelColor": "#3F1816",
+      "titleColor": "#3F1816",
+      "gridColor": "#E6D8C0",
+      "gridOpacity": 1,
+      "domainColor": "#A9835C",
+      "tickColor": "#A9835C",
+      "labelFont": "Nunito",
+      "titleFont": "Nunito"
+    },
+    "legend": {
+      "labelColor": "#3F1816",
+      "titleColor": "#3F1816",
+      "labelFont": "Nunito",
+      "titleFont": "Nunito"
     }
-  }
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "data/australian_states.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "australian_states"
+        }
+      },
+      "transform": [
+        {
+          "lookup": "properties.STE_NAME21",
+          "from": {
+            "data": {
+              "url": "data/cleaned_work_study_engagement_by_state.csv",
+              "format": {
+                "type": "csv"
+              }
+            },
+            "key": "State",
+            "fields": [
+              "Engaged_pct"
+            ]
+          }
+        },
+        {
+          "filter": "isValid(datum.Engaged_pct)"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "stroke": "#FFFFFF",
+        "strokeWidth": 1.5
+      },
+      "encoding": {
+        "color": {
+          "field": "Engaged_pct",
+          "type": "quantitative",
+          "title": "Fully engaged (%)",
+          "scale": {
+            "domain": [
+              75,
+              78,
+              81,
+              85
+            ],
+            "range": [
+              "#C9D6DB",
+              "#90A3AF",
+              "#3F7A8E",
+              "#003F50"
+            ],
+            "clamp": true
+          },
+          "legend": {
+            "orient": "bottom",
+            "direction": "horizontal",
+            "title": "Fully engaged (%)",
+            "format": ".1f",
+            "gradientLength": 220,
+            "offset": 12
+          }
+        },
+        "tooltip": [
+          {
+            "field": "properties.STE_NAME21",
+            "type": "nominal",
+            "title": "State or territory"
+          },
+          {
+            "field": "properties.AUS_NAME21",
+            "type": "nominal",
+            "title": "Country"
+          },
+          {
+            "value": "2025",
+            "type": "nominal",
+            "title": "Year"
+          },
+          {
+            "value": "15–24 years",
+            "type": "nominal",
+            "title": "Age group"
+          },
+          {
+            "field": "Engaged_pct",
+            "type": "quantitative",
+            "title": "Fully engaged (%)",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "lon": 154.2,
+            "lat": -33.5
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "text": [
+          "NSW & ACT:",
+          "highest, ≈84%"
+        ],
+        "align": "left",
+        "dx": 8,
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "color": "#7E3717",
+        "lineHeight": 14
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "lon": 149.4,
+            "lat": -42.3
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "text": [
+          "Tasmania:",
+          "lowest, ≈75%"
+        ],
+        "align": "left",
+        "dx": 8,
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "color": "#7E3717",
+        "lineHeight": 14
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        }
+      }
+    }
+  ]
 }

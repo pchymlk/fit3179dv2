@@ -1,13 +1,5 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": {
-    "anchor": "middle",
-    "fontSize": 17,
-    "subtitleFontSize": 12,
-    "offset": 12,
-    "text": "Share of People Enrolled in Study, by State and Territory",
-    "subtitle": "Circle area = % of people currently enrolled in study | 2025"
-  },
   "width": "container",
   "height": 430,
   "autosize": {
@@ -216,7 +208,7 @@
             ],
             "range": [
               0,
-              2200
+              1900
             ],
             "zero": true
           },
@@ -242,7 +234,7 @@
             "empty": false,
             "value": 1
           },
-          "value": 0.82
+          "value": 0.88
         },
         "order": {
           "field": "value",
@@ -498,6 +490,24 @@
     "title": {
       "font": "Nunito",
       "subtitleFont": "Nunito"
+    },
+    "background": "#FBF5EA",
+    "font": "Nunito",
+    "axis": {
+      "labelColor": "#3F1816",
+      "titleColor": "#3F1816",
+      "gridColor": "#E6D8C0",
+      "gridOpacity": 1,
+      "domainColor": "#A9835C",
+      "tickColor": "#A9835C",
+      "labelFont": "Nunito",
+      "titleFont": "Nunito"
+    },
+    "legend": {
+      "labelColor": "#3F1816",
+      "titleColor": "#3F1816",
+      "labelFont": "Nunito",
+      "titleFont": "Nunito"
     }
   }
 }

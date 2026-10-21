@@ -1,114 +1,13 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": "container",
-  "height": 480,
+  "height": 420,
   "autosize": {
     "type": "fit",
     "contains": "padding"
   },
   "data": {
     "url": "data/08_labour_force_outcomes.csv"
-  },
-  "mark": {
-    "type": "bar",
-    "height": {
-      "band": 0.8
-    },
-    "cornerRadiusEnd": 2
-  },
-  "encoding": {
-    "y": {
-      "field": "Group",
-      "type": "nominal",
-      "title": null,
-      "sort": null,
-      "axis": {
-        "labelExpr": "datum.label === 'Men with bachelor degree' ? 'Men with bachelor\\ndegree' : datum.label === 'Men with certificate III/IV' ? 'Men with certificate\\nIII/IV' : datum.label === 'Men without non-school qualification' ? 'Men without non-school\\nqualification' : datum.label === 'Women with bachelor degree' ? 'Women with bachelor\\ndegree' : datum.label === 'Women with certificate III/IV' ? 'Women with certificate\\nIII/IV' : 'Women without non-school\\nqualification'",
-        "labelFontSize": 11,
-        "labelLimit": 220,
-        "labelPadding": 10,
-        "ticks": false,
-        "domain": false
-      }
-    },
-    "yOffset": {
-      "field": "Labour_force_status",
-      "type": "nominal",
-      "sort": [
-        "Employed full-time",
-        "Employed part-time",
-        "Unemployed",
-        "Not in labour force"
-      ]
-    },
-    "x": {
-      "field": "Percent",
-      "type": "quantitative",
-      "title": "Share of group (%)",
-      "scale": {
-        "domain": [
-          0,
-          100
-        ]
-      },
-      "axis": {
-        "tickCount": 6,
-        "labelFontSize": 11,
-        "titleFontSize": 12,
-        "grid": true,
-        "labelOverlap": false
-      }
-    },
-    "color": {
-      "field": "Labour_force_status",
-      "type": "nominal",
-      "title": "Labour-force status",
-      "scale": {
-        "domain": [
-          "Employed full-time",
-          "Employed part-time",
-          "Unemployed",
-          "Not in labour force"
-        ],
-        "range": [
-          "#003F50",
-          "#90A3AF",
-          "#E5AA7B",
-          "#7E3717"
-        ]
-      },
-      "legend": {
-        "orient": "bottom",
-        "direction": "horizontal",
-        "columns": 2,
-        "title": "Labour-force status",
-        "labelLimit": 180,
-        "labelFontSize": 11,
-        "titleFontSize": 12,
-        "symbolSize": 100,
-        "rowPadding": 5,
-        "columnPadding": 18,
-        "offset": 18
-      }
-    },
-    "tooltip": [
-      {
-        "field": "Group",
-        "type": "nominal",
-        "title": "Qualification and sex group"
-      },
-      {
-        "field": "Labour_force_status",
-        "type": "nominal",
-        "title": "Labour-force status"
-      },
-      {
-        "field": "Percent",
-        "type": "quantitative",
-        "title": "Percentage",
-        "format": ".1f"
-      }
-    ]
   },
   "config": {
     "view": {
@@ -117,13 +16,129 @@
     "axis": {
       "labelFont": "Nunito",
       "titleFont": "Nunito",
-      "gridColor": "#E2E5E5",
-      "gridOpacity": 0.8
+      "gridColor": "#E6D8C0",
+      "gridOpacity": 1,
+      "labelColor": "#3F1816",
+      "titleColor": "#3F1816",
+      "domainColor": "#A9835C",
+      "tickColor": "#A9835C"
     },
     "title": {
       "font": "Nunito",
       "subtitleFont": "Nunito"
     },
-    "background": "#FBF5EA"
-  }
+    "background": "#FBF5EA",
+    "font": "Nunito",
+    "legend": {
+      "labelColor": "#3F1816",
+      "titleColor": "#3F1816",
+      "labelFont": "Nunito",
+      "titleFont": "Nunito"
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "bar",
+        "height": {
+          "band": 0.8
+        },
+        "cornerRadiusEnd": 2
+      },
+      "encoding": {
+        "y": {
+          "field": "Group",
+          "type": "nominal",
+          "title": null,
+          "sort": null,
+          "axis": {
+            "labelExpr": "datum.label === 'Men with bachelor degree' ? 'Men with bachelor\\ndegree' : datum.label === 'Men with certificate III/IV' ? 'Men with certificate\\nIII/IV' : datum.label === 'Men without non-school qualification' ? 'Men without non-school\\nqualification' : datum.label === 'Women with bachelor degree' ? 'Women with bachelor\\ndegree' : datum.label === 'Women with certificate III/IV' ? 'Women with certificate\\nIII/IV' : 'Women without non-school\\nqualification'",
+            "labelFontSize": 11,
+            "labelLimit": 220,
+            "labelPadding": 10,
+            "ticks": false,
+            "domain": false
+          }
+        },
+        "yOffset": {
+          "field": "Labour_force_status",
+          "type": "nominal",
+          "sort": [
+            "Employed full-time",
+            "Employed part-time",
+            "Unemployed",
+            "Not in labour force"
+          ]
+        },
+        "x": {
+          "field": "Percent",
+          "type": "quantitative",
+          "title": "Share of group (%)",
+          "scale": {
+            "domain": [
+              0,
+              100
+            ]
+          },
+          "axis": {
+            "tickCount": 6,
+            "labelFontSize": 11,
+            "titleFontSize": 12,
+            "grid": true,
+            "labelOverlap": false
+          }
+        },
+        "color": {
+          "field": "Labour_force_status",
+          "type": "nominal",
+          "title": "Labour-force status",
+          "scale": {
+            "domain": [
+              "Employed full-time",
+              "Employed part-time",
+              "Unemployed",
+              "Not in labour force"
+            ],
+            "range": [
+              "#003F50",
+              "#90A3AF",
+              "#E5AA7B",
+              "#7E3717"
+            ]
+          },
+          "legend": {
+            "orient": "bottom",
+            "direction": "horizontal",
+            "columns": 2,
+            "title": "Labour-force status",
+            "labelLimit": 0,
+            "labelFontSize": 11,
+            "titleFontSize": 12,
+            "symbolSize": 100,
+            "rowPadding": 5,
+            "columnPadding": 18,
+            "offset": 18
+          }
+        },
+        "tooltip": [
+          {
+            "field": "Group",
+            "type": "nominal",
+            "title": "Qualification and sex group"
+          },
+          {
+            "field": "Labour_force_status",
+            "type": "nominal",
+            "title": "Labour-force status"
+          },
+          {
+            "field": "Percent",
+            "type": "quantitative",
+            "title": "Percentage",
+            "format": ".1f"
+          }
+        ]
+      }
+    }
+  ]
 }

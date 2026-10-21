@@ -4,25 +4,40 @@
     "url": "data/11_state_profiles_long.csv"
   },
   "facet": {
-    "row": {
+    "column": {
       "field": "Metric",
       "type": "nominal",
       "title": null,
       "header": {
-        "labelFontSize": 13,
+        "labelFontSize": 12,
         "labelFontWeight": "bold",
-        "labelLimit": 300,
+        "labelLimit": 260,
         "labelOrient": "top"
       }
     }
   },
   "spec": {
-    "width": 380,
-    "height": 145,
+    "width": 200,
+    "height": {
+      "step": 26
+    },
     "transform": [
       {
-        "calculate": "format(datum.Value_pct,'.0f') + '%'",
-        "as": "label"
+        "joinaggregate": [
+          {
+            "op": "max",
+            "field": "Value_pct",
+            "as": "vmax"
+          },
+          {
+            "op": "min",
+            "field": "Value_pct",
+            "as": "vmin"
+          }
+        ],
+        "groupby": [
+          "Metric"
+        ]
       }
     ],
     "encoding": {
@@ -46,8 +61,12 @@
           ]
         },
         "axis": {
-          "tickCount": 5,
-          "grid": false
+          "values": [
+            0,
+            50,
+            100
+          ],
+          "grid": true
         }
       },
       "tooltip": [
@@ -65,28 +84,67 @@
           "title": "Percentage",
           "format": ".1f"
         }
-      ]
+      ],
+      "color": {
+        "field": "Abbreviation",
+        "type": "nominal",
+        "legend": null,
+        "scale": {
+          "domain": [
+            "NSW",
+            "VIC",
+            "QLD",
+            "SA",
+            "WA",
+            "TAS",
+            "NT",
+            "ACT"
+          ],
+          "range": [
+            "#003F50",
+            "#7E3717",
+            "#E5AA7B",
+            "#90A3AF",
+            "#A9835C",
+            "#4A8296",
+            "#3F1816",
+            "#D9C6A8"
+          ]
+        }
+      }
     },
     "layer": [
       {
         "mark": {
           "type": "bar",
-          "cornerRadiusEnd": 3,
-          "color": "#003F50"
+          "cornerRadiusEnd": 3
         }
       },
       {
+        "transform": [
+          {
+            "filter": "datum.Value_pct == datum.vmax || datum.Value_pct == datum.vmin"
+          },
+          {
+            "calculate": "datum.Value_pct == datum.vmax ? '▲ top' : '▼ low'",
+            "as": "tag"
+          }
+        ],
         "mark": {
           "type": "text",
           "align": "left",
-          "dx": 5,
+          "dx": 6,
           "fontSize": 11,
-          "color": "#3F1816"
+          "fontWeight": "bold",
+          "color": "#7E3717"
         },
         "encoding": {
           "text": {
-            "field": "label",
+            "field": "tag",
             "type": "nominal"
+          },
+          "color": {
+            "value": "#7E3717"
           }
         }
       }
@@ -94,7 +152,8 @@
   },
   "resolve": {
     "scale": {
-      "x": "shared"
+      "x": "shared",
+      "y": "independent"
     }
   },
   "config": {
@@ -102,12 +161,29 @@
       "stroke": null
     },
     "facet": {
-      "spacing": 24
+      "spacing": 44
     },
-    "background": "#FBF5EA"
+    "background": "#FBF5EA",
+    "font": "Nunito",
+    "axis": {
+      "labelColor": "#3F1816",
+      "titleColor": "#3F1816",
+      "gridColor": "#E6D8C0",
+      "gridOpacity": 1,
+      "domainColor": "#A9835C",
+      "tickColor": "#A9835C",
+      "labelFont": "Nunito",
+      "titleFont": "Nunito"
+    },
+    "legend": {
+      "labelColor": "#3F1816",
+      "titleColor": "#3F1816",
+      "labelFont": "Nunito",
+      "titleFont": "Nunito"
+    }
   },
   "padding": {
-    "right": 36,
+    "right": 12,
     "left": 5,
     "top": 5,
     "bottom": 5

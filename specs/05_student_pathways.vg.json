@@ -1,88 +1,187 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": "container",
-  "height": 340,
+  "height": 400,
   "data": {
     "url": "./data/05_engagement_by_remoteness.csv"
-  },
-  "mark": {
-    "type": "bar",
-    "stroke": "#FBF5EA",
-    "strokeWidth": 1
-  },
-  "encoding": {
-    "x": {
-      "field": "Remoteness",
-      "type": "nominal",
-      "title": "Remoteness area",
-      "sort": [
-        "Major Cities",
-        "Inner Regional",
-        "Outer Regional and Remote"
-      ],
-      "axis": {
-        "labelAngle": 0,
-        "labelLimit": 160,
-        "labelExpr": "datum.label === 'Outer Regional and Remote' ? ['Outer Regional','and Remote'] : datum.label"
-      }
-    },
-    "y": {
-      "field": "Percent",
-      "type": "quantitative",
-      "stack": "normalize",
-      "title": "Share of each area",
-      "axis": {
-        "format": "%",
-        "tickCount": 5
-      }
-    },
-    "color": {
-      "field": "Engagement_status",
-      "type": "nominal",
-      "title": "Engagement status",
-      "scale": {
-        "domain": [
-          "Fully engaged",
-          "Partially engaged",
-          "Not engaged"
-        ],
-        "range": [
-          "#003F50",
-          "#90A3AF",
-          "#E5AA7B"
-        ]
-      },
-      "legend": {
-        "orient": "bottom",
-        "direction": "horizontal",
-        "columns": 3,
-        "title": "Engagement status",
-        "labelLimit": 180,
-        "symbolSize": 100,
-        "offset": 12
-      }
-    },
-    "tooltip": [
-      {
-        "field": "Remoteness",
-        "type": "nominal"
-      },
-      {
-        "field": "Engagement_status",
-        "type": "nominal"
-      },
-      {
-        "field": "Percent",
-        "type": "quantitative",
-        "title": "Percentage",
-        "format": ".1f"
-      }
-    ]
   },
   "config": {
     "view": {
       "stroke": null
     },
-    "background": "#FBF5EA"
-  }
+    "background": "#FBF5EA",
+    "font": "Nunito",
+    "axis": {
+      "labelColor": "#3F1816",
+      "titleColor": "#3F1816",
+      "gridColor": "#E6D8C0",
+      "gridOpacity": 1,
+      "domainColor": "#A9835C",
+      "tickColor": "#A9835C",
+      "labelFont": "Nunito",
+      "titleFont": "Nunito"
+    },
+    "legend": {
+      "labelColor": "#3F1816",
+      "titleColor": "#3F1816",
+      "labelFont": "Nunito",
+      "titleFont": "Nunito"
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "bar",
+        "stroke": "#FBF5EA",
+        "strokeWidth": 1
+      },
+      "encoding": {
+        "x": {
+          "field": "Remoteness",
+          "type": "nominal",
+          "title": "Remoteness area",
+          "sort": [
+            "Major Cities",
+            "Inner Regional",
+            "Outer Regional and Remote"
+          ],
+          "axis": {
+            "labelAngle": 0,
+            "labelLimit": 160,
+            "labelExpr": "datum.label === 'Outer Regional and Remote' ? ['Outer Regional','and Remote'] : datum.label"
+          }
+        },
+        "y": {
+          "field": "Percent",
+          "type": "quantitative",
+          "stack": "normalize",
+          "title": "Share of each area",
+          "axis": {
+            "format": "%",
+            "tickCount": 5
+          }
+        },
+        "color": {
+          "field": "Engagement_status",
+          "type": "nominal",
+          "title": "Engagement status",
+          "scale": {
+            "domain": [
+              "Fully engaged",
+              "Partially engaged",
+              "Not engaged"
+            ],
+            "range": [
+              "#003F50",
+              "#90A3AF",
+              "#E5AA7B"
+            ]
+          },
+          "legend": {
+            "orient": "bottom",
+            "direction": "horizontal",
+            "columns": 3,
+            "title": "Engagement status",
+            "labelLimit": 180,
+            "symbolSize": 100,
+            "offset": 12
+          }
+        },
+        "tooltip": [
+          {
+            "field": "Remoteness",
+            "type": "nominal"
+          },
+          {
+            "field": "Engagement_status",
+            "type": "nominal"
+          },
+          {
+            "field": "Percent",
+            "type": "quantitative",
+            "title": "Percentage",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "stack": "Percent",
+          "groupby": [
+            "Remoteness"
+          ],
+          "sort": [
+            {
+              "field": "Engagement_status",
+              "order": "descending"
+            }
+          ],
+          "as": [
+            "s0",
+            "s1"
+          ],
+          "offset": "normalize"
+        },
+        {
+          "calculate": "(datum.s0+datum.s1)/2",
+          "as": "mid"
+        },
+        {
+          "calculate": "format(datum.Percent,'.0f')+'%'",
+          "as": "label"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "fontSize": 13,
+        "fontWeight": "bold"
+      },
+      "encoding": {
+        "x": {
+          "field": "Remoteness",
+          "type": "nominal",
+          "sort": [
+            "Major Cities",
+            "Inner Regional",
+            "Outer Regional and Remote"
+          ],
+          "axis": null
+        },
+        "y": {
+          "field": "mid",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              1
+            ]
+          },
+          "axis": null
+        },
+        "text": {
+          "field": "label",
+          "type": "nominal"
+        },
+        "color": {
+          "field": "Engagement_status",
+          "type": "nominal",
+          "legend": null,
+          "scale": {
+            "domain": [
+              "Fully engaged",
+              "Partially engaged",
+              "Not engaged"
+            ],
+            "range": [
+              "#FBF5EA",
+              "#3F1816",
+              "#3F1816"
+            ]
+          }
+        }
+      }
+    }
+  ]
 }

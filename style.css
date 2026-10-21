@@ -19,8 +19,8 @@
   --blush: #e5aa7b;
   --blush-soft: #f6e0cb;  /* blush tint for callouts */
   --tan: #a9835c;
-  --tan-soft: #d9c6a8;
-  --linen-deep: #e2cfb1;  /* alternate section band */    /* hairlines on cream */
+  --tan-soft: #d9c6a8;    /* hairlines on cream */
+  --linen-deep: #e2cfb1;  /* alternate section band */
   --rust: #7e3717;
   --leather: #3f1816;
   --gum: #5d6737;
@@ -214,6 +214,19 @@ h1 {
   margin: 4px 0 0;
 }
 
+/* One-sentence "so what" under each section heading */
+.lede {
+  max-width: 75ch;
+  margin: -12px 0 28px;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--leather);
+}
+
+.lede strong {
+  color: var(--rust);
+}
+
 /* ---------- Chart cards ---------- */
 .chart-grid {
   display: grid;
@@ -223,7 +236,11 @@ h1 {
   align-items: stretch;
 }
 
+/* Cards are flex columns so the insight box / fact tiles
+   sit at the bottom and fill leftover space */
 .chart-card {
+  display: flex;
+  flex-direction: column;
   min-width: 0;
   max-width: 100%;
   padding: 28px;
@@ -247,6 +264,7 @@ h1 {
   max-width: 100%;
   min-width: 0;
   min-height: 180px;
+  margin-bottom: 20px;
 }
 
 .chart-card .vega-embed,
@@ -300,7 +318,7 @@ h1 {
 
 /* Key-finding callout: soft blush pill-ish box */
 .chart-insight {
-  margin: 20px 0 0;
+  margin: auto 0 0;
   padding: 14px 20px;
   background: var(--blush-soft);
   border-radius: 20px;
@@ -310,6 +328,38 @@ h1 {
 .chart-insight strong {
   color: var(--rust);
 }
+
+/* ---------- Bridge line linking one section to the next ---------- */
+.bridge {
+  margin: 36px 0 0;
+  padding: 4px 0 4px 20px;
+  border-left: 5px solid var(--rust);
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--ocean);
+}
+
+/* ---------- Closing line ---------- */
+.closing {
+  max-width: 28ch;
+  margin: 0 auto;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+  line-height: 1.25;
+  color: var(--ocean);
+}
+
+/* ---------- Layout helpers (no empty cells) ---------- */
+.chart-grid-1 { grid-template-columns: 1fr; }
+.chart-grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.chart-wide   { grid-column: 1 / -1; }
+.span-2       { grid-row: span 2; }
+
+/* Hex map is a fixed-size drawing: keep it centred, never stretched */
+#chart-04 { max-width: 480px; margin-left: auto; margin-right: auto; }
+/* Three side-by-side panels scroll sideways on small screens */
+#chart-11 { overflow-x: auto; }
 
 /* ---------- Section 3 featured layout ---------- */
 .section-three-grid {
@@ -349,6 +399,11 @@ footer p {
 }
 
 /* ---------- Mobile ---------- */
+@media (max-width: 1200px) {
+  .chart-grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .chart-grid-3 > :last-child { grid-column: 1 / -1; }
+}
+
 @media (max-width: 760px) {
   .hero {
     padding: 48px 6% 72px;
@@ -398,4 +453,6 @@ footer p {
   .chart-card h3 {
     font-size: 1.1rem;
   }
+
+  .chart-grid-3 { grid-template-columns: 1fr; }
 }

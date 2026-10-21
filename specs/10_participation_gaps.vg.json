@@ -5,9 +5,28 @@
   "data": {
     "url": "data/10_study_participation_gender_gap.csv"
   },
-  "mark": {
-    "type": "bar",
-    "cornerRadiusEnd": 2
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "background": "#FBF5EA",
+    "font": "Nunito",
+    "axis": {
+      "labelColor": "#3F1816",
+      "titleColor": "#3F1816",
+      "gridColor": "#E6D8C0",
+      "gridOpacity": 1,
+      "domainColor": "#A9835C",
+      "tickColor": "#A9835C",
+      "labelFont": "Nunito",
+      "titleFont": "Nunito"
+    },
+    "legend": {
+      "labelColor": "#3F1816",
+      "titleColor": "#3F1816",
+      "labelFont": "Nunito",
+      "titleFont": "Nunito"
+    }
   },
   "encoding": {
     "x": {
@@ -35,78 +54,120 @@
         "labelAngle": 0,
         "labelFontSize": 11
       }
-    },
-    "xOffset": {
-      "field": "Sex",
-      "type": "nominal",
-      "sort": [
-        "Men",
-        "Women"
-      ]
-    },
-    "y": {
-      "field": "Currently_studying_pct",
-      "type": "quantitative",
-      "title": "Currently studying (%)",
-      "scale": {
-        "domain": [
-          0,
-          100
-        ]
-      },
-      "axis": {
-        "tickCount": 5,
-        "grid": true
-      }
-    },
-    "color": {
-      "field": "Sex",
-      "type": "nominal",
-      "title": null,
-      "sort": [
-        "Men",
-        "Women"
-      ],
-      "scale": {
-        "domain": [
-          "Men",
-          "Women"
-        ],
-        "range": [
-          "#003F50",
-          "#7E3717"
-        ]
-      },
-      "legend": {
-        "orient": "bottom",
-        "direction": "horizontal",
-        "symbolSize": 120,
-        "labelFontSize": 12
-      }
-    },
-    "tooltip": [
-      {
-        "field": "Sex",
-        "type": "nominal",
-        "title": "Sex"
-      },
-      {
-        "field": "Age_group",
-        "type": "nominal",
-        "title": "Age group"
-      },
-      {
-        "field": "Currently_studying_pct",
-        "type": "quantitative",
-        "title": "Currently studying (%)",
-        "format": ".1f"
-      }
-    ]
+    }
   },
-  "config": {
-    "view": {
-      "stroke": null
+  "layer": [
+    {
+      "mark": {
+        "type": "bar",
+        "cornerRadiusEnd": 2
+      },
+      "encoding": {
+        "xOffset": {
+          "field": "Sex",
+          "type": "nominal",
+          "sort": [
+            "Men",
+            "Women"
+          ]
+        },
+        "y": {
+          "field": "Currently_studying_pct",
+          "type": "quantitative",
+          "title": "Currently studying (%)",
+          "scale": {
+            "domain": [
+              0,
+              100
+            ]
+          },
+          "axis": {
+            "tickCount": 5,
+            "grid": true
+          }
+        },
+        "color": {
+          "field": "Sex",
+          "type": "nominal",
+          "title": null,
+          "sort": [
+            "Men",
+            "Women"
+          ],
+          "scale": {
+            "domain": [
+              "Men",
+              "Women"
+            ],
+            "range": [
+              "#003F50",
+              "#7E3717"
+            ]
+          },
+          "legend": {
+            "orient": "bottom",
+            "direction": "horizontal",
+            "symbolSize": 120,
+            "labelFontSize": 12
+          }
+        },
+        "tooltip": [
+          {
+            "field": "Sex",
+            "type": "nominal",
+            "title": "Sex"
+          },
+          {
+            "field": "Age_group",
+            "type": "nominal",
+            "title": "Age group"
+          },
+          {
+            "field": "Currently_studying_pct",
+            "type": "quantitative",
+            "title": "Currently studying (%)",
+            "format": ".1f"
+          }
+        ]
+      }
     },
-    "background": "#FBF5EA"
-  }
+    {
+      "data": {
+        "values": [
+          {
+            "Age_group": "35–39",
+            "ypos": 72
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "text": [
+          "Women lead in every age group",
+          "except 20–24, where it is almost level"
+        ],
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "color": "#7E3717",
+        "lineHeight": 15
+      },
+      "encoding": {
+        "y": {
+          "field": "ypos",
+          "type": "quantitative",
+          "title": "Currently studying (%)",
+          "scale": {
+            "domain": [
+              0,
+              100
+            ]
+          },
+          "axis": {
+            "tickCount": 5,
+            "grid": true
+          }
+        }
+      }
+    }
+  ]
 }

@@ -5,31 +5,28 @@
   "data": {
     "url": "data/09_age_group_indicators.csv"
   },
-  "transform": [
-    {
-      "fold": [
-        "Currently_studying_pct",
-        "Has_non_school_qualification_pct",
-        "Bachelor_or_above_pct",
-        "Fully_engaged_work_study_pct"
-      ],
-      "as": [
-        "Indicator",
-        "Value_pct"
-      ]
+  "config": {
+    "view": {
+      "stroke": null
     },
-    {
-      "calculate": "datum.Indicator === 'Currently_studying_pct' ? 'Currently studying' : datum.Indicator === 'Has_non_school_qualification_pct' ? 'Any qualification' : datum.Indicator === 'Bachelor_or_above_pct' ? 'Bachelor or above' : 'Work/study engaged'",
-      "as": "Indicator_label"
+    "background": "#FBF5EA",
+    "font": "Nunito",
+    "axis": {
+      "labelColor": "#3F1816",
+      "titleColor": "#3F1816",
+      "gridColor": "#E6D8C0",
+      "gridOpacity": 1,
+      "domainColor": "#A9835C",
+      "tickColor": "#A9835C",
+      "labelFont": "Nunito",
+      "titleFont": "Nunito"
+    },
+    "legend": {
+      "labelColor": "#3F1816",
+      "titleColor": "#3F1816",
+      "labelFont": "Nunito",
+      "titleFont": "Nunito"
     }
-  ],
-  "mark": {
-    "type": "line",
-    "point": {
-      "filled": true,
-      "size": 70
-    },
-    "strokeWidth": 3
   },
   "encoding": {
     "x": {
@@ -57,102 +54,135 @@
         "labelAngle": 0,
         "labelFontSize": 11
       }
-    },
-    "y": {
-      "field": "Value_pct",
-      "type": "quantitative",
-      "title": "Percentage (%)",
-      "scale": {
-        "domain": [
-          0,
-          100
-        ]
-      },
-      "axis": {
-        "tickCount": 5,
-        "grid": true
-      }
-    },
-    "color": {
-      "field": "Indicator_label",
-      "type": "nominal",
-      "title": null,
-      "scale": {
-        "domain": [
-          "Currently studying",
-          "Any qualification",
-          "Bachelor or above",
-          "Work/study engaged"
-        ],
-        "range": [
-          "#003F50",
-          "#7E3717",
-          "#A9835C",
-          "#90A3AF"
-        ]
-      },
-      "legend": {
-        "orient": "bottom",
-        "direction": "horizontal",
-        "columns": 2,
-        "labelLimit": 200,
-        "symbolSize": 120
-      }
-    },
-    "strokeDash": {
-      "field": "Indicator_label",
-      "type": "nominal",
-      "legend": null,
-      "scale": {
-        "domain": [
-          "Currently studying",
-          "Any qualification",
-          "Bachelor or above",
-          "Work/study engaged"
-        ],
-        "range": [
-          [
-            1,
-            0
-          ],
-          [
-            1,
-            0
-          ],
-          [
-            6,
-            4
-          ],
-          [
-            2,
-            3
-          ]
-        ]
-      }
-    },
-    "tooltip": [
-      {
-        "field": "Age_group",
-        "type": "nominal",
-        "title": "Age group"
-      },
-      {
-        "field": "Indicator_label",
-        "type": "nominal",
-        "title": "Indicator"
-      },
-      {
-        "field": "Value_pct",
-        "type": "quantitative",
-        "title": "Percentage",
-        "format": ".1f"
-      }
-    ]
+    }
   },
-  "config": {
-    "view": {
-      "stroke": null
+  "layer": [
+    {
+      "transform": [
+        {
+          "fold": [
+            "Currently_studying_pct",
+            "Has_non_school_qualification_pct",
+            "Bachelor_or_above_pct",
+            "Fully_engaged_work_study_pct"
+          ],
+          "as": [
+            "Indicator",
+            "Value_pct"
+          ]
+        },
+        {
+          "calculate": "datum.Indicator === 'Currently_studying_pct' ? 'Currently studying' : datum.Indicator === 'Has_non_school_qualification_pct' ? 'Any qualification' : datum.Indicator === 'Bachelor_or_above_pct' ? 'Bachelor or above' : 'Work/study engaged'",
+          "as": "Indicator_label"
+        }
+      ],
+      "mark": {
+        "type": "line",
+        "point": {
+          "filled": true,
+          "size": 70
+        },
+        "strokeWidth": 3
+      },
+      "encoding": {
+        "y": {
+          "field": "Value_pct",
+          "type": "quantitative",
+          "title": "Percentage (%)",
+          "scale": {
+            "domain": [
+              0,
+              100
+            ]
+          },
+          "axis": {
+            "tickCount": 5,
+            "grid": true
+          }
+        },
+        "color": {
+          "field": "Indicator_label",
+          "type": "nominal",
+          "title": null,
+          "scale": {
+            "domain": [
+              "Currently studying",
+              "Any qualification",
+              "Bachelor or above",
+              "Work/study engaged"
+            ],
+            "range": [
+              "#003F50",
+              "#7E3717",
+              "#A9835C",
+              "#90A3AF"
+            ]
+          },
+          "legend": {
+            "orient": "bottom",
+            "direction": "horizontal",
+            "columns": 2,
+            "labelLimit": 200,
+            "symbolSize": 120
+          }
+        },
+        "tooltip": [
+          {
+            "field": "Age_group",
+            "type": "nominal",
+            "title": "Age group"
+          },
+          {
+            "field": "Indicator_label",
+            "type": "nominal",
+            "title": "Indicator"
+          },
+          {
+            "field": "Value_pct",
+            "type": "quantitative",
+            "title": "Percentage",
+            "format": ".1f"
+          }
+        ]
+      }
     },
-    "background": "#FBF5EA"
-  }
+    {
+      "data": {
+        "values": [
+          {
+            "Age_group": "35–39",
+            "ypos": 58
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "text": [
+          "Studying falls from ≈81% to ≈18%",
+          "between ages 15–19 and 25–29"
+        ],
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "color": "#7E3717",
+        "lineHeight": 15
+      },
+      "encoding": {
+        "y": {
+          "field": "ypos",
+          "type": "quantitative",
+          "title": "Percentage (%)",
+          "scale": {
+            "domain": [
+              0,
+              100
+            ]
+          },
+          "axis": {
+            "tickCount": 5,
+            "grid": true
+          }
+        }
+      }
+    }
+  ]
 }
