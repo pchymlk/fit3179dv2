@@ -38,6 +38,10 @@
     {
       "calculate": "isValid(datum['2024']) ? datum['2024'] : 0",
       "as": "End"
+    },
+    {
+      "calculate": "datum.End - datum.Start",
+      "as": "Chg"
     }
   ],
   "encoding": {
@@ -45,7 +49,7 @@
       "field": "Field",
       "type": "nominal",
       "sort": {
-        "field": "End",
+        "field": "Chg",
         "order": "descending"
       },
       "scale": {

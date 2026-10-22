@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": "container",
-  "height": 300,
+  "height": 360,
   "data": {
     "url": "data/cleaned_higher_education_enrolments.csv",
     "format": {
@@ -51,7 +51,11 @@
         "labelExpr": "datum.value >= 1000000 ? format(datum.value / 1000000, '.1f') + 'M' : format(datum.value / 1000, '.0f') + 'K'"
       },
       "scale": {
-        "zero": true
+        "zero": false,
+        "domain": [
+          1300000,
+          1800000
+        ]
       }
     }
   },
@@ -82,32 +86,6 @@
             "format": ","
           }
         ]
-      }
-    },
-    {
-      "transform": [
-        {
-          "filter": "datum.year == 2015"
-        },
-        {
-          "calculate": "format(datum.students/1000000,'.2f')+'M'+' in 2015'",
-          "as": "label"
-        }
-      ],
-      "mark": {
-        "type": "text",
-        "align": "left",
-        "dx": 4,
-        "dy": 22,
-        "fontSize": 12,
-        "fontWeight": "bold",
-        "color": "#3F1816"
-      },
-      "encoding": {
-        "text": {
-          "field": "label",
-          "type": "nominal"
-        }
       }
     },
     {

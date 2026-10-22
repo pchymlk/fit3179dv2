@@ -118,13 +118,7 @@
               "#90A3AF"
             ]
           },
-          "legend": {
-            "orient": "bottom",
-            "direction": "horizontal",
-            "columns": 2,
-            "labelLimit": 200,
-            "symbolSize": 120
-          }
+          "legend": null
         },
         "tooltip": [
           {
@@ -183,6 +177,83 @@
           }
         }
       }
+    },
+    {
+      "transform": [
+        {
+          "fold": [
+            "Currently_studying_pct",
+            "Has_non_school_qualification_pct",
+            "Bachelor_or_above_pct",
+            "Fully_engaged_work_study_pct"
+          ],
+          "as": [
+            "Indicator",
+            "Value_pct"
+          ]
+        },
+        {
+          "calculate": "datum.Indicator === 'Currently_studying_pct' ? 'Currently studying' : datum.Indicator === 'Has_non_school_qualification_pct' ? 'Any qualification' : datum.Indicator === 'Bachelor_or_above_pct' ? 'Bachelor or above' : 'Work/study engaged'",
+          "as": "Indicator_label"
+        },
+        {
+          "filter": "datum.Age_group === '65–74'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 10,
+        "fontSize": 12,
+        "fontWeight": "bold"
+      },
+      "encoding": {
+        "y": {
+          "field": "Value_pct",
+          "type": "quantitative",
+          "title": "Percentage (%)",
+          "scale": {
+            "domain": [
+              0,
+              100
+            ]
+          },
+          "axis": {
+            "tickCount": 5,
+            "grid": true
+          }
+        },
+        "text": {
+          "field": "Indicator_label",
+          "type": "nominal"
+        },
+        "color": {
+          "field": "Indicator_label",
+          "type": "nominal",
+          "title": null,
+          "scale": {
+            "domain": [
+              "Currently studying",
+              "Any qualification",
+              "Bachelor or above",
+              "Work/study engaged"
+            ],
+            "range": [
+              "#003F50",
+              "#7E3717",
+              "#A9835C",
+              "#90A3AF"
+            ]
+          },
+          "legend": null
+        }
+      }
     }
-  ]
+  ],
+  "padding": {
+    "right": 150,
+    "left": 5,
+    "top": 10,
+    "bottom": 5
+  }
 }

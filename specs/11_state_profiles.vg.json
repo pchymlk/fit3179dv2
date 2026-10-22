@@ -1,191 +1,190 @@
+
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "data": {
     "url": "data/11_state_profiles_long.csv"
   },
+  "transform": [
+    {
+      "calculate": "toNumber(datum.Value_pct)",
+      "as": "v"
+    },
+    {
+      "calculate": "datum.Metric === 'Currently studying ages 15–74' ? '01 · Currently studying (15–74)' : datum.Metric === 'Fully engaged ages 15–24' ? '02 · Fully engaged youth (15–24)' : '03 · Year 12 or Cert III+ (20–24)'",
+      "as": "Metric_short"
+    },
+    {
+      "joinaggregate": [
+        {
+          "op": "mean",
+          "field": "v",
+          "as": "avg"
+        }
+      ],
+      "groupby": ["Metric"]
+    }
+  ],
   "facet": {
     "column": {
-      "field": "Metric",
+      "field": "Metric_short",
       "type": "nominal",
-      "title": null,
+      "sort": [
+        "01 · Currently studying (15–74)",
+        "02 · Fully engaged youth (15–24)",
+        "03 · Year 12 or Cert III+ (20–24)"
+      ],
       "header": {
-        "labelFontSize": 12,
+        "title": null,
+        "labelFont": "Nunito",
+        "labelFontSize": 13,
         "labelFontWeight": "bold",
-        "labelLimit": 260,
-        "labelOrient": "top"
+        "labelColor": "#3F1816",
+        "labelLimit": 220,
+        "labelLineHeight": 17,
+        "labelOrient": "top",
+        "labelPadding": 12
       }
     }
   },
   "spec": {
-    "width": 200,
+    "width": 270,
     "height": {
-      "step": 26
-    },
-    "transform": [
-      {
-        "joinaggregate": [
-          {
-            "op": "max",
-            "field": "Value_pct",
-            "as": "vmax"
-          },
-          {
-            "op": "min",
-            "field": "Value_pct",
-            "as": "vmin"
-          }
-        ],
-        "groupby": [
-          "Metric"
-        ]
-      }
-    ],
-    "encoding": {
-      "y": {
-        "field": "Abbreviation",
-        "type": "nominal",
-        "title": null,
-        "sort": "-x",
-        "axis": {
-          "labelFontSize": 11
-        }
-      },
-      "x": {
-        "field": "Value_pct",
-        "type": "quantitative",
-        "title": "Percentage",
-        "scale": {
-          "domain": [
-            0,
-            100
-          ]
-        },
-        "axis": {
-          "values": [
-            0,
-            50,
-            100
-          ],
-          "grid": true
-        }
-      },
-      "tooltip": [
-        {
-          "field": "State",
-          "type": "nominal"
-        },
-        {
-          "field": "Metric",
-          "type": "nominal"
-        },
-        {
-          "field": "Value_pct",
-          "type": "quantitative",
-          "title": "Percentage",
-          "format": ".1f"
-        }
-      ],
-      "color": {
-        "field": "Abbreviation",
-        "type": "nominal",
-        "legend": null,
-        "scale": {
-          "domain": [
-            "NSW",
-            "VIC",
-            "QLD",
-            "SA",
-            "WA",
-            "TAS",
-            "NT",
-            "ACT"
-          ],
-          "range": [
-            "#003F50",
-            "#7E3717",
-            "#E5AA7B",
-            "#90A3AF",
-            "#A9835C",
-            "#4A8296",
-            "#3F1816",
-            "#D9C6A8"
-          ]
-        }
-      }
+      "step": 36
     },
     "layer": [
       {
         "mark": {
-          "type": "bar",
-          "cornerRadiusEnd": 3
+          "type": "rule",
+          "color": "#3F1816",
+          "strokeDash": [5, 4],
+          "strokeWidth": 1.5,
+          "opacity": 0.8
+        },
+        "encoding": {
+          "x": {
+            "field": "avg",
+            "type": "quantitative",
+            "scale": {
+              "zero": false,
+              "nice": true
+            }
+          }
         }
       },
       {
-        "transform": [
-          {
-            "filter": "datum.Value_pct == datum.vmax || datum.Value_pct == datum.vmin"
-          },
-          {
-            "calculate": "datum.Value_pct == datum.vmax ? '▲ top' : '▼ low'",
-            "as": "tag"
-          }
-        ],
         "mark": {
-          "type": "text",
-          "align": "left",
-          "dx": 6,
-          "fontSize": 11,
-          "fontWeight": "bold",
-          "color": "#7E3717"
+          "type": "point",
+          "filled": true,
+          "size": 150,
+          "stroke": "#FBF5EA",
+          "strokeWidth": 1.5
         },
         "encoding": {
-          "text": {
-            "field": "tag",
-            "type": "nominal"
+          "x": {
+            "field": "v",
+            "type": "quantitative",
+            "title": "Percentage (%)",
+            "scale": {
+              "zero": false,
+              "nice": true
+            },
+            "axis": {
+              "tickCount": 4,
+              "format": ".0f",
+              "labelFontSize": 11,
+              "titleFontSize": 12,
+              "grid": true,
+              "gridColor": "#E6D8C0",
+              "domainColor": "#A9835C",
+              "tickColor": "#A9835C"
+            }
+          },
+          "y": {
+            "field": "Abbreviation",
+            "type": "nominal",
+            "title": null,
+            "sort": [
+              "ACT",
+              "NSW",
+              "VIC",
+              "NT",
+              "QLD",
+              "SA",
+              "WA",
+              "TAS"
+            ],
+            "axis": {
+              "labelFontSize": 12,
+              "labelPadding": 8,
+              "ticks": false,
+              "domain": false
+            }
           },
           "color": {
-            "value": "#7E3717"
-          }
+            "field": "Metric",
+            "type": "nominal",
+            "scale": {
+              "domain": [
+                "Currently studying ages 15–74",
+                "Fully engaged ages 15–24",
+                "Year 12 or Cert III+ ages 20–24"
+              ],
+              "range": [
+                "#003F50",
+                "#7E3717",
+                "#A9835C"
+              ]
+            },
+            "legend": null
+          },
+          "tooltip": [
+            {
+              "field": "State",
+              "type": "nominal",
+              "title": "State"
+            },
+            {
+              "field": "Metric",
+              "type": "nominal",
+              "title": "Indicator"
+            },
+            {
+              "field": "v",
+              "type": "quantitative",
+              "title": "Percentage",
+              "format": ".1f"
+            },
+            {
+              "field": "avg",
+              "type": "quantitative",
+              "title": "All-state average (%)",
+              "format": ".1f"
+            }
+          ]
         }
       }
     ]
   },
   "resolve": {
     "scale": {
-      "x": "shared",
-      "y": "independent"
+      "x": "independent",
+      "y": "shared"
     }
   },
+  "spacing": 32,
   "config": {
+    "background": "#FBF5EA",
+    "font": "Nunito",
     "view": {
       "stroke": null
     },
-    "facet": {
-      "spacing": 44
-    },
-    "background": "#FBF5EA",
-    "font": "Nunito",
     "axis": {
       "labelColor": "#3F1816",
       "titleColor": "#3F1816",
       "gridColor": "#E6D8C0",
-      "gridOpacity": 1,
-      "domainColor": "#A9835C",
-      "tickColor": "#A9835C",
-      "labelFont": "Nunito",
-      "titleFont": "Nunito"
-    },
-    "legend": {
-      "labelColor": "#3F1816",
-      "titleColor": "#3F1816",
+      "gridOpacity": 0.9,
       "labelFont": "Nunito",
       "titleFont": "Nunito"
     }
-  },
-  "padding": {
-    "right": 12,
-    "left": 5,
-    "top": 5,
-    "bottom": 5
   }
 }

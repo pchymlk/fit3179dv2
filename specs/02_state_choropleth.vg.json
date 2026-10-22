@@ -94,7 +94,7 @@
             "orient": "bottom",
             "direction": "horizontal",
             "title": "Fully engaged (%)",
-            "format": ".1f",
+            "format": ".0f",
             "gradientLength": 220,
             "offset": 12
           }
@@ -133,39 +133,6 @@
       "data": {
         "values": [
           {
-            "lon": 154.2,
-            "lat": -33.5
-          }
-        ]
-      },
-      "mark": {
-        "type": "text",
-        "text": [
-          "NSW & ACT:",
-          "highest, ≈84%"
-        ],
-        "align": "left",
-        "dx": 8,
-        "fontSize": 12,
-        "fontWeight": "bold",
-        "color": "#7E3717",
-        "lineHeight": 14
-      },
-      "encoding": {
-        "longitude": {
-          "field": "lon",
-          "type": "quantitative"
-        },
-        "latitude": {
-          "field": "lat",
-          "type": "quantitative"
-        }
-      }
-    },
-    {
-      "data": {
-        "values": [
-          {
             "lon": 149.4,
             "lat": -42.3
           }
@@ -192,6 +159,204 @@
         "latitude": {
           "field": "lat",
           "type": "quantitative"
+        }
+      }
+    },
+    {
+      "data": {
+        "url": "data/cleaned_work_study_engagement_by_state.csv",
+        "format": {
+          "type": "csv"
+        }
+      },
+      "transform": [
+        {
+          "lookup": "State",
+          "from": {
+            "data": {
+              "values": [
+                {
+                  "State": "New South Wales",
+                  "abbr": "NSW",
+                  "lon": 147.0,
+                  "lat": -32.2
+                },
+                {
+                  "State": "Victoria",
+                  "abbr": "VIC",
+                  "lon": 144.7,
+                  "lat": -37.6
+                },
+                {
+                  "State": "Queensland",
+                  "abbr": "QLD",
+                  "lon": 144.5,
+                  "lat": -22.6
+                },
+                {
+                  "State": "South Australia",
+                  "abbr": "SA",
+                  "lon": 135.8,
+                  "lat": -30.1
+                },
+                {
+                  "State": "Western Australia",
+                  "abbr": "WA",
+                  "lon": 122.2,
+                  "lat": -25.5
+                },
+                {
+                  "State": "Northern Territory",
+                  "abbr": "NT",
+                  "lon": 133.4,
+                  "lat": -19.5
+                }
+              ]
+            },
+            "key": "State",
+            "fields": [
+              "abbr",
+              "lon",
+              "lat"
+            ]
+          }
+        },
+        {
+          "filter": "isValid(datum.abbr)"
+        },
+        {
+          "calculate": "toNumber(datum.Engaged_pct)",
+          "as": "v"
+        },
+        {
+          "calculate": "datum.abbr",
+          "as": "label"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "dy": -7,
+        "fontSize": 12,
+        "fontWeight": "bold"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "label",
+          "type": "nominal"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.v >= 80",
+            "value": "#FBF5EA"
+          },
+          "value": "#3F1816"
+        }
+      }
+    },
+    {
+      "data": {
+        "url": "data/cleaned_work_study_engagement_by_state.csv",
+        "format": {
+          "type": "csv"
+        }
+      },
+      "transform": [
+        {
+          "lookup": "State",
+          "from": {
+            "data": {
+              "values": [
+                {
+                  "State": "New South Wales",
+                  "abbr": "NSW",
+                  "lon": 147.0,
+                  "lat": -32.2
+                },
+                {
+                  "State": "Victoria",
+                  "abbr": "VIC",
+                  "lon": 144.7,
+                  "lat": -37.6
+                },
+                {
+                  "State": "Queensland",
+                  "abbr": "QLD",
+                  "lon": 144.5,
+                  "lat": -22.6
+                },
+                {
+                  "State": "South Australia",
+                  "abbr": "SA",
+                  "lon": 135.8,
+                  "lat": -30.1
+                },
+                {
+                  "State": "Western Australia",
+                  "abbr": "WA",
+                  "lon": 122.2,
+                  "lat": -25.5
+                },
+                {
+                  "State": "Northern Territory",
+                  "abbr": "NT",
+                  "lon": 133.4,
+                  "lat": -19.5
+                }
+              ]
+            },
+            "key": "State",
+            "fields": [
+              "abbr",
+              "lon",
+              "lat"
+            ]
+          }
+        },
+        {
+          "filter": "isValid(datum.abbr)"
+        },
+        {
+          "calculate": "toNumber(datum.Engaged_pct)",
+          "as": "v"
+        },
+        {
+          "calculate": "format(datum.v,'.0f') + '%'",
+          "as": "label"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "dy": 7,
+        "fontSize": 11,
+        "fontWeight": "normal"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "label",
+          "type": "nominal"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.v >= 80",
+            "value": "#FBF5EA"
+          },
+          "value": "#3F1816"
         }
       }
     }
