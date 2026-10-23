@@ -1,16 +1,251 @@
 {
-  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": "container",
   "height": 400,
   "data": {
     "url": "data/10_study_participation_gender_gap.csv"
   },
+  "transform": [
+    {
+      "calculate": "toNumber(datum.Currently_studying_pct)",
+      "as": "v"
+    },
+    {
+      "pivot": "Sex",
+      "value": "v",
+      "groupby": [
+        "Age_group"
+      ]
+    },
+    {
+      "calculate": "datum.Women - datum.Men",
+      "as": "Gap"
+    },
+    {
+      "calculate": "0",
+      "as": "Zero"
+    },
+    {
+      "calculate": "datum.Gap >= 0 ? 'Women higher' : 'Men higher'",
+      "as": "Lead"
+    }
+  ],
+  "layer": [
+    {
+      "data": {
+        "values": [
+          {
+            "y": 0
+          }
+        ]
+      },
+      "mark": {
+        "type": "rule",
+        "color": "#A9835C",
+        "strokeWidth": 1.5
+      },
+      "encoding": {
+        "y": {
+          "field": "y",
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "rule",
+        "strokeWidth": 3.5,
+        "opacity": 1
+      },
+      "encoding": {
+        "x": {
+          "field": "Age_group",
+          "type": "nominal",
+          "title": "Age group",
+          "sort": [
+            "15–19",
+            "20–24",
+            "25–29",
+            "30–34",
+            "35–39",
+            "40–44",
+            "45–49",
+            "45–54",
+            "50–54",
+            "54-74",
+            "55–59",
+            "55–74",
+            "54–74",
+            "60–64",
+            "65–74"
+          ],
+          "axis": {
+            "labelAngle": 0,
+            "labelFontSize": 11,
+            "grid": false
+          }
+        },
+        "y": {
+          "field": "Gap",
+          "type": "quantitative",
+          "title": "Women minus men (percentage points)",
+          "axis": {
+            "grid": true,
+            "tickCount": 6
+          }
+        },
+        "y2": {
+          "field": "Zero"
+        },
+        "color": {
+          "field": "Lead",
+          "type": "nominal",
+          "title": null,
+          "scale": {
+            "domain": [
+              "Women higher",
+              "Men higher"
+            ],
+            "range": [
+              "#7E3717",
+              "#003F50"
+            ]
+          },
+          "legend": {
+            "orient": "bottom",
+            "direction": "horizontal",
+            "symbolSize": 120,
+            "labelFontSize": 12
+          }
+        },
+        "tooltip": [
+          {
+            "field": "Age_group",
+            "type": "nominal",
+            "title": "Age group"
+          },
+          {
+            "field": "Men",
+            "type": "quantitative",
+            "title": "Men studying (%)",
+            "format": ".1f"
+          },
+          {
+            "field": "Women",
+            "type": "quantitative",
+            "title": "Women studying (%)",
+            "format": ".1f"
+          },
+          {
+            "field": "Gap",
+            "type": "quantitative",
+            "title": "Gap (pp)",
+            "format": "+.1f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 210,
+        "stroke": "#FBF5EA",
+        "strokeWidth": 1.5,
+        "opacity": 1
+      },
+      "encoding": {
+        "x": {
+          "field": "Age_group",
+          "type": "nominal",
+          "title": "Age group",
+          "sort": [
+            "15–19",
+            "20–24",
+            "25–29",
+            "30–34",
+            "35–39",
+            "40–44",
+            "45–49",
+            "45–54",
+            "50–54",
+            "54-74",
+            "55–59",
+            "55–74",
+            "54–74",
+            "60–64",
+            "65–74"
+          ],
+          "axis": {
+            "labelAngle": 0,
+            "labelFontSize": 11,
+            "grid": false
+          }
+        },
+        "y": {
+          "field": "Gap",
+          "type": "quantitative",
+          "title": "Women minus men (percentage points)",
+          "axis": {
+            "grid": true,
+            "tickCount": 6
+          }
+        },
+        "color": {
+          "field": "Lead",
+          "type": "nominal",
+          "title": null,
+          "scale": {
+            "domain": [
+              "Women higher",
+              "Men higher"
+            ],
+            "range": [
+              "#7E3717",
+              "#003F50"
+            ]
+          },
+          "legend": {
+            "orient": "bottom",
+            "direction": "horizontal",
+            "symbolSize": 120,
+            "labelFontSize": 12
+          }
+        },
+        "tooltip": [
+          {
+            "field": "Age_group",
+            "type": "nominal",
+            "title": "Age group"
+          },
+          {
+            "field": "Men",
+            "type": "quantitative",
+            "title": "Men studying (%)",
+            "format": ".1f"
+          },
+          {
+            "field": "Women",
+            "type": "quantitative",
+            "title": "Women studying (%)",
+            "format": ".1f"
+          },
+          {
+            "field": "Gap",
+            "type": "quantitative",
+            "title": "Gap (pp)",
+            "format": "+.1f"
+          }
+        ]
+      }
+    }
+  ],
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "config": {
+    "background": "#FBF5EA",
+    "font": "Nunito",
     "view": {
       "stroke": null
     },
-    "background": "#FBF5EA",
-    "font": "Nunito",
     "axis": {
       "labelColor": "#3F1816",
       "titleColor": "#3F1816",
@@ -27,147 +262,5 @@
       "labelFont": "Nunito",
       "titleFont": "Nunito"
     }
-  },
-  "encoding": {
-    "x": {
-      "field": "Age_group",
-      "type": "nominal",
-      "title": "Age group",
-      "sort": [
-        "15–19",
-        "20–24",
-        "25–29",
-        "30–34",
-        "35–39",
-        "40–44",
-        "45–49",
-        "45–54",
-        "50–54",
-        "54-74",
-        "55–59",
-        "55–74",
-        "54–74",
-        "60–64",
-        "65–74"
-      ],
-      "axis": {
-        "labelAngle": 0,
-        "labelFontSize": 11
-      }
-    }
-  },
-  "layer": [
-    {
-      "mark": {
-        "type": "bar",
-        "cornerRadiusEnd": 2
-      },
-      "encoding": {
-        "xOffset": {
-          "field": "Sex",
-          "type": "nominal",
-          "sort": [
-            "Men",
-            "Women"
-          ]
-        },
-        "y": {
-          "field": "Currently_studying_pct",
-          "type": "quantitative",
-          "title": "Currently studying (%)",
-          "scale": {
-            "domain": [
-              0,
-              100
-            ]
-          },
-          "axis": {
-            "tickCount": 5,
-            "grid": true
-          }
-        },
-        "color": {
-          "field": "Sex",
-          "type": "nominal",
-          "title": null,
-          "sort": [
-            "Men",
-            "Women"
-          ],
-          "scale": {
-            "domain": [
-              "Men",
-              "Women"
-            ],
-            "range": [
-              "#003F50",
-              "#7E3717"
-            ]
-          },
-          "legend": {
-            "orient": "bottom",
-            "direction": "horizontal",
-            "symbolSize": 120,
-            "labelFontSize": 12
-          }
-        },
-        "tooltip": [
-          {
-            "field": "Sex",
-            "type": "nominal",
-            "title": "Sex"
-          },
-          {
-            "field": "Age_group",
-            "type": "nominal",
-            "title": "Age group"
-          },
-          {
-            "field": "Currently_studying_pct",
-            "type": "quantitative",
-            "title": "Currently studying (%)",
-            "format": ".1f"
-          }
-        ]
-      }
-    },
-    {
-      "data": {
-        "values": [
-          {
-            "Age_group": "35–39",
-            "ypos": 72
-          }
-        ]
-      },
-      "mark": {
-        "type": "text",
-        "text": [
-          "Women lead in every age group",
-          "except 20–24, where it is almost level"
-        ],
-        "fontSize": 12,
-        "fontWeight": "bold",
-        "color": "#7E3717",
-        "lineHeight": 15
-      },
-      "encoding": {
-        "y": {
-          "field": "ypos",
-          "type": "quantitative",
-          "title": "Currently studying (%)",
-          "scale": {
-            "domain": [
-              0,
-              100
-            ]
-          },
-          "axis": {
-            "tickCount": 5,
-            "grid": true
-          }
-        }
-      }
-    }
-  ]
+  }
 }

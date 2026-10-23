@@ -1,16 +1,146 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": "container",
-  "height": 380,
+  "height": 400,
+  "autosize": {
+    "type": "fit-x",
+    "contains": "padding"
+  },
+  "padding": {
+    "left": 8,
+    "right": 16,
+    "top": 8,
+    "bottom": 8
+  },
   "data": {
     "url": "data/07_domestic_commencements_by_field.csv"
   },
+  "transform": [
+    {
+      "aggregate": [
+        {
+          "op": "sum",
+          "field": "Commencing_domestic_students",
+          "as": "Students"
+        }
+      ],
+      "groupby": [
+        "Year",
+        "Field"
+      ]
+    },
+    {
+      "calculate": "indexof(datum.Field,'Non-award')===0 ? 'Non-award courses' : indexof(datum.Field,'Agriculture')===0 ? 'Agriculture & Environment' : indexof(datum.Field,'Food')===0 ? 'Food & Hospitality' : indexof(datum.Field,'Engineering')===0 ? 'Engineering' : datum.Field==='Management and Commerce' ? 'Management & Commerce' : datum.Field==='Natural and Physical Sciences' ? 'Natural & Physical Sciences' : datum.Field",
+      "as": "Short"
+    },
+    {
+      "calculate": "indexof([\"Health\", \"Information Technology\", \"Management and Commerce\", \"Education\", \"Engineering and Related Technologies\", \"Natural and Physical Sciences\", \"Creative Arts\", \"Architecture and Building\", \"Mixed Field Programmes\", \"Food, Hospitality and Personal Services\", \"Agriculture, Environmental and Related Sciences\", \"Non-award courses(3.04)\", \"Society and Culture\"], datum.Field)",
+      "as": "Ord"
+    }
+  ],
+  "mark": {
+    "type": "area",
+    "interpolate": "monotone",
+    "stroke": "#FBF5EA",
+    "strokeWidth": 0.8,
+    "opacity": 1
+  },
+  "encoding": {
+    "x": {
+      "field": "Year",
+      "type": "quantitative",
+      "title": "Year",
+      "axis": {
+        "format": "d",
+        "tickMinStep": 1,
+        "grid": false
+      }
+    },
+    "y": {
+      "field": "Students",
+      "aggregate": "sum",
+      "type": "quantitative",
+      "stack": "center",
+      "axis": null
+    },
+    "detail": {
+      "field": "Field",
+      "type": "nominal"
+    },
+    "order": {
+      "field": "Ord",
+      "type": "quantitative"
+    },
+    "color": {
+      "field": "Field",
+      "type": "nominal",
+      "title": "Field of education",
+      "scale": {
+        "domain": [
+          "Society and Culture",
+          "Non-award courses(3.04)",
+          "Agriculture, Environmental and Related Sciences",
+          "Food, Hospitality and Personal Services",
+          "Mixed Field Programmes",
+          "Architecture and Building",
+          "Creative Arts",
+          "Natural and Physical Sciences",
+          "Engineering and Related Technologies",
+          "Education",
+          "Management and Commerce",
+          "Information Technology",
+          "Health"
+        ],
+        "range": [
+          "#7E3717",
+          "#C9CFA6",
+          "#8A9462",
+          "#8C6B4A",
+          "#C5D0D7",
+          "#F0C9A0",
+          "#B5683F",
+          "#D9C6A8",
+          "#90A3AF",
+          "#A9835C",
+          "#E5AA7B",
+          "#4A8296",
+          "#003F50"
+        ]
+      },
+      "legend": {
+        "orient": "right",
+        "labelLimit": 220,
+        "symbolType": "square",
+        "symbolSize": 140,
+        "labelExpr": "indexof(datum.label,'Non-award')===0 ? 'Non-award courses' : indexof(datum.label,'Agriculture')===0 ? 'Agriculture & Environment' : indexof(datum.label,'Food')===0 ? 'Food & Hospitality' : indexof(datum.label,'Engineering')===0 ? 'Engineering' : datum.label"
+      }
+    },
+    "tooltip": [
+      {
+        "field": "Year",
+        "type": "quantitative",
+        "title": "Year",
+        "format": "d"
+      },
+      {
+        "field": "Short",
+        "type": "nominal",
+        "title": "Field"
+      },
+      {
+        "field": "Students",
+        "type": "quantitative",
+        "title": "Commencements",
+        "format": ",.0f"
+      }
+    ]
+  },
   "config": {
+    "background": "#FBF5EA",
+    "font": "Nunito",
     "view": {
       "stroke": null
     },
-    "background": "#FBF5EA",
-    "font": "Nunito",
     "axis": {
       "labelColor": "#3F1816",
       "titleColor": "#3F1816",
@@ -27,160 +157,5 @@
       "labelFont": "Nunito",
       "titleFont": "Nunito"
     }
-  },
-  "layer": [
-    {
-      "transform": [
-        {
-          "calculate": "indexof([\"Health\", \"Information Technology\", \"Management and Commerce\", \"Education\", \"Engineering and Related Technologies\", \"Natural and Physical Sciences\", \"Creative Arts\", \"Architecture and Building\", \"Mixed Field Programmes\", \"Food, Hospitality and Personal Services\", \"Agriculture, Environmental and Related Sciences\", \"Non-award courses(3.04)\", \"Society and Culture\"], datum.Field)",
-          "as": "rank"
-        }
-      ],
-      "mark": {
-        "type": "area",
-        "interpolate": "monotone",
-        "opacity": 1,
-        "stroke": "#FBF5EA",
-        "strokeWidth": 0.8
-      },
-      "encoding": {
-        "x": {
-          "field": "Year",
-          "type": "quantitative",
-          "title": "Year",
-          "axis": {
-            "format": "d",
-            "tickMinStep": 1
-          }
-        },
-        "y": {
-          "field": "Commencing_domestic_students",
-          "type": "quantitative",
-          "stack": "zero",
-          "title": "Commencements",
-          "axis": {
-            "format": "~s"
-          }
-        },
-        "color": {
-          "field": "Field",
-          "type": "nominal",
-          "title": "Field of education",
-          "scale": {
-            "domain": [
-              "Society and Culture",
-              "Non-award courses(3.04)",
-              "Agriculture, Environmental and Related Sciences",
-              "Food, Hospitality and Personal Services",
-              "Mixed Field Programmes",
-              "Architecture and Building",
-              "Creative Arts",
-              "Natural and Physical Sciences",
-              "Engineering and Related Technologies",
-              "Education",
-              "Management and Commerce",
-              "Information Technology",
-              "Health"
-            ],
-            "range": [
-              "#7E3717",
-              "#C9CFA6",
-              "#8A9462",
-              "#8C6B4A",
-              "#C5D0D7",
-              "#F0C9A0",
-              "#B5683F",
-              "#D9C6A8",
-              "#90A3AF",
-              "#A9835C",
-              "#E5AA7B",
-              "#4A8296",
-              "#003F50"
-            ]
-          },
-          "legend": {
-            "orient": "right",
-            "labelLimit": 220,
-            "symbolType": "square",
-            "symbolSize": 140,
-            "labelExpr": "indexof(datum.label,'Non-award')===0 ? 'Non-award courses' : indexof(datum.label,'Agriculture')===0 ? 'Agriculture & Environment' : indexof(datum.label,'Food')===0 ? 'Food & Hospitality' : indexof(datum.label,'Engineering')===0 ? 'Engineering' : datum.label"
-          }
-        },
-        "order": {
-          "field": "rank",
-          "type": "quantitative"
-        },
-        "tooltip": [
-          {
-            "field": "Year",
-            "type": "quantitative",
-            "title": "Year",
-            "format": "d"
-          },
-          {
-            "field": "Field",
-            "type": "nominal",
-            "title": "Field of education"
-          },
-          {
-            "field": "Commencing_domestic_students",
-            "type": "quantitative",
-            "title": "Commencements",
-            "format": ",.0f"
-          }
-        ]
-      }
-    },
-    {
-      "data": {
-        "values": [
-          {
-            "x0": 2020,
-            "x1": 2021
-          }
-        ]
-      },
-      "mark": {
-        "type": "rect",
-        "color": "#7E3717",
-        "opacity": 0.1
-      },
-      "encoding": {
-        "x": {
-          "field": "x0",
-          "type": "quantitative"
-        },
-        "x2": {
-          "field": "x1"
-        }
-      }
-    },
-    {
-      "data": {
-        "values": [
-          {
-            "x": 2020.5,
-            "y": 492000
-          }
-        ]
-      },
-      "mark": {
-        "type": "text",
-        "text": "Total commencements peak, 2020–21",
-        "fontSize": 11,
-        "fontWeight": "bold",
-        "color": "#7E3717"
-      },
-      "encoding": {
-        "x": {
-          "field": "x",
-          "type": "quantitative"
-        },
-        "y": {
-          "field": "y",
-          "type": "quantitative"
-        }
-      }
-    }
-  ]
+  }
 }

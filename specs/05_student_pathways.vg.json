@@ -1,65 +1,139 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": "container",
-  "height": 400,
-  "data": {
-    "url": "./data/05_engagement_by_remoteness.csv"
+  "height": 420,
+  "autosize": {
+    "type": "fit-x",
+    "contains": "padding"
   },
-  "config": {
-    "view": {
-      "stroke": null
-    },
-    "background": "#FBF5EA",
-    "font": "Nunito",
-    "axis": {
-      "labelColor": "#3F1816",
-      "titleColor": "#3F1816",
-      "gridColor": "#E6D8C0",
-      "gridOpacity": 1,
-      "domainColor": "#A9835C",
-      "tickColor": "#A9835C",
-      "labelFont": "Nunito",
-      "titleFont": "Nunito"
-    },
-    "legend": {
-      "labelColor": "#3F1816",
-      "titleColor": "#3F1816",
-      "labelFont": "Nunito",
-      "titleFont": "Nunito"
-    }
+  "padding": {
+    "left": 8,
+    "right": 8,
+    "top": 4,
+    "bottom": 4
   },
   "layer": [
     {
+      "data": {
+        "url": "./data/05_engagement_by_remoteness.csv"
+      },
+      "transform": [
+        {
+          "calculate": "toNumber(datum.Percent)",
+          "as": "P"
+        },
+        {
+          "calculate": "indexof(['Fully engaged','Partially engaged','Not engaged'], datum.Engagement_status)",
+          "as": "so"
+        },
+        {
+          "calculate": "indexof(['Major Cities','Inner Regional','Outer Regional and Remote'], datum.Remoteness)",
+          "as": "r"
+        },
+        {
+          "joinaggregate": [
+            {
+              "op": "sum",
+              "field": "P",
+              "as": "total"
+            }
+          ],
+          "groupby": [
+            "Remoteness"
+          ]
+        },
+        {
+          "window": [
+            {
+              "op": "sum",
+              "field": "P",
+              "as": "cum"
+            }
+          ],
+          "sort": [
+            {
+              "field": "so"
+            }
+          ],
+          "groupby": [
+            "Remoteness"
+          ],
+          "frame": [
+            null,
+            0
+          ]
+        },
+        {
+          "calculate": "sequence(round((datum.cum - datum.P) / datum.total * 100), round(datum.cum / datum.total * 100))",
+          "as": "cell"
+        },
+        {
+          "flatten": [
+            "cell"
+          ]
+        },
+        {
+          "calculate": "datum.cell % 20",
+          "as": "gx"
+        },
+        {
+          "calculate": "floor(datum.cell / 20) + datum.r * 7",
+          "as": "gy"
+        },
+        {
+          "calculate": "datum.gx - 0.46",
+          "as": "x0"
+        },
+        {
+          "calculate": "datum.gx + 0.46",
+          "as": "x1"
+        },
+        {
+          "calculate": "datum.gy - 0.46",
+          "as": "y0"
+        },
+        {
+          "calculate": "datum.gy + 0.46",
+          "as": "y1"
+        }
+      ],
       "mark": {
-        "type": "bar",
+        "type": "rect",
         "stroke": "#FBF5EA",
-        "strokeWidth": 1
+        "strokeWidth": 1,
+        "cornerRadius": 3
       },
       "encoding": {
         "x": {
-          "field": "Remoteness",
-          "type": "nominal",
-          "title": "Remoteness area",
-          "sort": [
-            "Major Cities",
-            "Inner Regional",
-            "Outer Regional and Remote"
-          ],
-          "axis": {
-            "labelAngle": 0,
-            "labelLimit": 160,
-            "labelExpr": "datum.label === 'Outer Regional and Remote' ? ['Outer Regional','and Remote'] : datum.label"
-          }
+          "field": "x0",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              -0.7,
+              19.7
+            ],
+            "nice": false
+          },
+          "axis": null
+        },
+        "x2": {
+          "field": "x1"
         },
         "y": {
-          "field": "Percent",
+          "field": "y0",
           "type": "quantitative",
-          "stack": "normalize",
-          "title": "Share of each area",
-          "axis": {
-            "format": "%",
-            "tickCount": 5
-          }
+          "scale": {
+            "domain": [
+              -2.0,
+              18.8
+            ],
+            "reverse": true,
+            "nice": false
+          },
+          "axis": null
+        },
+        "y2": {
+          "field": "y1"
         },
         "color": {
           "field": "Engagement_status",
@@ -80,30 +154,190 @@
           "legend": {
             "orient": "bottom",
             "direction": "horizontal",
-            "columns": 3,
-            "title": "Engagement status",
-            "labelLimit": 180,
-            "symbolSize": 100,
-            "offset": 12
+            "symbolType": "square",
+            "symbolSize": 140,
+            "labelFontSize": 12,
+            "offset": 10
           }
         },
         "tooltip": [
           {
             "field": "Remoteness",
-            "type": "nominal"
+            "type": "nominal",
+            "title": "Remoteness area"
           },
           {
             "field": "Engagement_status",
-            "type": "nominal"
+            "type": "nominal",
+            "title": "Status"
           },
           {
             "field": "Percent",
             "type": "quantitative",
-            "title": "Percentage",
+            "title": "Share (%)",
             "format": ".1f"
           }
         ]
       }
+    },
+    {
+      "data": {
+        "url": "./data/05_engagement_by_remoteness.csv"
+      },
+      "transform": [
+        {
+          "filter": "datum.Engagement_status === 'Fully engaged'"
+        },
+        {
+          "calculate": "indexof(['Major Cities','Inner Regional','Outer Regional and Remote'], datum.Remoteness)",
+          "as": "r"
+        },
+        {
+          "calculate": "datum.r * 7 - 1.2",
+          "as": "ly"
+        },
+        {
+          "calculate": "-0.46",
+          "as": "xl"
+        },
+        {
+          "calculate": "19.46",
+          "as": "xr"
+        },
+        {
+          "calculate": "format(toNumber(datum.Percent), '.0f') + '% fully engaged'",
+          "as": "pct"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "fontSize": 13,
+        "fontWeight": "bold",
+        "color": "#3F1816",
+        "font": "Nunito"
+      },
+      "encoding": {
+        "x": {
+          "field": "xl",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              -0.7,
+              19.7
+            ],
+            "nice": false
+          },
+          "axis": null
+        },
+        "y": {
+          "field": "ly",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              -2.0,
+              18.8
+            ],
+            "reverse": true,
+            "nice": false
+          },
+          "axis": null
+        },
+        "text": {
+          "field": "Remoteness",
+          "type": "nominal"
+        }
+      }
+    },
+    {
+      "data": {
+        "url": "./data/05_engagement_by_remoteness.csv"
+      },
+      "transform": [
+        {
+          "filter": "datum.Engagement_status === 'Fully engaged'"
+        },
+        {
+          "calculate": "indexof(['Major Cities','Inner Regional','Outer Regional and Remote'], datum.Remoteness)",
+          "as": "r"
+        },
+        {
+          "calculate": "datum.r * 7 - 1.2",
+          "as": "ly"
+        },
+        {
+          "calculate": "-0.46",
+          "as": "xl"
+        },
+        {
+          "calculate": "19.46",
+          "as": "xr"
+        },
+        {
+          "calculate": "format(toNumber(datum.Percent), '.0f') + '% fully engaged'",
+          "as": "pct"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "baseline": "middle",
+        "fontSize": 13,
+        "fontWeight": "bold",
+        "color": "#003F50",
+        "font": "Nunito"
+      },
+      "encoding": {
+        "x": {
+          "field": "xr",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              -0.7,
+              19.7
+            ],
+            "nice": false
+          },
+          "axis": null
+        },
+        "y": {
+          "field": "ly",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              -2.0,
+              18.8
+            ],
+            "reverse": true,
+            "nice": false
+          },
+          "axis": null
+        },
+        "text": {
+          "field": "pct",
+          "type": "nominal"
+        }
+      }
     }
-  ]
+  ],
+  "config": {
+    "background": "#FBF5EA",
+    "font": "Nunito",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelColor": "#3F1816",
+      "titleColor": "#3F1816",
+      "labelFont": "Nunito",
+      "titleFont": "Nunito"
+    },
+    "legend": {
+      "labelColor": "#3F1816",
+      "titleColor": "#3F1816",
+      "labelFont": "Nunito",
+      "titleFont": "Nunito"
+    }
+  }
 }

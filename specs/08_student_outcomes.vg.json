@@ -1,130 +1,120 @@
 {
-  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": "container",
-  "height": 420,
+  "height": 330,
   "autosize": {
-    "type": "fit",
+    "type": "fit-x",
     "contains": "padding"
   },
+  "padding": {
+    "left": 8,
+    "right": 16,
+    "top": 8,
+    "bottom": 8
+  },
+  "params": [
+    {
+      "name": "Status",
+      "value": "Not in labour force",
+      "bind": {
+        "input": "select",
+        "options": [
+          "Employed full-time",
+          "Employed part-time",
+          "Unemployed",
+          "Not in labour force"
+        ],
+        "name": "Labour-force status: "
+      }
+    }
+  ],
   "data": {
     "url": "data/08_labour_force_outcomes.csv"
   },
-  "config": {
-    "view": {
-      "stroke": null
+  "transform": [
+    {
+      "filter": "datum.Labour_force_status === Status"
     },
-    "axis": {
-      "labelFont": "Nunito",
-      "titleFont": "Nunito",
-      "gridColor": "#E6D8C0",
-      "gridOpacity": 1,
-      "labelColor": "#3F1816",
-      "titleColor": "#3F1816",
-      "domainColor": "#A9835C",
-      "tickColor": "#A9835C"
+    {
+      "calculate": "indexof(datum.Group,'Men')===0 ? 'Men' : 'Women'",
+      "as": "Sex"
     },
-    "title": {
-      "font": "Nunito",
-      "subtitleFont": "Nunito"
+    {
+      "calculate": "slice(datum.Group, datum.Sex==='Men' ? 4 : 6)",
+      "as": "QualRaw"
     },
-    "background": "#FBF5EA",
-    "font": "Nunito",
-    "legend": {
-      "labelColor": "#3F1816",
-      "titleColor": "#3F1816",
-      "labelFont": "Nunito",
-      "titleFont": "Nunito"
+    {
+      "calculate": "indexof(datum.QualRaw,'with bachelor')===0 ? 'Bachelor degree' : indexof(datum.QualRaw,'with certificate')===0 ? 'Certificate III/IV' : 'No non-school qualification'",
+      "as": "Qual"
+    },
+    {
+      "calculate": "toNumber(datum.Percent)",
+      "as": "Pct"
+    },
+    {
+      "calculate": "datum.Sex==='Men' ? -datum.Pct : datum.Pct",
+      "as": "Signed"
+    },
+    {
+      "joinaggregate": [
+        {
+          "op": "max",
+          "field": "Pct",
+          "as": "M"
+        }
+      ]
     }
-  },
+  ],
   "layer": [
     {
       "mark": {
         "type": "bar",
-        "height": {
-          "band": 0.8
-        },
-        "cornerRadiusEnd": 2
+        "cornerRadiusEnd": 3
       },
       "encoding": {
-        "y": {
-          "field": "Group",
-          "type": "nominal",
-          "title": null,
-          "sort": null,
-          "axis": {
-            "labelExpr": "datum.label === 'Men with bachelor degree' ? 'Men with bachelor\\ndegree' : datum.label === 'Men with certificate III/IV' ? 'Men with certificate\\nIII/IV' : datum.label === 'Men without non-school qualification' ? 'Men without non-school\\nqualification' : datum.label === 'Women with bachelor degree' ? 'Women with bachelor\\ndegree' : datum.label === 'Women with certificate III/IV' ? 'Women with certificate\\nIII/IV' : 'Women without non-school\\nqualification'",
-            "labelFontSize": 11,
-            "labelLimit": 220,
-            "labelPadding": 10,
-            "ticks": false,
-            "domain": false
-          }
-        },
-        "yOffset": {
-          "field": "Labour_force_status",
-          "type": "nominal",
-          "sort": [
-            "Employed full-time",
-            "Employed part-time",
-            "Unemployed",
-            "Not in labour force"
-          ]
-        },
         "x": {
-          "field": "Percent",
+          "field": "Signed",
           "type": "quantitative",
           "title": "Share of group (%)",
           "scale": {
-            "domain": [
-              0,
-              100
-            ]
+            "nice": true,
+            "zero": true
           },
           "axis": {
+            "labelExpr": "abs(datum.value)",
             "tickCount": 6,
-            "labelFontSize": 11,
-            "titleFontSize": 12,
-            "grid": true,
-            "labelOverlap": false
+            "grid": true
           }
         },
-        "color": {
-          "field": "Labour_force_status",
+        "y": {
+          "field": "Qual",
           "type": "nominal",
-          "title": "Labour-force status",
+          "title": null,
+          "sort": [
+            "Bachelor degree",
+            "Certificate III/IV",
+            "No non-school qualification"
+          ],
           "scale": {
-            "domain": [
-              "Employed full-time",
-              "Employed part-time",
-              "Unemployed",
-              "Not in labour force"
-            ],
-            "range": [
-              "#003F50",
-              "#90A3AF",
-              "#E5AA7B",
-              "#7E3717"
-            ]
+            "paddingInner": 0.35
           },
-          "legend": {
-            "orient": "bottom",
-            "direction": "horizontal",
-            "columns": 2,
-            "title": "Labour-force status",
-            "labelLimit": 0,
-            "labelFontSize": 11,
-            "titleFontSize": 12,
-            "symbolSize": 100,
-            "rowPadding": 5,
-            "columnPadding": 18,
-            "offset": 18
+          "axis": {
+            "labelFontSize": 12,
+            "labelPadding": 10,
+            "ticks": false,
+            "domain": false,
+            "labelLimit": 220
           }
         },
         "tooltip": [
           {
-            "field": "Group",
+            "field": "Sex",
             "type": "nominal",
-            "title": "Qualification and sex group"
+            "title": "Sex"
+          },
+          {
+            "field": "Qual",
+            "type": "nominal",
+            "title": "Qualification"
           },
           {
             "field": "Labour_force_status",
@@ -132,13 +122,105 @@
             "title": "Labour-force status"
           },
           {
-            "field": "Percent",
+            "field": "Pct",
             "type": "quantitative",
             "title": "Percentage",
             "format": ".1f"
           }
-        ]
+        ],
+        "color": {
+          "field": "Sex",
+          "type": "nominal",
+          "title": null,
+          "scale": {
+            "domain": [
+              "Men",
+              "Women"
+            ],
+            "range": [
+              "#003F50",
+              "#7E3717"
+            ]
+          },
+          "legend": {
+            "orient": "bottom",
+            "direction": "horizontal",
+            "symbolSize": 120,
+            "labelFontSize": 12
+          }
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "calculate": "[-datum.M, datum.M]",
+          "as": "Ext"
+        },
+        {
+          "flatten": [
+            "Ext"
+          ]
+        }
+      ],
+      "mark": {
+        "type": "point",
+        "opacity": 0
+      },
+      "encoding": {
+        "x": {
+          "field": "Ext",
+          "type": "quantitative",
+          "scale": {
+            "nice": true,
+            "zero": true
+          }
+        },
+        "y": {
+          "field": "Qual",
+          "type": "nominal",
+          "title": null,
+          "sort": [
+            "Bachelor degree",
+            "Certificate III/IV",
+            "No non-school qualification"
+          ],
+          "scale": {
+            "paddingInner": 0.35
+          },
+          "axis": {
+            "labelFontSize": 12,
+            "labelPadding": 10,
+            "ticks": false,
+            "domain": false,
+            "labelLimit": 220
+          }
+        }
       }
     }
-  ]
+  ],
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "config": {
+    "background": "#FBF5EA",
+    "font": "Nunito",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelColor": "#3F1816",
+      "titleColor": "#3F1816",
+      "gridColor": "#E6D8C0",
+      "gridOpacity": 1,
+      "domainColor": "#A9835C",
+      "tickColor": "#A9835C",
+      "labelFont": "Nunito",
+      "titleFont": "Nunito"
+    },
+    "legend": {
+      "labelColor": "#3F1816",
+      "titleColor": "#3F1816",
+      "labelFont": "Nunito",
+      "titleFont": "Nunito"
+    }
+  }
 }

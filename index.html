@@ -1,10 +1,11 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Who Gets to Study? Higher Education in Australia</title>
+  <meta name="author" content="[Your name]">
+  <meta name="description" content="An interactive data story on higher education enrolments, fields of study and unequal access across Australia.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,6 +20,7 @@
   <h1>Who Gets to Study, and What Happens Next?</h1>
   <p class="intro">Enrolments are at a record high. Where you live and who you are still shape opportunity.</p>
   <p class="source-note">Sources: ABS Education and Work 2025; Department of Education 2015–2024.</p>
+  <p class="byline">By [Your name] · [Course code] · 23 October 2026</p>
 </header>
 
 <nav class="jump" aria-label="Jump to section">
@@ -41,14 +43,14 @@
       </div>
     </div>
 
-    <p class="lede">Enrolments are at record highs, but <strong>growth was uneven</strong>.</p>
+    <p class="lede">Enrolments are at a record high, but <strong>growth was uneven</strong>.</p>
 
     <div class="chart-grid chart-grid-1">
       <article class="chart-card">
         <h3>Higher Education Student Enrolments</h3>
         <p class="chart-sub">Australia, 2015–2024, all enrolled students</p>
-        <div id="chart-01"></div>
-        <p class="chart-insight"><strong>Key finding:</strong> Enrolments dipped in 2021–22, then hit a record in 2024.</p>
+        <div id="chart-01" role="img" aria-label="Line chart of total higher education enrolments in Australia from 2015 to 2024"></div>
+        <p class="chart-insight"><strong>Key finding:</strong> Enrolments dipped after 2020, bottomed out in 2022, then reached a record in 2024.</p>
       </article>
     </div>
 
@@ -73,19 +75,13 @@
       <article class="chart-card">
         <h3>Young Australians Fully Engaged in Work and/or Study</h3>
         <p class="chart-sub">People aged 15–24, by state, 2025. Darker means more engaged.</p>
-        <div id="chart-02"></div>
+        <div id="chart-02" role="img" aria-label="Map of Australian states shaded by the share of 15 to 24 year olds fully engaged in work or study"></div>
       </article>
 
       <article class="chart-card">
         <h3>Student Distribution</h3>
-        <p class="chart-sub">Circle area shows % enrolled in study, 2025.</p>
-        <div id="chart-03"></div>
-      </article>
-
-      <article class="chart-card chart-wide">
-        <h3>State Comparison</h3>
-        <p class="chart-sub">One hexagon per state, laid out like Australia.</p>
-        <div id="chart-04"></div>
+        <p class="chart-sub">Circle area shows % enrolled in study, 2025. Use the dropdown to switch between persons, men and women.</p>
+        <div id="chart-03" role="img" aria-label="Map of Australia with circles sized by the share of people enrolled in study in each state"></div>
       </article>
     </div>
 
@@ -109,28 +105,28 @@
     <div class="chart-grid">
       <article class="chart-card chart-wide">
         <h3>How Student Choices Have Shifted</h3>
-        <p class="chart-sub">Domestic commencing enrolments by broad field, 2015–2024.</p>
-        <div id="chart-07"></div>
+        <p class="chart-sub">Domestic commencing enrolments by broad field, 2015–2024. Band thickness shows the number of students.</p>
+        <div id="chart-07" role="img" aria-label="Streamgraph of domestic commencing enrolments by field of education from 2015 to 2024"></div>
         <p class="chart-insight"><strong>Key finding:</strong> Health grew most; Management and Commerce shrank most.</p>
       </article>
 
       <article class="chart-card">
         <h3>Which Fields Saw the Biggest Enrolment Changes?</h3>
         <p class="chart-sub">Domestic commencing students: <span class="dot dot-sky"></span>2015 <span class="dot dot-rust"></span>2024. Labels show change.</p>
-        <div id="chart-06"></div>
+        <div id="chart-06" role="img" aria-label="Dumbbell chart comparing domestic commencing students by field in 2015 and 2024"></div>
       </article>
 
       <article class="chart-card">
         <h3>Employment Outcomes by Qualification and Sex</h3>
-        <p class="chart-sub">Labour-force status among people aged 15–74, 2025.</p>
-        <div id="chart-08"></div>
-        <p class="chart-insight"><strong>Key finding:</strong> Women without a qualification: ≈44% are outside the labour force.</p>
+        <p class="chart-sub">Labour-force status among people aged 15–74, 2025. Use the dropdown to change the status shown.</p>
+        <div id="chart-08" role="img" aria-label="Butterfly chart comparing men and women by qualification for the selected labour-force status"></div>
+        <p class="chart-insight"><strong>Key finding:</strong> Not in the labour force: ≈44% of women without a qualification.</p>
       </article>
 
       <article class="chart-card chart-wide">
         <h3>Student Profiles by Age Group</h3>
         <p class="chart-sub">Each line is one indicator, as a percentage of the age group.</p>
-        <div id="chart-09"></div>
+        <div id="chart-09" role="img" aria-label="Line chart of study, qualification and engagement indicators by age group"></div>
       </article>
     </div>
 
@@ -154,8 +150,8 @@
     <div class="chart-grid">
       <article class="chart-card">
         <h3>Gender Gap in Study Participation</h3>
-        <p class="chart-sub">Currently enrolled in study, by age group, 2025.</p>
-        <div id="chart-10"></div>
+        <p class="chart-sub">Women minus men, currently enrolled in study, by age group, 2025.</p>
+        <div id="chart-10" role="img" aria-label="Lollipop chart of the gap between women and men currently studying, by age group"></div>
 
         <aside class="context">
           <p class="context-title">What could affect this?</p>
@@ -170,15 +166,21 @@
 
       <article class="chart-card">
         <h3>Work and Study Engagement by Remoteness</h3>
-        <p class="chart-sub">People aged 15–24. Group percentages, not individual transitions.</p>
-        <div id="chart-05"></div>
+        <p class="chart-sub">People aged 15–24. Each square is 1% of the area's young people. Group percentages, not individual transitions.</p>
+        <div id="chart-05" role="img" aria-label="Waffle chart of work and study engagement status for three remoteness areas"></div>
         <p class="chart-insight"><strong>Key finding:</strong> Major Cities 84% fully engaged; regional areas 75%.</p>
       </article>
 
-      <article class="chart-card chart-wide chart-11-card">
+      <article class="chart-card">
+        <h3>Gender Gap in Study Enrolment by State</h3>
+        <p class="chart-sub">Women minus men, in percentage points (pp), 2025. One hexagon per state, laid out like Australia. Darker means a larger gap.</p>
+        <div id="chart-04" role="img" aria-label="Hexagon map of the gap between women and men enrolled in study, by state"></div>
+      </article>
+
+      <article class="chart-card chart-11-card">
         <h3>State Education Profiles</h3>
-        <p class="chart-sub">Compare study participation, youth engagement and qualifications across Australian states. Dashed lines show each indicator's average.</p>
-        <div id="chart-11"></div>
+        <p class="chart-sub">How each state ranks against the others on three indicators, 2025. Darker means higher. Hover for exact values.</p>
+        <div id="chart-11" role="img" aria-label="Heatmap comparing states on study participation, youth engagement and qualifications"></div>
       </article>
     </div>
   </div>
@@ -194,7 +196,24 @@
 </main>
 
 <footer>
-  <p>Data visualisation project. Charts built with Vega-Lite. Data: ABS and Department of Education.</p>
+  <div class="footer-grid">
+    <div>
+      <h4>Data sources</h4>
+      <ul>
+        <li>Australian Bureau of Statistics, <em>Education and Work, Australia</em>, 2025. [Add table numbers and URL]</li>
+        <li>Department of Education, <em>Higher Education Statistics</em>, 2015–2024. [Add dataset title and URL]</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Notes</h4>
+      <p>pp = percentage points. Commencing students are domestic students only. State and group figures are shares of the people in each group, not counts.</p>
+    </div>
+    <div>
+      <h4>About</h4>
+      <p>[Your name] · [Course code] · 23 October 2026. Built with Vega-Lite. Typefaces: Fraunces and Nunito.</p>
+    </div>
+  </div>
+  <p class="fine-print">Data visualisation project. Data: ABS and Department of Education.</p>
 </footer>
 
 <!-- CHART LOADER -->
@@ -240,11 +259,47 @@
       });
   }
 
+  // Crop an SVG's viewBox to its visible marks (hexagons, labels, legend).
+  function fitHexMap(el) {
+    var svg = el.querySelector("svg");
+    if (!svg) return;
+    var w = parseFloat(svg.getAttribute("width"));
+    var ht = parseFloat(svg.getAttribute("height"));
+    if (!w || !ht) return;
+
+    svg.setAttribute("viewBox", "0 0 " + w + " " + ht);
+    var box = svg.getBoundingClientRect();
+    var k = box.width / w;
+    var minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+
+    svg.querySelectorAll(".mark-line path, .mark-text text, .role-legend").forEach(function (n) {
+      var r = n.getBoundingClientRect();
+      if (!r.width && !r.height) return;
+      minX = Math.min(minX, r.left);  minY = Math.min(minY, r.top);
+      maxX = Math.max(maxX, r.right); maxY = Math.max(maxY, r.bottom);
+    });
+    if (!isFinite(minX)) return;
+
+    var pad = 12;
+    var vx = (minX - box.left) / k - pad;
+    var vy = (minY - box.top) / k - pad;
+    var vw = (maxX - minX) / k + 2 * pad;
+    var vh = (maxY - minY) / k + 2 * pad;
+    svg.setAttribute("viewBox", [vx, vy, vw, vh].join(" "));
+    svg.style.width = "100%";
+    svg.style.height = "auto";
+  }
+
   Object.keys(charts).forEach(function (id) {
     var el = document.getElementById(id);
 
     loadSpec(charts[id], 0)
       .then(function (spec) {
+        // Waffle chart: keep squares square by tying height to the container width.
+        // (x range is 20.4 units wide, y range is 20.8 units tall.)
+        if (id === "chart-05") {
+          spec.height = Math.round((el.clientWidth - 16) * 20.8 / 20.4);
+        }
         return vegaEmbed("#" + id, spec, {
           actions: false,
           renderer: "svg",
@@ -252,20 +307,9 @@
         });
       })
       .then(function () {
-        // Keep the state hex map responsive.
+        // Hex map: crop the SVG to what is actually drawn so it is centred and fills its card.
         if (id === "chart-04") {
-          var svg = el.querySelector("svg");
-
-          if (svg) {
-            var width = svg.getAttribute("width");
-            var height = svg.getAttribute("height");
-
-            if (width && height) {
-              svg.setAttribute("viewBox", "0 0 " + width + " " + height);
-              svg.style.width = "100%";
-              svg.style.height = "auto";
-            }
-          }
+          fitHexMap(el);
         }
       })
       .catch(function (error) {
