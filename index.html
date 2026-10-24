@@ -118,7 +118,7 @@
 
       <article class="chart-card">
         <h3>Which Fields Saw the Biggest Enrolment Changes?</h3>
-        <p class="chart-sub">Domestic commencing students: <span class="dot dot-sky"></span>2015 <span class="dot dot-rust"></span>2024. Labels show change.</p>
+        <p class="chart-sub">Domestic commencing students: <span class="dot dot-sky"></span>2015 <span class="dot dot-rust"></span>2024. Hover for exact values.</p>
         <div id="chart-06" role="img" aria-label="Dumbbell chart comparing domestic commencing students by field in 2015 and 2024"></div>
       </article>
 
@@ -155,6 +155,20 @@
     <p class="lede">Access differs by <strong>gender, remoteness and state</strong>. Gender gaps by age are small (under 4 pp).</p>
 
     <div class="chart-grid">
+      <article class="chart-card chart-11-card">
+        <h3>State Education Profiles</h3>
+        <p class="chart-sub">How each state ranks against the others on three indicators, 2025. Darker means higher. Hover for exact values.</p>
+        <div id="chart-11" role="img" aria-label="Heatmap comparing states on study participation, youth engagement and qualifications"></div>
+        <p class="chart-insight"><strong>Key finding:</strong> The ACT ranks highest on study and youth engagement; Tasmania ranks lowest on all three indicators.</p>
+      </article>
+
+      <article class="chart-card">
+        <h3>Work and Study Engagement by Remoteness</h3>
+        <p class="chart-sub">People aged 15–24. Each square is 1% of the area's young people. Group percentages, not individual transitions.</p>
+        <div id="chart-05" role="img" aria-label="Waffle chart of work and study engagement status for three remoteness areas"></div>
+        <p class="chart-insight"><strong>Key finding:</strong> Major Cities 84% fully engaged; regional areas 75%.</p>
+      </article>
+
       <article class="chart-card">
         <h3>Gender Gap in Study Participation</h3>
         <p class="chart-sub">Women minus men, currently enrolled in study, by age group, 2025.</p>
@@ -173,24 +187,10 @@
       </article>
 
       <article class="chart-card">
-        <h3>Work and Study Engagement by Remoteness</h3>
-        <p class="chart-sub">People aged 15–24. Each square is 1% of the area's young people. Group percentages, not individual transitions.</p>
-        <div id="chart-05" role="img" aria-label="Waffle chart of work and study engagement status for three remoteness areas"></div>
-        <p class="chart-insight"><strong>Key finding:</strong> Major Cities 84% fully engaged; regional areas 75%.</p>
-      </article>
-
-      <article class="chart-card">
         <h3>Gender Gap in Study Enrolment by State</h3>
         <p class="chart-sub">Women minus men, in percentage points (pp), 2025. One hexagon per state, laid out like Australia. Darker means a larger gap.</p>
         <div id="chart-04" role="img" aria-label="Hexagon map of the gap between women and men enrolled in study, by state"></div>
         <p class="chart-insight"><strong>Key finding:</strong> The NT has the largest gap (+5.1 pp) and Victoria the smallest (+0.3 pp). Small populations (NT, ACT, TAS) make their figures less stable.</p>
-      </article>
-
-      <article class="chart-card chart-11-card">
-        <h3>State Education Profiles</h3>
-        <p class="chart-sub">How each state ranks against the others on three indicators, 2025. Darker means higher. Hover for exact values.</p>
-        <div id="chart-11" role="img" aria-label="Heatmap comparing states on study participation, youth engagement and qualifications"></div>
-        <p class="chart-insight"><strong>Key finding:</strong> The ACT ranks highest on study and youth engagement; Tasmania ranks lowest on all three indicators.</p>
       </article>
     </div>
   </div>
@@ -301,22 +301,26 @@
     svg.style.height = "auto";
   }
 
+  var EMBED_OPTS = { actions: false, renderer: "svg" };
+
   function renderChart(id) {
     var el = document.getElementById(id);
     el.classList.remove("chart-missing");
 
     return loadSpec(charts[id])
       .then(function (spec) {
-        // Waffle: keep squares square. x range is 36.3 units, y range is 13 units,
-        // and the spec has 4px padding on each side.
+        // Waffle: keep squares square by reading the plot's x/y ranges from the spec
+        // (the spec has 4px padding on each side).
         if (id === "chart-05") {
-          spec.height = Math.round((el.clientWidth - 8) * 13 / 36.3);
+          var enc = spec.layer[0].encoding;
+          var xd = enc.x.scale.domain, yd = enc.y.scale.domain;
+          spec.height = Math.round((el.clientWidth - 8) * (yd[1] - yd[0]) / (xd[1] - xd[0]));
         }
         // Student profiles: leave less room for end labels on narrow screens.
         if (id === "chart-09") {
           spec.padding.right = el.clientWidth < 600 ? 118 : 150;
         }
-        return vegaEmbed("#" + id, spec, { actions: false, renderer: "svg" });
+        return vegaEmbed("#" + id, spec, EMBED_OPTS);
       })
       .then(function () {
         if (id === "chart-04") fitHexMap(el);
