@@ -5,7 +5,6 @@
    Tan     #A9835C  borders, quiet details
    Rust    #7E3717  strong accent (links, key numbers)
    Leather #3F1816  headings and body text
-   Gum     #5D6737  decorative only (never next to Rust in charts)
    Forest  #222918  footer
    Sky     #90A3AF  cool neutral
    Ocean   #003F50  hero, primary data colour
@@ -23,7 +22,6 @@
   --linen-deep: #e2cfb1;  /* alternate section band */
   --rust: #7e3717;
   --leather: #3f1816;
-  --gum: #5d6737;
   --forest: #222918;
   --sky: #90a3af;
   --ocean: #003f50;
@@ -316,8 +314,6 @@ h1 {
   font-size: 0.95rem;
 }
 
-.chart-scroll { overflow-x: auto; }
-
 /* Key-finding callout: soft blush pill-ish box */
 .chart-insight {
   margin: auto 0 0;
@@ -382,36 +378,11 @@ h1 {
 /* ---------- Layout helpers (no empty cells) ---------- */
 .chart-grid-1 { grid-template-columns: 1fr; }
 .chart-wide   { grid-column: 1 / -1; }
-.span-2       { grid-row: span 2; }
 
 /* Hex map: scaled by script, sits in the left column */
 #chart-04 { max-width: 620px; margin-left: auto; margin-right: auto; }
 /* Three side-by-side panels scroll sideways on small screens */
 #chart-11 { overflow-x: auto; }
-
-/* ---------- Section 3 featured layout ---------- */
-.section-three-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  align-items: start;
-}
-
-.section-three-grid .chart-featured {
-  grid-column: 1 / -1;
-}
-
-.section-three-grid .chart-featured > div {
-  min-height: 360px;
-}
-
-.section-three-grid .chart-card:not(.chart-featured) > div {
-  min-height: 300px;
-}
-
-.section-three-grid .vega-embed,
-.section-three-grid .vega-embed canvas,
-.section-three-grid .vega-embed svg {
-  max-width: 100%;
-}
 
 /* ---------- Footer ---------- */
 footer {
@@ -437,19 +408,9 @@ footer p {
     bottom: 28px;
   }
 
-  .chart-grid,
-  .section-three-grid {
+  .chart-grid {
     grid-template-columns: 1fr;
     gap: 20px;
-  }
-
-  .section-three-grid .chart-featured {
-    grid-column: auto;
-  }
-
-  .section-three-grid .chart-featured > div,
-  .section-three-grid .chart-card:not(.chart-featured) > div {
-    min-height: 220px;
   }
 
   .chart-card {
@@ -502,7 +463,6 @@ footer h4 { margin: 0 0 8px; font-family: var(--font-display); font-weight: 600;
 footer ul { margin: 0; padding-left: 18px; }
 footer li { margin-bottom: 4px; }
 footer a { color: var(--blush); }
-footer .fine-print { max-width: 1300px; margin: 24px auto 0; padding-top: 16px; border-top: 1px solid rgba(235,220,197,0.25); font-size: 0.85rem; color: #c3cfd6; }
 
 @media (max-width: 760px) { .footer-grid { grid-template-columns: 1fr; gap: 20px; } }
 

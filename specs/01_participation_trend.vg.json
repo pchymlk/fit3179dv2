@@ -49,17 +49,19 @@
       "title": "Enrolled students",
       "axis": {
         "values": [
-          0,
-          500000,
-          1000000,
-          1500000
+          1300000,
+          1400000,
+          1500000,
+          1600000,
+          1700000,
+          1800000
         ],
         "labelExpr": "format(datum.value / 1000000, '.1f') + 'M'"
       },
       "scale": {
-        "zero": true,
+        "zero": false,
         "domain": [
-          0,
+          1300000,
           1800000
         ],
         "nice": false

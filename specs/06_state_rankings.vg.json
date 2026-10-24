@@ -245,7 +245,7 @@
           "as": "Chg"
         },
         {
-          "calculate": "abs(datum.Chg) < 1000 ? '' : format(datum.Chg,'+.2~s')",
+          "calculate": "abs(datum.Chg) < 5000 ? '' : format(datum.Chg,'+.2~s')",
           "as": "Label"
         }
       ],

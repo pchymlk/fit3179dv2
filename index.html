@@ -5,11 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Who Gets to Study? Higher Education in Australia</title>
   <meta name="author" content="Madeline F Handoyo">
+  <meta property="og:title" content="Who Gets to Study? Higher Education in Australia">
+  <meta property="og:description" content="An interactive data story on higher education enrolments, fields of study and unequal access across Australia.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%93%3C/text%3E%3C/svg%3E">
   <meta name="description" content="An interactive data story on higher education enrolments, fields of study and unequal access across Australia.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -48,7 +52,7 @@
     <div class="chart-grid chart-grid-1">
       <article class="chart-card">
         <h3>Higher Education Student Enrolments</h3>
-        <p class="chart-sub">Australia, 2015–2024, all enrolled students</p>
+        <p class="chart-sub">Australia, 2015–2024, all enrolled students. The vertical axis starts at 1.3M to make the dip visible.</p>
         <div id="chart-01" role="img" aria-label="Line chart of total higher education enrolments in Australia from 2015 to 2024"></div>
         <p class="chart-insight"><strong>Key finding:</strong> Enrolments dipped after 2020, bottomed out in 2022, then reached a record in 2024.</p>
       </article>
@@ -69,19 +73,21 @@
       </div>
     </div>
 
-    <p class="lede">Participation is similar everywhere. <strong>The ACT leads; Tasmania trails.</strong></p>
+    <p class="lede">Most states are within a few points of each other. <strong>The ACT leads; Tasmania trails.</strong></p>
 
     <div class="chart-grid">
       <article class="chart-card">
         <h3>Young Australians Fully Engaged in Work and/or Study</h3>
-        <p class="chart-sub">People aged 15–24, by state, 2025. Darker means more engaged.</p>
+        <p class="chart-sub">People aged 15–24, by state, 2025. Darker means more engaged. The colour scale runs from 75% to 85%.</p>
         <div id="chart-02" role="img" aria-label="Map of Australian states shaded by the share of 15 to 24 year olds fully engaged in work or study"></div>
+        <p class="chart-insight"><strong>Key finding:</strong> The ACT is the most engaged and Tasmania the least (≈75%). The other states sit between 79% and 84%.</p>
       </article>
 
       <article class="chart-card">
         <h3>Student Distribution</h3>
         <p class="chart-sub">Circle area shows % enrolled in study, 2025. Use the dropdown to switch between persons, men and women.</p>
-        <div id="chart-03" role="img" aria-label="Map of Australia with circles sized by the share of people enrolled in study in each state"></div>
+        <div id="chart-03" role="group" aria-label="Map of Australia with circles sized by the share of people enrolled in study in each state"></div>
+        <p class="chart-insight"><strong>Key finding:</strong> In the Persons view, the ACT is highest (17.9%) and Tasmania lowest (14.4%).</p>
       </article>
     </div>
 
@@ -119,14 +125,15 @@
       <article class="chart-card">
         <h3>Employment Outcomes by Qualification and Sex</h3>
         <p class="chart-sub">Labour-force status among people aged 15–74, 2025. Use the dropdown to change the status shown.</p>
-        <div id="chart-08" role="img" aria-label="Butterfly chart comparing men and women by qualification for the selected labour-force status"></div>
-        <p class="chart-insight"><strong>Key finding:</strong> Not in the labour force: ≈44% of women without a qualification.</p>
+        <div id="chart-08" role="group" aria-label="Butterfly chart comparing men and women by qualification for the selected labour-force status"></div>
+        <p class="chart-insight"><strong>Default view:</strong> ≈44% of women without a qualification are not in the labour force, against about a third of men. Change the dropdown to compare other statuses.</p>
       </article>
 
       <article class="chart-card chart-wide">
         <h3>Student Profiles by Age Group</h3>
         <p class="chart-sub">Each line is one indicator, as a percentage of the age group.</p>
         <div id="chart-09" role="img" aria-label="Line chart of study, qualification and engagement indicators by age group"></div>
+        <p class="chart-insight"><strong>Key finding:</strong> Studying falls from ≈81% at ages 15–19 to ≈18% at 25–29, while holding a qualification rises to about 75%.</p>
       </article>
     </div>
 
@@ -145,21 +152,22 @@
       </div>
     </div>
 
-    <p class="lede">Access differs by <strong>gender, remoteness and state</strong>.</p>
+    <p class="lede">Access differs by <strong>gender, remoteness and state</strong>. Gender gaps by age are small (under 4 pp).</p>
 
     <div class="chart-grid">
       <article class="chart-card">
         <h3>Gender Gap in Study Participation</h3>
         <p class="chart-sub">Women minus men, currently enrolled in study, by age group, 2025.</p>
         <div id="chart-10" role="img" aria-label="Lollipop chart of the gap between women and men currently studying, by age group"></div>
+        <p class="chart-insight" style="margin:0 0 18px"><strong>Key finding:</strong> Women are ahead at every age except 20–24. The largest gap is ≈3.9 pp at 25–29.</p>
 
         <aside class="context">
           <p class="context-title">What could affect this?</p>
           <p class="context-note">Possible factors, not findings from this data.</p>
           <ul>
-            <li>Men are more likely to take apprenticeships and trades.</li>
-            <li>Women are more likely to enrol at university.</li>
-            <li>Caring duties can limit study in later years.</li>
+            <li>Men may be more likely to take apprenticeships and trades.</li>
+            <li>Women may be more likely to enrol at university.</li>
+            <li>Caring duties may limit study in later years.</li>
           </ul>
         </aside>
       </article>
@@ -175,12 +183,14 @@
         <h3>Gender Gap in Study Enrolment by State</h3>
         <p class="chart-sub">Women minus men, in percentage points (pp), 2025. One hexagon per state, laid out like Australia. Darker means a larger gap.</p>
         <div id="chart-04" role="img" aria-label="Hexagon map of the gap between women and men enrolled in study, by state"></div>
+        <p class="chart-insight"><strong>Key finding:</strong> The NT has the largest gap (+5.1 pp) and Victoria the smallest (+0.3 pp). Small populations (NT, ACT, TAS) make their figures less stable.</p>
       </article>
 
       <article class="chart-card chart-11-card">
         <h3>State Education Profiles</h3>
         <p class="chart-sub">How each state ranks against the others on three indicators, 2025. Darker means higher. Hover for exact values.</p>
         <div id="chart-11" role="img" aria-label="Heatmap comparing states on study participation, youth engagement and qualifications"></div>
+        <p class="chart-insight"><strong>Key finding:</strong> The ACT ranks highest on study and youth engagement; Tasmania ranks lowest on all three indicators.</p>
       </article>
     </div>
   </div>
@@ -200,13 +210,14 @@
     <div>
       <h4>Data sources</h4>
       <ul>
-        <li>Australian Bureau of Statistics, <em>Education and Work, Australia</em>, 2025. https://www.abs.gov.au/statistics/people/education/education-and-work-australia/latest-release</li>
-        <li>Department of Education, <em>Higher Education Statistics</em>, 2015–2024. https://www.education.gov.au/higher-education-statistics/student-data</li>
+        <li>Australian Bureau of Statistics, <em>Education and Work, Australia</em>, 2025. <a href="https://www.abs.gov.au/statistics/people/education/education-and-work-australia/latest-release">abs.gov.au/…/education-and-work-australia</a></li>
+        <li>Department of Education, <em>Higher Education Statistics</em>, 2015–2024. <a href="https://www.education.gov.au/higher-education-statistics/student-data">education.gov.au/…/student-data</a></li>
       </ul>
     </div>
     <div>
       <h4>Notes</h4>
       <p>pp = percentage points. Commencing students are domestic students only. State and group figures are shares of the people in each group, not counts.</p>
+      <p>Generative AI (Claude and ChatGPT) was used to assist in improving the website.</p>
     </div>
     <div>
       <h4>About</h4>
@@ -242,6 +253,7 @@
   var DIRS = [CHART_DIR, "", "charts/", "vega/", "specs/", "json/", "data/"];
 
   function loadSpec(file, i) {
+    i = i || 0;
     if (i >= DIRS.length) {
       return Promise.reject(new Error("Spec file not found: " + file));
     }
@@ -289,33 +301,48 @@
     svg.style.height = "auto";
   }
 
-  Object.keys(charts).forEach(function (id) {
+  function renderChart(id) {
     var el = document.getElementById(id);
+    el.classList.remove("chart-missing");
 
-    loadSpec(charts[id], 0)
+    return loadSpec(charts[id])
       .then(function (spec) {
-        // Waffle chart: keep squares square by tying height to the container width.
-        // (x range is 20.4 units wide, y range is 20.8 units tall.)
+        // Waffle: keep squares square. x range is 36.3 units, y range is 13 units,
+        // and the spec has 4px padding on each side.
         if (id === "chart-05") {
-          spec.height = Math.round((el.clientWidth - 16) * 20.8 / 20.4);
+          spec.height = Math.round((el.clientWidth - 8) * 13 / 36.3);
         }
-        return vegaEmbed("#" + id, spec, {
-          actions: false,
-          renderer: "svg",
-          width: "container"
-        });
+        // Student profiles: leave less room for end labels on narrow screens.
+        if (id === "chart-09") {
+          spec.padding.right = el.clientWidth < 600 ? 118 : 150;
+        }
+        return vegaEmbed("#" + id, spec, { actions: false, renderer: "svg" });
       })
       .then(function () {
-        // Hex map: crop the SVG to what is actually drawn so it is centred and fills its card.
-        if (id === "chart-04") {
-          fitHexMap(el);
-        }
+        if (id === "chart-04") fitHexMap(el);
       })
       .catch(function (error) {
         console.error(id, error);
         el.classList.add("chart-missing");
         el.textContent = "Could not load chart. Check the specification file and data paths.";
       });
+  }
+
+  // Wait for web fonts so Vega measures text with Nunito, not a fallback.
+  var fontsReady = document.fonts ? document.fonts.ready : Promise.resolve();
+  fontsReady.then(function () {
+    Object.keys(charts).forEach(renderChart);
+  });
+
+  // Redraw the size-dependent charts when the window width changes.
+  var lastWidth = window.innerWidth, resizeTimer;
+  window.addEventListener("resize", function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function () {
+      if (window.innerWidth === lastWidth) return;
+      lastWidth = window.innerWidth;
+      ["chart-04", "chart-05", "chart-09"].forEach(renderChart);
+    }, 250);
   });
 </script>
 

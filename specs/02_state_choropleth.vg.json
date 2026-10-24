@@ -185,7 +185,7 @@
                   "State": "Victoria",
                   "abbr": "VIC",
                   "lon": 144.7,
-                  "lat": -37.6
+                  "lat": -36.7
                 },
                 {
                   "State": "Queensland",
@@ -284,7 +284,7 @@
                   "State": "Victoria",
                   "abbr": "VIC",
                   "lon": 144.7,
-                  "lat": -37.6
+                  "lat": -36.7
                 },
                 {
                   "State": "Queensland",
@@ -328,7 +328,7 @@
           "as": "v"
         },
         {
-          "calculate": "format(datum.v,'.0f') + '%'",
+          "calculate": "format(datum.v,'.1f') + '%'",
           "as": "label"
         }
       ],
@@ -357,6 +357,53 @@
             "value": "#FBF5EA"
           },
           "value": "#3F1816"
+        }
+      }
+    },
+    {
+      "data": {
+        "url": "data/cleaned_work_study_engagement_by_state.csv",
+        "format": {
+          "type": "csv"
+        }
+      },
+      "transform": [
+        {
+          "filter": "datum.State == 'Australian Capital Territory'"
+        },
+        {
+          "calculate": "'ACT: ' + format(toNumber(datum.Engaged_pct),'.1f') + '%'",
+          "as": "label"
+        },
+        {
+          "calculate": "151.9",
+          "as": "lon"
+        },
+        {
+          "calculate": "-35.9",
+          "as": "lat"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 6,
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "color": "#003F50"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "label",
+          "type": "nominal"
         }
       }
     }
